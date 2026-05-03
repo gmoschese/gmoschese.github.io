@@ -1,28 +1,57 @@
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * Illungo - Neural Animation Script
+ * Gestisce l'animazione continua dei nodi dell'ombra di Papà Gambalunga
+ */
+
+window.addEventListener('load', () => {
+    // Seleziona tutti i nodi (cerchi) dell'SVG
     const neurons = document.querySelectorAll('.neuron');
     
-    // Funzione per accendere un neurone a caso in loop continuo
+    // Controllo di sicurezza: se l'HTML non è ancora pronto, interrompe per evitare errori
+    if (neurons.length === 0) {
+        console.error("Illungo Script: Nessun neurone trovato. Controlla le classi nell'HTML.");
+        return;
+    }
+
+    /**
+     * Funzione ricorsiva per l'accensione casuale
+     * Crea un effetto organico e imprevedibile
+     */
     const fireRandomNeuron = () => {
-        // Seleziona un neurone casuale
+        // 1. Sceglie un neurone a caso dalla lista
         const randomIndex = Math.floor(Math.random() * neurons.length);
         const neuron = neurons[randomIndex];
 
-        // Aggiunge la classe active (che attiva il glow nel CSS)
+        // 2. Attiva il neurone aggiungendo la classe CSS 'active'
+        // Questa classe attiva il fill azzurro e il bagliore (glow)
         neuron.classList.add('active');
 
-        // Lo spegne dopo un intervallo variabile (200-500ms)
+        // 3. Imposta lo spegnimento del neurone
+        // La durata dell'accensione è variabile (tra 300ms e 700ms)
+        const lightDuration = 300 + Math.random() * 400;
         setTimeout(() => {
             neuron.classList.remove('active');
-        }, 200 + Math.random() * 300);
+        }, lightDuration);
 
-        // Pianifica il prossimo impulso tra 100ms e 600ms
-        // Questo intervallo crea il ritmo "neurale" irregolare
-        setTimeout(fireRandomNeuron, 100 + Math.random() * 500);
+        // 4. Pianifica il prossimo impulso
+        // L'intervallo tra un'accensione e l'altra è casuale (tra 150ms e 750ms)
+        const nextImpulse = 150 + Math.random() * 600;
+        setTimeout(fireRandomNeuron, nextImpulse);
     };
 
-    // Avvia il ciclo immediatamente al caricamento della pagina
-    fireRandomNeuron();
+    /**
+     * ESECUZIONE
+     * Lanciamo due cicli paralleli per rendere la rete più viva.
+     * In questo modo ci saranno spesso 1 o 2 nodi accesi contemporaneamente.
+     */
     
-    // Facoltativo: un secondo ciclo parallelo per rendere la rete più "densa" di impulsi
-    setTimeout(fireRandomNeuron, 300); 
+    // Primo ciclo (principale)
+    fireRandomNeuron();
+
+    // Secondo ciclo (sfalsato di 400ms)
+    setTimeout(() => {
+        fireRandomNeuron();
+    }, 400);
+
+    console.log("Illungo System: Neural Network Online.");
 });
