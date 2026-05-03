@@ -3,7 +3,7 @@
     --secondary: #666;
     --accent: #0055ff;
     --bg: #fafafa;
-    --warning: #f39c12; /* Arancione per i lavori in corso */
+    --warning: #f39c12;
 }
 
 body {
@@ -19,19 +19,19 @@ body {
 .container { width: 90%; max-width: 900px; }
 .main-header { display: flex; gap: 5rem; align-items: center; }
 
-/* SVG E NODI - PULIZIA TOTALE */
+/* SVG E NODI */
+.neural-svg { overflow: visible; }
 .node-group { cursor: pointer; }
 
 .neuron { 
     fill: var(--primary); 
-    stroke: none; 
+    stroke: var(--bg); /* Crea un piccolo stacco visivo */
+    stroke-width: 1px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
     pointer-events: none; 
 }
 
-.hitbox { 
-    fill: transparent !important; /* Forza la trasparenza totale */
-}
+.hitbox { fill: transparent !important; }
 
 .synapse { 
     stroke: var(--primary); 
@@ -39,12 +39,13 @@ body {
     opacity: 0.1; 
 }
 
+/* EFFETTO HOVER - FORZA IL COLORE E IL RAGGIO */
 .node-group:hover .neuron { 
-    r: 6; 
-    fill: var(--accent); 
+    r: 7px !important; 
+    fill: var(--accent) !important; 
 }
 
-/* UI ELEMENTS & STATUS BOX */
+/* UI ELEMENTS */
 .status-box { 
     display: inline-flex; 
     align-items: center; 
@@ -54,35 +55,31 @@ body {
     font-family: monospace; 
     font-size: 0.75rem; 
     margin-bottom: 1.2rem; 
-    transition: all 0.3s ease;
 }
 
-/* Variante per lavori in corso */
 .status-working {
-    background: #fff4e5; /* Sfondo arancio chiarissimo */
-    color: #d47b00;      /* Testo arancio scuro */
+    background: #fff4e5;
+    color: #d47b00;
 }
 
 .pulse-dot { 
     width: 8px; 
     height: 8px; 
-    background: #2ecc71; /* Verde base */
+    background: #2ecc71;
     border-radius: 50%; 
     margin-right: 10px; 
     animation: blink 2s infinite; 
 }
 
-/* Forza il colore arancione se presente la classe .orange */
-.pulse-dot.orange {
-    background: var(--warning) !important;
-}
+.pulse-dot.orange { background: var(--warning) !important; }
 
 h1 { 
     font-size: clamp(2.8rem, 8vw, 4rem); 
     line-height: 0.95; 
-    margin-bottom: 0.6rem; 
+    margin: 0 0 0.6rem 0; 
     font-weight: 800; 
     letter-spacing: -1px;
+    color: var(--primary);
 }
 
 .divider { 
@@ -96,16 +93,16 @@ h1 {
     color: var(--secondary);
     max-width: 400px;
     line-height: 1.5;
+    font-size: 1.1rem;
 }
 
-/* SOCIAL BAR */
 .social-bar { display: flex; gap: 1.2rem; margin-top: 2rem; }
 .social-icon { 
     color: var(--primary); 
-    width: 20px; 
-    height: 20px; 
+    width: 22px; 
+    height: 22px; 
     transition: 0.2s; 
-    opacity: 0.7; 
+    opacity: 0.6; 
 }
 .social-icon:hover { 
     color: var(--accent); 
@@ -118,6 +115,4 @@ h1 {
     50% { opacity: 0.3; } 
 }
 
-/* UTILITY PAGINE SECONDARIE */
-.content-area { max-width: 600px; margin: 10vh auto; padding: 20px; }
-.back-link { display: inline-block; text-decoration: none; color: var(--accent); font-family: monospace; margin-bottom: 2rem; font-weight: bold; }
+.hint { font-family: monospace; font-size: 0.7rem; color: #aaa; margin-top: 10px; text-align: center; }
