@@ -18,7 +18,6 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden;
 }
 
 .container {
@@ -32,13 +31,13 @@ body {
     align-items: center;
 }
 
-/* LOGICA NODI */
+/* NODI E INTERAZIONE */
 .node-group {
     cursor: pointer;
 }
 
 .hitbox {
-    fill: transparent; /* Area invisibile ma cliccabile */
+    fill: transparent;
     pointer-events: all;
 }
 
@@ -47,10 +46,9 @@ body {
     stroke: var(--primary);
     stroke-width: 1.8;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none; /* Il mouse interagisce con la hitbox, non col pallino */
+    pointer-events: none;
 }
 
-/* Hover Stabile */
 .node-group:hover .neuron {
     r: 7;
     fill: var(--accent);
@@ -58,7 +56,6 @@ body {
     filter: drop-shadow(0 0 8px var(--accent));
 }
 
-/* Pulse Casuale */
 .neuron.pulse {
     fill: var(--accent);
     stroke: var(--accent);
@@ -71,7 +68,7 @@ body {
     opacity: 0.1;
 }
 
-/* TESTI E UI */
+/* UI ELEMENTS */
 .hint {
     margin-top: 15px;
     font-size: 0.65rem;
@@ -80,7 +77,6 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     text-align: center;
-    width: 100px;
 }
 
 .status-box {
@@ -100,7 +96,12 @@ body {
     background: #2ecc71;
     border-radius: 50%;
     margin-right: 8px;
-    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }
 
 h1 {
@@ -108,7 +109,6 @@ h1 {
     line-height: 1;
     margin-bottom: 0.5rem;
     font-weight: 800;
-    letter-spacing: -1px;
 }
 
 .role {
@@ -128,7 +128,6 @@ h1 {
     line-height: 1.6;
     font-size: 1.05rem;
     max-width: 420px;
-    transition: opacity 0.2s;
 }
 
 @media (max-width: 700px) {
