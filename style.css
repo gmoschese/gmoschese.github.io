@@ -93,13 +93,15 @@ h1 {
     list-style: none;
     padding: 0;
 }
+
 .main-nav a {
-    font-family: monospace;
-    font-size: 0.85rem;
+    text-decoration: none;
     color: var(--secondary);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
     transition: all 0.2s ease;
-    display: block;
 }
+
 
 .main-nav a:hover {
     color: var(--accent);
