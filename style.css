@@ -9,46 +9,50 @@ body {
     display: flex; justify-content: center; align-items: center; min-height: 100vh;
 }
 
-.container { width: 90%; max-width: 900px; }
-.main-header { display: flex; align-items: center; gap: 4rem; }
+.main-header { display: flex; align-items: center; gap: 5rem; }
 
-/* SVG E NODI */
-.neural-svg { overflow: visible; }
-
+/* --- I NODI --- */
 .neuron {
     fill: var(--primary);
-    r: 3px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none; /* Impedisce lo sfarfallio */
+    stroke: white;
+    stroke-width: 2px;
+    transition: all 0.3s ease;
+    pointer-events: none; /* IL SEGRETO: il mouse ignora il cerchio che cresce */
 }
 
 .hitbox {
     fill: transparent;
     cursor: pointer;
+    pointer-events: all; /* Il mouse sente solo questa */
 }
 
-/* Stato attivo (Random o Hover) */
+/* Animazione quando attivo o hover */
 .node-group:hover .neuron,
 .node-group.active .neuron {
-    fill: var(--accent) !important;
-    r: 7px;
+    fill: var(--accent);
+    r: 8px; /* Cresce senza sfarfallare */
+    filter: drop-shadow(0 0 5px rgba(0,85,255,0.5));
 }
 
-.synapse { stroke: var(--primary); stroke-width: 1.2; opacity: 0.1; }
+.synapse { stroke: var(--primary); stroke-width: 1px; opacity: 0.1; }
 
-/* SOCIAL BAR FIXED */
-.social-bar { display: flex; gap: 15px; margin-top: 25px; }
-.social-icon { width: 24px; height: 24px; color: var(--primary); opacity: 0.7; transition: 0.3s; }
-.social-icon svg { width: 24px; height: 24px; display: block; }
-.social-icon:hover { color: var(--accent); opacity: 1; transform: translateY(-2px); }
+/* --- ESTETICA TESTO --- */
+h1 { font-size: 4.5rem; margin: 0; line-height: 0.9; font-weight: 900; letter-spacing: -2px; }
+.role { text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; margin-top: 15px; color: var(--primary); }
+.divider { width: 50px; height: 4px; background: var(--accent); margin: 2rem 0; }
+.message { color: #555; max-width: 350px; line-height: 1.6; font-size: 1.1rem; min-height: 4.8em; }
 
-/* UI ELEMENTS */
-h1 { font-size: 4rem; margin: 0; line-height: 0.95; font-weight: 800; }
-.role { font-weight: 600; margin-top: 10px; }
-.divider { width: 45px; height: 3px; background: var(--accent); margin: 1.5rem 0; }
-.message { color: #666; max-width: 400px; line-height: 1.5; min-height: 3em; }
-.status-box { background: #fff4e5; color: #d47b00; padding: 6px 12px; border-radius: 4px; display: inline-flex; align-items: center; font-family: monospace; font-size: 0.8rem; margin-bottom: 1rem; }
-.pulse-dot { width: 8px; height: 8px; background: #f39c12; border-radius: 50%; margin-right: 8px; animation: pulse 2s infinite; }
-.hint { font-family: monospace; font-size: 0.7rem; color: #aaa; margin-top: 10px; text-align: center; }
+.status-box { 
+    font-family: monospace; font-size: 0.7rem; color: #d47b00; background: #fff4e5;
+    padding: 5px 10px; border-radius: 3px; display: inline-flex; align-items: center; margin-bottom: 1rem;
+}
+.pulse-dot { width: 6px; height: 6px; background: #f39c12; border-radius: 50%; margin-right: 8px; animation: blink 1.5s infinite; }
 
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+.social-bar { display: flex; gap: 20px; margin-top: 30px; }
+.social-icon { 
+    font-family: monospace; font-size: 0.7rem; text-decoration: none; color: var(--primary);
+    border: 1px solid #ddd; padding: 5px 10px; transition: 0.3s;
+}
+.social-icon:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
