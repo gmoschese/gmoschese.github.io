@@ -4,46 +4,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const defaultText = "Designing systems where data flows, learns, and becomes decisions.";
 
     const textMap = {
-        stack: "Data engineering stack: pipelines and cloud architectures.",
-        lab: "Experimental projects in AI and data science.",
+        stack: "Data engineering stack: pipelines and cloud systems.",
+        lab: "Experimental projects in AI and research.",
         ai: "Building AI systems and LLM pipelines.",
         log: "Technical logs and incident reports.",
-        opensource: "Open source collaborations.",
-        about: "System architect profile."
+        opensource: "Open source community contributions.",
+        about: "System Architect profile."
     };
 
-    let autoTimer;
-
-    function startRandomCycle() {
-        autoTimer = setInterval(() => {
-            // Rimuovi active da tutti
-            nodeGroups.forEach(n => n.classList.remove("active"));
-            
-            // Scegli uno a caso
-            const randomNode = nodeGroups[Math.floor(Math.random() * nodeGroups.length)];
-            randomNode.classList.add("active");
-            
-            // Opzionale: cambia il testo mentre gira da solo
-            // textBox.textContent = textMap[randomNode.getAttribute('data-section')];
-        }, 2000); // Ogni 2 secondi si accende un punto diverso
+    // FUNZIONE RANDOM
+    function playRandom() {
+        // Rimuove la classe da tutti
+        nodeGroups.forEach(n => n.classList.remove("active"));
+        // Accende uno a caso
+        const rand = Math.floor(Math.random() * nodeGroups.length);
+        nodeGroups[rand].classList.add("active");
     }
+
+    let interval = setInterval(playRandom, 2000);
 
     nodeGroups.forEach(group => {
         group.addEventListener("mouseenter", () => {
-            clearInterval(autoTimer); // Ferma il giro se l'utente entra col mouse
+            clearInterval(interval); // Ferma il random
             nodeGroups.forEach(n => n.classList.remove("active"));
-            
-            const section = group.getAttribute("data-section");
-            textBox.textContent = textMap[section];
             group.classList.add("active");
+            textBox.textContent = textMap[group.getAttribute("data-section")];
         });
 
         group.addEventListener("mouseleave", () => {
             group.classList.remove("active");
             textBox.textContent = defaultText;
-            startRandomCycle(); // Riparti quando l'utente esce
+            interval = setInterval(playRandom, 2000); // Riparte
         });
     });
-
-    startRandomCycle(); // Avvio immediato
 });
