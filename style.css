@@ -34,5 +34,24 @@ h1 { font-size: clamp(2.8rem, 8vw, 4rem); line-height: 0.95; margin-bottom: 0.6r
 .divider { width: 45px; height: 3px; background: var(--accent); margin: 1.8rem 0; }
 .message { color: var(--secondary); line-height: 1.6; font-size: 1.1rem; max-width: 440px; transition: opacity 0.2s; }
 
+/* SOCIAL BAR */
+.social-bar {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.social-bar a {
+    color: var(--secondary);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.social-bar a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 @media (max-width: 768px) { .main-header { flex-direction: column; text-align: center; gap: 3rem; } .divider { margin: 1.8rem auto; } }
