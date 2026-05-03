@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const neurons = document.querySelectorAll(".neuron");
+    const nodeGroups = document.querySelectorAll(".node-group");
     const textBox = document.getElementById("dynamic-text");
+    const defaultText = "Designing systems where data flows, learns, and becomes decisions.";
 
     const textMap = {
         stack: "Data engineering stack: pipelines, cloud systems, distributed processing.",
@@ -10,52 +11,58 @@ document.addEventListener("DOMContentLoaded", () => {
         console: "Interactive tools and system interfaces."
     };
 
-    let hovered = false;
+    let isHovered = false;
 
+    // Loop della rete molto più attivo
     function pulseLoop() {
-        if (!hovered) {
-            const node = neurons[Math.floor(Math.random() * neurons.length)];
-            node.classList.add("pulse");
-
+        if (!isHovered) {
+            const allNeurons = document.querySelectorAll(".neuron");
+            const randomNeuron = allNeurons[Math.floor(Math.random() * allNeurons.length)];
+            
+            randomNeuron.classList.add("pulse");
             setTimeout(() => {
-                node.classList.remove("pulse");
+                randomNeuron.classList.remove("pulse");
             }, 500);
         }
-
-        setTimeout(pulseLoop, 400 + Math.random() * 600);
+        
+        // Frequenza alta: un battito ogni 300-700ms
+        setTimeout(pulseLoop, 300 + Math.random() * 400);
     }
 
     pulseLoop();
 
-    neurons.forEach(node => {
-
-        node.addEventListener("mouseenter", () => {
-            hovered = true;
-
-            neurons.forEach(n => {
-                n.classList.remove("pulse");
-                n.classList.remove("active");
-            });
-
-            node.classList.add("active");
-
-            const section = node.dataset.section;
+    nodeGroups.forEach(group => {
+        group.addEventListener("mouseenter", () => {
+            isHovered = true;
+            
+            // Spegne i battiti casuali per focus
+            document.querySelectorAll(".neuron").forEach(n => n.classList.remove("pulse"));
+            
+            const section = group.getAttribute("data-section");
             if (section && textMap[section]) {
-                textBox.textContent = textMap[section];
+                textBox.style.opacity = 0;
+                setTimeout(() => {
+                    textBox.textContent = textMap[section];
+                    textBox.style.opacity = 1;
+                }, 100);
             }
         });
 
-        node.addEventListener("mouseleave", () => {
-            hovered = false;
-            node.classList.remove("active");
+        group.addEventListener("mouseleave", () => {
+            isHovered = false;
+            textBox.style.opacity = 0;
+            setTimeout(() => {
+                textBox.textContent = defaultText;
+                textBox.style.opacity = 1;
+            }, 100);
         });
 
-        node.addEventListener("click", () => {
-            const section = node.dataset.section;
+        group.addEventListener("click", () => {
+            const section = group.getAttribute("data-section");
             if (section) {
-                window.location.href = "sections/" + section + ".html";
+                console.log("Navigazione a:", section);
+                // window.location.href = "sections/" + section + ".html";
             }
         });
-
     });
 });
