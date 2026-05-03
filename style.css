@@ -84,3 +84,27 @@ h1 {
 .message {
     color: var(--secondary);
 }
+
+.main-nav {
+    margin: 2rem 0;
+}
+
+.main-nav ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    max-width: 300px;
+}
+
+.main-nav a {
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--secondary);
+    transition: all 0.2s ease;
+    display: block;
+}
+
+.main-nav a:hover {
+    color: var(--accent);
+    transform: translateX(5px);
+}
