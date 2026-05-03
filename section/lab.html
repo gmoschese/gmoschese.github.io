@@ -3,39 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giovanni Moschese | Section</title>
-    <link rel="stylesheet" href="../style.css"> <!-- Carica il CSS principale -->
+    <title>Giovanni Moschese | Portfolio</title>
+    <link rel="stylesheet" href="../style.css">
     <style>
-        .content-area { max-width: 600px; margin: 10vh auto; padding: 20px; }
+        body { align-items: flex-start; padding-top: 10vh; overflow-y: auto; }
+        .content-area { max-width: 600px; margin: 0 auto; padding: 40px; }
         .back-link { 
             display: inline-block; 
             text-decoration: none; 
             color: var(--accent); 
             font-family: monospace; 
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             font-weight: bold;
+            font-size: 0.9rem;
         }
-        .back-link:hover { opacity: 0.7; }
-        h2 { font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 1rem; }
-        .section-list { list-style: none; margin-top: 2rem; }
-        .section-list li { margin-bottom: 1rem; color: var(--secondary); border-left: 2px solid #eee; padding-left: 15px; }
+        .back-link:hover { opacity: 0.6; }
+        h2 { font-size: 2.8rem; letter-spacing: -2px; margin-bottom: 1.5rem; color: var(--primary); }
+        .section-list { list-style: none; margin-top: 2.5rem; }
+        .section-list li { 
+            margin-bottom: 1.5rem; 
+            color: var(--secondary); 
+            border-left: 3px solid #eee; 
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+        .section-list li strong { color: var(--primary); display: block; margin-bottom: 4px; }
+        .log-entry { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid #eee; }
+        .log-date { font-family: monospace; font-size: 0.8rem; color: var(--accent); }
     </style>
 </head>
 <body>
     <div class="content-area">
-        <a href="../index.html" class="back-link">← // RETURN_TO_BASE</a>
+        <a href="../index.html" class="back-link">← // RETURN_TO_SYSTEM</a>
         
-        <div class="status-box" style="margin-bottom: 0.5rem;">
-            <span class="pulse-dot"></span> node_active: true
-        </div>
+       <h2>The Lab</h2>
+<p class="message">Sperimentazione pura. Progetti nati per testare i limiti delle tecnologie.</p>
+<ul class="section-list">
+    <li><strong>Project Nexus:</strong> Un'interfaccia neurale per la navigazione di database relazionali.</li>
+    <li><strong>Synthetic Data Gen:</strong> Tool per la creazione di dataset sintetici per stress-test di pipeline.</li>
+</ul>
         
-        <h2>Project Title</h2>
-        <p class="message">Descrizione dettagliata della sezione selezionata. Qui puoi inserire i tuoi progetti o le tecnologie che utilizzi.</p>
-        
-        <ul class="section-list">
-            <li><strong>Entry_01:</strong> Dettaglio tecnico o link a progetto.</li>
-            <li><strong>Entry_02:</strong> Dettaglio tecnico o link a progetto.</li>
-        </ul>
     </div>
 </body>
 </html>
