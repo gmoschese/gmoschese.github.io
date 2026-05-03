@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giovanni Moschese | Portfolio</title>
-    <!-- Il riferimento al CSS deve essere pulito -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,30 +19,29 @@
                     <line class="synapse" x1="50" y1="160" x2="75" y2="220" />
                 </g>
                 <g class="nodes">
-                    <!-- I data-section devono combaciare con lo script.js -->
                     <g class="node-group" data-section="stack">
                         <circle class="hitbox" cx="25" cy="40" r="15" />
-                        <circle class="neuron" cx="25" cy="40" r="4" />
+                        <circle class="neuron" cx="25" cy="40" />
                     </g>
                     <g class="node-group" data-section="lab">
                         <circle class="hitbox" cx="75" cy="40" r="15" />
-                        <circle class="neuron" cx="75" cy="40" r="3" />
+                        <circle class="neuron" cx="75" cy="40" />
                     </g>
                     <g class="node-group" data-section="ai">
                         <circle class="hitbox" cx="50" cy="100" r="15" />
-                        <circle class="neuron" cx="50" cy="100" r="3" />
+                        <circle class="neuron" cx="50" cy="100" />
                     </g>
                     <g class="node-group" data-section="log">
                         <circle class="hitbox" cx="50" cy="160" r="15" />
-                        <circle class="neuron" cx="50" cy="160" r="3" />
+                        <circle class="neuron" cx="50" cy="160" />
                     </g>
                     <g class="node-group" data-section="opensource">
                         <circle class="hitbox" cx="25" cy="220" r="15" />
-                        <circle class="neuron" cx="25" cy="220" r="3" />
+                        <circle class="neuron" cx="25" cy="220" />
                     </g>
                     <g class="node-group" data-section="about">
                         <circle class="hitbox" cx="75" cy="220" r="15" />
-                        <circle class="neuron" cx="75" cy="220" r="3" />
+                        <circle class="neuron" cx="75" cy="220" />
                     </g>
                 </g>
             </svg>
@@ -54,14 +52,13 @@
             <div class="status-box status-working">
                 <span class="pulse-dot orange"></span> System: Building...
             </div>
-            <h1>Giovanni Moschese</h1>
+            <h1>Giovanni<br>Moschese</h1>
             <p class="role">Data Engineer • AI Systems • LLM</p>
             <div class="divider"></div>
             <p class="message" id="dynamic-text">Designing systems where data flows, learns, and becomes decisions.</p>
         </div>
     </header>
 </div>
-<!-- Assicurati che lo script sia alla fine del body -->
 <script src="script.js"></script>
 </body>
 </html>
