@@ -24,31 +24,40 @@ body {
 
 .main-header {
     display: flex;
-    align-items: flex-start; /* Allinea l'ombra in alto */
-    gap: 5rem; /* Grande spazio tra ombra e testo */
+    flex-direction: row; /* Forza l'affiancamento */
+    align-items: flex-start;
+    gap: 60px; /* Spazio generoso */
+    margin-bottom: 50px;
 }
 
 /* Stilizzazione Ombra */
 .brand-visual {
-    width: 120px; /* Forza la larghezza dell'area SVG */
-    flex-shrink: 0;
+    width: 100px;
+    height: 180px;
+    display: block; /* Assicura che il contenitore esista */
+    /* border: 1px solid red;  <-- Decommenta questa riga se ancora non vedi nulla per fare debugging */
 }
 
 .neural-svg {
-    width: 100%;
-    height: auto;
-    stroke: var(--primary);
-    stroke-width: 1.2;
-    fill: none;
+    display: block;
+    overflow: visible; /* Fondamentale se i nodi sono sui bordi */
 }
 
+/* Rendi i nodi ben visibili anche senza JS */
 .neuron {
-    fill: var(--bg);
-    stroke: var(--primary);
+    fill: #fafafa;
+    stroke: #1a1a1a;
+    stroke-width: 1.5px;
+    transition: all 0.3s ease;
 }
 
-.synapse { opacity: 0.1; }
-.synapse-strong { opacity: 0.3; }
+/*.synapse { opacity: 0.1; }
+.synapse-strong { opacity: 0.3; } */
+
+/* Sinapsi visibili di base */
+.synapse, .synapse-strong {
+    stroke: #1a1a1a;
+}
 
 /* Testi */
 .alias {
