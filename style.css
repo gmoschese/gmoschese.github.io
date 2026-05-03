@@ -30,7 +30,7 @@ body {
 }
 
 .brand-visual {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem; /* Ridotto per bilanciare l'altezza dell'ombra */
     cursor: pointer;
     display: inline-block;
 }
@@ -39,7 +39,8 @@ body {
 .neural-svg {
     fill: var(--bg);
     stroke: var(--primary);
-    stroke-width: 2;
+    stroke-width: 1.5;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1)); /* Effetto ombra leggera */
 }
 
 .synapse {
