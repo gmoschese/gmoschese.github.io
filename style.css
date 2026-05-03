@@ -8,90 +8,52 @@
 body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     margin: 0;
+    background-color: var(--bg);
+    color: var(--primary);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: var(--bg);
-    color: var(--primary);
+    min-height: 100vh;
     -webkit-font-smoothing: antialiased;
 }
 
 .container {
-    text-align: left;
-    padding: 2rem;
-    max-width: 500px;
+    width: 90%;
+    max-width: 800px;
+    padding: 4rem 2rem;
     animation: fadeIn 1s ease-out;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+header {
+    display: flex;
+    align-items: flex-start;
+    gap: 4rem; /* Spazio tra ombra e testo */
 }
 
+/* Ombra Slanciata */
 .brand-visual {
-    margin-bottom: 1.5rem; /* Ridotto per bilanciare l'altezza dell'ombra */
-    cursor: pointer;
-    display: inline-block;
+    flex-shrink: 0;
 }
 
-/* Neural Network Styling */
 .neural-svg {
-    fill: var(--bg);
+    width: 100px; /* Più grande per dare importanza */
+    height: auto;
+    fill: none;
     stroke: var(--primary);
-    stroke-width: 1.5;
-    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1)); /* Effetto ombra leggera */
-}
-
-.synapse {
-    stroke-width: 1.5;
-    opacity: 0.1;
-    transition: all 0.3s ease;
-}
-
-.synapse-strong {
-    stroke-width: 1.5;
-    opacity: 0.3;
-    stroke: var(--primary);
-    transition: all 0.3s ease;
+    stroke-width: 1.2;
 }
 
 .neuron {
     fill: var(--bg);
     stroke: var(--primary);
-    stroke-width: 2;
-    /* Transizione fluida per il cambio colore via JS */
-    transition: fill 0.2s ease, stroke 0.2s ease; 
+    transition: all 0.3s ease;
 }
 
-/* Reazione delle sinapsi al passaggio del mouse */
-.brand-visual:hover .synapse-strong {
-    stroke: var(--accent);
-    opacity: 0.6;
-}
+.synapse { opacity: 0.1; }
+.synapse-strong { opacity: 0.3; }
 
-/* UI Elements */
-h1 {
-    font-size: 3rem;
-    margin: 0;
-    font-weight: 700;
-    letter-spacing: -2px;
-    line-height: 1;
-}
-
-.role {
-    font-size: 1.1rem;
-    color: var(--secondary);
-    margin-top: 0.7rem;
-    font-weight: 400;
-}
-
-.divider {
-    width: 45px;
-    height: 2px;
-    background-color: var(--accent);
-    margin: 2rem 0;
-}
+/* Testi */
+.status-row { margin-bottom: 2rem; }
 
 .status-box {
     display: inline-flex;
@@ -99,46 +61,65 @@ h1 {
     background: #f0f0f0;
     padding: 6px 14px;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    color: #555;
-    margin-bottom: 1.5rem;
-}
-
-.pulse {
-    height: 8px;
-    width: 8px;
-    background-color: #2ecc71;
-    border-radius: 50%;
-    margin-right: 10px;
-    animation: pulse-animation 2s infinite;
-}
-
-@keyframes pulse-animation {
-    0% { box-shadow: 0 0 0 0px rgba(46, 204, 113, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
-    100% { box-shadow: 0 0 0 0px rgba(46, 204, 113, 0); }
-}
-
-.message {
-    line-height: 1.8;
-    font-size: 1.1rem;
     color: var(--secondary);
 }
 
-.alias-label {
+.alias {
     font-family: monospace;
-    font-size: 0.8rem;
-    color: var(--secondary);
-    letter-spacing: 3px;
+    color: var(--accent);
     text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.8rem;
     margin-bottom: 0.5rem;
 }
 
+h1 {
+    font-size: 3.5rem;
+    margin: 0;
+    letter-spacing: -2px;
+    line-height: 0.9;
+}
+
+.role {
+    font-size: 1.2rem;
+    color: var(--secondary);
+    margin: 1rem 0 0 0;
+}
+
+.divider {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+    margin: 3rem 0;
+}
+
+.message {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--secondary);
+    max-width: 450px;
+}
+
 footer {
-    margin-top: 4rem;
-    font-size: 0.75rem;
-    color: #bbb;
+    margin-top: 6rem;
+    font-size: 0.7rem;
+    color: #ccc;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    h1 { font-size: 2.5rem; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
