@@ -1,120 +1,32 @@
 :root {
     --primary: #1a1a1a;
-    --secondary: #666;
     --accent: #0055ff;
-    --bg: #fafafa;
-    --warning: #f39c12;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    min-height: 100vh; 
-    margin: 0;
+/* Stato base: Forza il colore e la transizione */
+.node-group .neuron {
+    fill: var(--primary) !important;
+    transition: all 0.4s ease-in-out;
+    r: 3px; /* Raggio base */
 }
 
-.container { width: 90%; max-width: 900px; }
-.main-header { display: flex; gap: 5rem; align-items: center; }
-
-/* SVG E NODI */
-.neural-svg { overflow: visible; }
-.node-group { cursor: pointer; }
-
-.neuron { 
-    fill: var(--primary); 
-    stroke: var(--bg); /* Crea un piccolo stacco visivo */
-    stroke-width: 1px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-    pointer-events: none; 
-}
-
-.hitbox { fill: transparent !important; }
-
-.synapse { 
-    stroke: var(--primary); 
-    stroke-width: 1.2; 
-    opacity: 0.1; 
-}
-
-/* EFFETTO HOVER - FORZA IL COLORE E IL RAGGIO */
-/* Modifica questa parte nel tuo CSS */
+/* Stato Attivo/Hover: Qui forziamo l'illuminazione e l'aumento del raggio */
 .node-group:hover .neuron,
-.node-group.active .neuron { 
-    r: 7px !important; 
-    fill: var(--accent) !important; 
+.node-group.active .neuron {
+    fill: var(--accent) !important;
+    stroke: var(--accent) !important;
+    r: 7px !important; /* Qui il raggio aumenta visibilmente */
+    filter: drop-shadow(0 0 5px var(--accent)); /* Aggiunge un effetto bagliore */
 }
 
-/* UI ELEMENTS */
-.status-box { 
-    display: inline-flex; 
-    align-items: center; 
-    background: #f0f0f0; 
-    padding: 7px 14px; 
-    border-radius: 4px; 
-    font-family: monospace; 
-    font-size: 0.75rem; 
-    margin-bottom: 1.2rem; 
+.synapse {
+    stroke: var(--primary);
+    stroke-width: 1.2;
+    opacity: 0.1;
+    transition: opacity 0.3s;
 }
 
-.status-working {
-    background: #fff4e5;
-    color: #d47b00;
+/* Quando un nodo è attivo, illuminiamo leggermente anche le linee collegate */
+.node-group.active ~ .connections .synapse {
+    opacity: 0.4;
 }
-
-.pulse-dot { 
-    width: 8px; 
-    height: 8px; 
-    background: #2ecc71;
-    border-radius: 50%; 
-    margin-right: 10px; 
-    animation: blink 2s infinite; 
-}
-
-.pulse-dot.orange { background: var(--warning) !important; }
-
-h1 { 
-    font-size: clamp(2.8rem, 8vw, 4rem); 
-    line-height: 0.95; 
-    margin: 0 0 0.6rem 0; 
-    font-weight: 800; 
-    letter-spacing: -1px;
-    color: var(--primary);
-}
-
-.divider { 
-    width: 45px; 
-    height: 3px; 
-    background: var(--accent); 
-    margin: 1.8rem 0; 
-}
-
-.message {
-    color: var(--secondary);
-    max-width: 400px;
-    line-height: 1.5;
-    font-size: 1.1rem;
-}
-
-.social-bar { display: flex; gap: 1.2rem; margin-top: 2rem; }
-.social-icon { 
-    color: var(--primary); 
-    width: 22px; 
-    height: 22px; 
-    transition: 0.2s; 
-    opacity: 0.6; 
-}
-.social-icon:hover { 
-    color: var(--accent); 
-    transform: translateY(-2px); 
-    opacity: 1; 
-}
-
-@keyframes blink { 
-    0%, 100% { opacity: 1; } 
-    50% { opacity: 0.3; } 
-}
-
-.hint { font-family: monospace; font-size: 0.7rem; color: #aaa; margin-top: 10px; text-align: center; }
