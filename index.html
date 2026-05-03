@@ -4,46 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giovanni Moschese | Portfolio</title>
-    <!-- Forza il caricamento del CSS -->
-    <link rel="stylesheet" href="style.css?v=1.0">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header class="main-header">
+            
             <div class="brand-visual">
                 <svg class="neural-svg" width="120" height="300" viewBox="0 0 120 300">
+
+                    <!-- Linee -->
                     <g class="connections">
-                        <line class="synapse" x1="30" y1="50" x2="20" y2="120" />
                         <line class="synapse" x1="30" y1="50" x2="60" y2="120" />
-                        <line class="synapse" x1="30" y1="50" x2="100" y2="120" />
-                        <line class="synapse" x1="90" y1="50" x2="20" y2="120" />
                         <line class="synapse" x1="90" y1="50" x2="60" y2="120" />
-                        <line class="synapse" x1="90" y1="50" x2="100" y2="120" />
-                        <line class="synapse" x1="20" y1="120" x2="20" y2="190" />
-                        <line class="synapse" x1="20" y1="120" x2="60" y2="190" />
-                        <line class="synapse" x1="60" y1="120" x2="20" y2="190" />
-                        <line class="synapse" x1="60" y1="120" x2="100" y2="190" />
-                        <line class="synapse" x1="100" y1="120" x2="60" y2="190" />
-                        <line class="synapse" x1="100" y1="120" x2="100" y2="190" />
-                        <line class="synapse" x1="20" y1="190" x2="30" y2="260" />
-                        <line class="synapse" x1="20" y1="190" x2="90" y2="260" />
+
+                        <line class="synapse" x1="60" y1="120" x2="60" y2="190" />
+
                         <line class="synapse" x1="60" y1="190" x2="30" y2="260" />
                         <line class="synapse" x1="60" y1="190" x2="90" y2="260" />
-                        <line class="synapse" x1="100" y1="190" x2="30" y2="260" />
-                        <line class="synapse" x1="100" y1="190" x2="90" y2="260" />
                     </g>
+
+                    <!-- Nodi -->
                     <g class="nodes">
-                        <circle class="neuron" cx="30" cy="50" r="4.5" />
-                        <circle class="neuron" cx="90" cy="50" r="4.5" />
-                        <circle class="neuron" cx="20" cy="120" r="4.5" />
-                        <circle class="neuron" cx="60" cy="120" r="4.5" />
-                        <circle class="neuron" cx="100" cy="120" r="4.5" />
-                        <circle class="neuron" cx="20" cy="190" r="4.5" />
-                        <circle class="neuron" cx="60" cy="190" r="4.5" />
-                        <circle class="neuron" cx="100" cy="190" r="4.5" />
-                        <circle class="neuron" cx="30" cy="260" r="4.5" />
-                        <circle class="neuron" cx="90" cy="260" r="4.5" />
+                        <circle class="neuron" cx="30" cy="50" r="5" />
+                        <circle class="neuron" cx="90" cy="50" r="5" />
+                        <circle class="neuron" cx="60" cy="120" r="5" />
+                        <circle class="neuron" cx="60" cy="190" r="5" />
+                        <circle class="neuron" cx="30" cy="260" r="5" />
+                        <circle class="neuron" cx="90" cy="260" r="5" />
                     </g>
+
+                    <!-- DATA FLOW -->
+                    <g class="data-layer"></g>
+
                 </svg>
             </div>
 
@@ -51,29 +44,20 @@
                 <div class="status-box">
                     <span class="pulse"></span> System: Online
                 </div>
+
                 <h1>Giovanni<br>Moschese</h1>
-                <p class="role">Software Developer & Tech Enthusiast</p>
-                
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="#">// Stack</a></li>
-                        <li><a href="#">// Lab</a></li>
-                        <li><a href="#">// Open Source</a></li>
-                        <li><a href="#">// Console</a></li>
-                    </ul>
-                </nav>
+                <p class="role">Data Engineer & Tech Architect</p>
 
                 <div class="divider"></div>
-                
-                <p class="message">
-                    Architecting digital environments with focus on logic and design.<br>
-                    Currently building minimal, high-performance systems.
+
+                <p class="message" id="dynamic-text">
+                    Building systems where data flows, transforms, and becomes decisions.
                 </p>
             </div>
+
         </header>
     </div>
 
-    <!-- Script caricato alla fine -->
     <script src="script.js"></script>
 </body>
 </html>
