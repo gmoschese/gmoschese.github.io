@@ -20,6 +20,7 @@ body {
     min-height: 100vh;
 }
 
+/* layout */
 .container {
     width: 90%;
     max-width: 900px;
@@ -27,45 +28,41 @@ body {
 
 .main-header {
     display: flex;
-    gap: 4rem;
+    align-items: center;
+    gap: 3rem;
 }
 
-/* NEURAL */
+/* rete */
 .neuron {
     fill: white;
     stroke: var(--primary);
-    stroke-width: 2;
-    transition: all 0.25s ease;
+    stroke-width: 1.8;
+    transition: all 0.2s ease;
     cursor: pointer;
 }
 
-.neuron:hover {
-    transform: scale(1.15);
+/* lampeggio random */
+.neuron.pulse {
+    fill: var(--accent);
+    stroke: var(--accent);
+    filter: drop-shadow(0 0 6px var(--accent));
 }
 
+/* hover */
 .neuron.active {
     fill: var(--accent);
     stroke: var(--accent);
-    transform: scale(1.15);
+    transform: scale(1.1);
+    transform-origin: center;
     filter: drop-shadow(0 0 8px var(--accent));
 }
 
 .synapse {
     stroke: var(--primary);
-    opacity: 0.2;
-    transition: 0.3s;
+    opacity: 0.15;
 }
 
-.synapse.active {
-    opacity: 0.8;
-    stroke: var(--accent);
-}
-
-.data-layer circle {
-    filter: drop-shadow(0 0 6px currentColor);
-}
-
-/* UI */
+/* hint */
 .hint {
     margin-top: 10px;
     font-size: 0.7rem;
@@ -73,6 +70,7 @@ body {
     font-family: monospace;
 }
 
+/* UI */
 .status-box {
     background: #eee;
     padding: 6px 10px;
