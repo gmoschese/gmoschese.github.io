@@ -65,6 +65,14 @@ body {
     animation: blink 2s infinite; 
 }
 
+.status-working {
+    background: #fff4e5;
+    color: #d47b00;
+}
+.pulse-dot.orange {
+    background: #f39c12;
+}
+
 h1 { 
     font-size: clamp(2.8rem, 8vw, 4rem); 
     line-height: 0.95; 
