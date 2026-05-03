@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const nodeGroups = document.querySelectorAll(".node-group");
+    const nodeGroups = Array.from(document.querySelectorAll(".node-group"));
     const textBox = document.getElementById("dynamic-text");
     const defaultText = "Designing systems where data flows, learns, and becomes decisions.";
     
@@ -12,47 +12,43 @@ document.addEventListener("DOMContentLoaded", () => {
         about: "Execute whoami.sh to view system architect profile."
     };
 
-    let currentIndex = -1;
-    let autoCycle = setInterval(highlightNextNode, 3000); // Cambia ogni 3 secondi
+    let autoCycle;
 
-    function highlightNextNode() {
-        // Rimuove la classe active da tutti i nodi
-        nodeGroups.forEach(n => n.classList.remove("active"));
-        
-        // Passa al nodo successivo
-        currentIndex = (currentIndex + 1) % nodeGroups.length;
-        const currentNode = nodeGroups[currentIndex];
-        
-        // Lo illumina e cambia il testo
-        currentNode.classList.add("active");
-        const section = currentNode.getAttribute("data-section");
-        textBox.textContent = textMap[section];
+    // Funzione per accendere un nodo a caso
+    function startRandomHighlight() {
+        autoCycle = setInterval(() => {
+            // Spegni tutti
+            nodeGroups.forEach(n => n.classList.remove("active"));
+            
+            // Scegli uno a caso
+            const randomIndex = Math.floor(Math.random() * nodeGroups.length);
+            const targetNode = nodeGroups[randomIndex];
+            
+            // Accendi
+            targetNode.classList.add("active");
+            
+            // Opzionale: cambia il testo anche durante il giro random
+            // textBox.textContent = textMap[targetNode.getAttribute("data-section")];
+        }, 2000); // Cambia ogni 2 secondi
     }
 
-    nodeGroups.forEach((group, index) => {
-        // Se l'utente usa il mouse, fermiamo l'automatismo
+    nodeGroups.forEach(group => {
         group.addEventListener("mouseenter", () => {
-            clearInterval(autoCycle); 
-            nodeGroups.forEach(n => n.classList.remove("active")); // Pulisce gli altri
+            clearInterval(autoCycle); // Ferma il random quando l'utente interagisce
+            nodeGroups.forEach(n => n.classList.remove("active"));
             
             const section = group.getAttribute("data-section");
             textBox.textContent = textMap[section];
             group.classList.add("active");
         });
 
-        // Quando il mouse esce, facciamo ripartire il ciclo dopo un po'
         group.addEventListener("mouseleave", () => {
             group.classList.remove("active");
             textBox.textContent = defaultText;
-            
-            // Reset dell'indice per ricominciare da dove si era rimasti o dal prossimo
-            currentIndex = index;
-            clearInterval(autoCycle);
-            autoCycle = setInterval(highlightNextNode, 3000);
-        });
-
-        group.addEventListener("click", () => {
-            window.location.href = `./section/${group.getAttribute("data-section")}.html`;
+            startRandomHighlight(); // Fai ripartire il random
         });
     });
+
+    // Avvia il ciclo al caricamento
+    startRandomHighlight();
 });
