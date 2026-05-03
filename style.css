@@ -1,58 +1,187 @@
 :root {
     --primary: #1a1a1a;
-    --accent: #0055ff;
-    --bg: #fafafa;
+    --accent:  #0055ff;
+    --bg:      #fafafa;
 }
+
+* { box-sizing: border-box; }
 
 body {
-    margin: 0; background: var(--bg); font-family: -apple-system, sans-serif;
-    display: flex; justify-content: center; align-items: center; min-height: 100vh;
+    margin: 0;
+    background: var(--bg);
+    font-family: -apple-system, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.main-header { display: flex; align-items: center; gap: 5rem; }
+.container {
+    padding: 2rem;
+}
 
-/* --- I NODI --- */
+.main-header {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+/* ── NODI ─────────────────────────────────────── */
+
 .neuron {
     fill: var(--primary);
     stroke: white;
     stroke-width: 2px;
-    transition: all 0.3s ease;
-    pointer-events: none; /* IL SEGRETO: il mouse ignora il cerchio che cresce */
+    /* scale() invece di r: — funziona su tutti i browser */
+    transform-origin: center;
+    transform-box: fill-box;
+    transition: transform 0.3s ease, fill 0.3s ease, filter 0.3s ease;
+    pointer-events: none;
 }
 
 .hitbox {
     fill: transparent;
     cursor: pointer;
-    pointer-events: all; /* Il mouse sente solo questa */
+    pointer-events: all;
 }
 
-/* Animazione quando attivo o hover */
 .node-group:hover .neuron,
 .node-group.active .neuron {
     fill: var(--accent);
-    r: 8px; /* Cresce senza sfarfallare */
-    filter: drop-shadow(0 0 5px rgba(0,85,255,0.5));
+    transform: scale(2);
+    filter: drop-shadow(0 0 5px rgba(0, 85, 255, 0.5));
 }
 
-.synapse { stroke: var(--primary); stroke-width: 1px; opacity: 0.1; }
-
-/* --- ESTETICA TESTO --- */
-h1 { font-size: 4.5rem; margin: 0; line-height: 0.9; font-weight: 900; letter-spacing: -2px; }
-.role { text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; margin-top: 15px; color: var(--primary); }
-.divider { width: 50px; height: 4px; background: var(--accent); margin: 2rem 0; }
-.message { color: #555; max-width: 350px; line-height: 1.6; font-size: 1.1rem; min-height: 4.8em; }
-
-.status-box { 
-    font-family: monospace; font-size: 0.7rem; color: #d47b00; background: #fff4e5;
-    padding: 5px 10px; border-radius: 3px; display: inline-flex; align-items: center; margin-bottom: 1rem;
+.synapse {
+    stroke: var(--primary);
+    stroke-width: 1px;
+    opacity: 0.1;
+    transition: opacity 0.4s ease;
 }
-.pulse-dot { width: 6px; height: 6px; background: #f39c12; border-radius: 50%; margin-right: 8px; animation: blink 1.5s infinite; }
 
-.social-bar { display: flex; gap: 20px; margin-top: 30px; }
-.social-icon { 
-    font-family: monospace; font-size: 0.7rem; text-decoration: none; color: var(--primary);
-    border: 1px solid #ddd; padding: 5px 10px; transition: 0.3s;
+/* ── LABEL SVG ────────────────────────────────── */
+
+.node-label {
+    font-family: monospace;
+    font-size: 9px;
+    fill: var(--accent);
+    text-anchor: middle;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
-.social-icon:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.node-group:hover .node-label,
+.node-group.active .node-label {
+    opacity: 1;
+}
+
+/* ── TESTO HERO ───────────────────────────────── */
+
+h1 {
+    font-size: 4.5rem;
+    margin: 0;
+    line-height: 0.9;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.role {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    color: var(--primary);
+}
+
+.divider {
+    width: 50px;
+    height: 4px;
+    background: var(--accent);
+    margin: 2rem 0;
+}
+
+.message {
+    color: #555;
+    max-width: 350px;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    min-height: 4.8em;   /* evita layout shift al cambio testo */
+    transition: opacity 0.25s ease;
+}
+
+.message.fading {
+    opacity: 0;
+}
+
+/* ── STATUS BOX ───────────────────────────────── */
+
+.status-box {
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: #d47b00;
+    background: #fff4e5;
+    padding: 5px 10px;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    background: #f39c12;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: blink 1.5s infinite;
+}
+
+/* ── SOCIAL BAR ───────────────────────────────── */
+
+.social-bar {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.social-icon {
+    font-family: monospace;
+    font-size: 0.7rem;
+    text-decoration: none;
+    color: var(--primary);
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.social-icon:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* ── ANIMAZIONI ───────────────────────────────── */
+
+@keyframes blink {
+    0%, 100% { opacity: 1;   }
+    50%       { opacity: 0.3; }
+}
+
+/* ── RESPONSIVE ───────────────────────────────── */
+
+@media (max-width: 700px) {
+    .main-header {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    h1 { font-size: 3rem; }
+
+    .divider      { margin: 1.5rem auto; }
+    .message      { max-width: 100%; }
+    .social-bar   { justify-content: center; }
+}
