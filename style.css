@@ -77,7 +77,9 @@ h1 {
     opacity: 0;
 }
 
-/* ── Status box ───────────────────────────────── */
+/* ══════════════════════════════════════════════
+   STATUS BOX
+══════════════════════════════════════════════ */
 
 .status-box {
     font-family: monospace;
@@ -89,6 +91,19 @@ h1 {
     display: inline-flex;
     align-items: center;
     margin-bottom: 1rem;
+}
+
+/* Variante WIP — grigio/giallo per le sezioni */
+.status-box.wip {
+    color: #666;
+    background: #f2f2f2;
+    border: 1px dashed #ccc;
+}
+
+.status-box.wip .pulse-dot {
+    background: #aaa;
+    animation: none;      /* fermo = non attivo */
+    opacity: 0.6;
 }
 
 .pulse-dot {
@@ -228,8 +243,6 @@ h1 {
     margin-top: 1rem;
 }
 
-/* ── Lista sezioni ────────────────────────────── */
-
 .section-list {
     list-style: none;
     margin: 2rem 0;
@@ -251,15 +264,11 @@ h1 {
     font-family: monospace;
 }
 
-/* ── Footer sezione ───────────────────────────── */
-
 .section-footer {
     margin-top: 4rem;
     border-top: 1px solid #eee;
     padding-top: 2rem;
 }
-
-/* ── Log page ─────────────────────────────────── */
 
 .log-entry {
     margin-bottom: 2rem;
