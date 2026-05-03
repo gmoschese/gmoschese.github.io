@@ -32,6 +32,7 @@ body {
 }
 
 /* NEURAL */
+
 .neuron {
     fill: white;
     stroke: var(--primary);
@@ -40,7 +41,10 @@ body {
     cursor: pointer;
 }
 
-/* HOVER = SCALE + GLOW */
+.neuron:hover {
+    transform: scale(1.15);
+}
+
 .neuron.active {
     fill: var(--accent);
     stroke: var(--accent);
@@ -49,9 +53,16 @@ body {
     filter: drop-shadow(0 0 8px var(--accent));
 }
 
+/* Connessioni */
 .synapse {
     stroke: var(--primary);
     opacity: 0.2;
+    transition: all 0.3s ease;
+}
+
+.synapse.active {
+    opacity: 0.8;
+    stroke: var(--accent);
 }
 
 /* DATA FLOW */
@@ -61,10 +72,16 @@ body {
 
 /* HINT */
 .hint {
-    margin-top: 10px;
-    font-size: 0.7rem;
+    margin-top: 12px;
+    font-size: 0.75rem;
     color: var(--secondary);
     font-family: monospace;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.brand-visual:hover .hint {
+    opacity: 1;
 }
 
 /* UI */
