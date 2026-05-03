@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G. Moschese | Personal Site</title>
     <style>
         :root {
-            --primary: #2d3436;
-            --accent: #0984e3;
-            --bg: #ffffff;
+            --primary: #1a1a1a;
+            --secondary: #666666;
+            --accent: #007aff;
+            --bg: #fafafa;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -20,63 +21,101 @@
             height: 100vh;
             background-color: var(--bg);
             color: var(--primary);
+            -webkit-font-smoothing: antialiased;
         }
 
-        .card {
-            text-align: center;
+        .container {
+            text-align: left;
             padding: 2rem;
-            max-width: 400px;
+            max-width: 500px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: -1px;
+            font-size: 3rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: -2px;
         }
 
-        .tagline {
-            color: var(--accent);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            display: block;
-        }
-
-        .content {
-            line-height: 1.6;
+        .role {
             font-size: 1.1rem;
-            color: #636e72;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+            font-weight: 400;
         }
 
-        .status-dot {
-            height: 10px;
-            width: 10px;
-            background-color: #55efc4;
+        .divider {
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+            margin: 2rem 0;
+        }
+
+        .status-box {
+            display: inline-flex;
+            align-items: center;
+            background: #eee;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #444;
+        }
+
+        .pulse {
+            height: 8px;
+            width: 8px;
+            background-color: #2ecc71;
             border-radius: 50%;
-            display: inline-block;
-            margin-right: 5px;
+            margin-right: 8px;
+            box-shadow: 0 0 0 rgba(46, 204, 113, 0.4);
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0px rgba(46, 204, 113, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0px rgba(46, 204, 113, 0); }
+        }
+
+        .message {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: var(--secondary);
         }
 
         footer {
-            margin-top: 3rem;
-            font-size: 0.8rem;
-            color: #b2bec3;
+            margin-top: 4rem;
+            font-size: 0.75rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
-    <div class="card">
+    <div class="container">
+        <div class="status-box">
+            <span class="pulse"></span> Building in progress
+        </div>
         <h1>G. Moschese</h1>
-        <span class="tagline">Personal Space</span>
+        <div class="role">Software Developer & Tech Enthusiast</div>
         
-        <div class="content">
-            <p><span class="status-dot"></span> Attualmente sto costruendo qualcosa di nuovo.</p>
-            <p>Appassionato di tecnologia e sviluppatore del progetto <strong>Lockal</strong>.</p>
+        <div class="divider"></div>
+
+        <div class="message">
+            Currently crafting a new digital experience. <br>
+            Stay tuned for updates.
         </div>
 
         <footer>
-            &copy; 2026 — Built with GitHub Pages
+            &copy; 2026 &mdash; London / Remote
         </footer>
     </div>
 </body>
