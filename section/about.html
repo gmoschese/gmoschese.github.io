@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giovanni Moschese | Terminal</title>
+    <style>
+        :root {
+            --term-bg: #0d0d0d;
+            --term-green: #00ff41;
+            --term-white: #d1d1d1;
+        }
+
+        body {
+            background-color: var(--term-bg);
+            color: var(--term-white);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .terminal-window {
+            width: 100%;
+            max-width: 800px;
+            background: #1a1a1a;
+            border-radius: 6px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .terminal-header {
+            background: #333;
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 20px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .prompt { color: var(--term-green); }
+        .command { color: #fff; margin-bottom: 15px; }
+        .output { color: var(--term-white); margin-bottom: 20px; opacity: 0.8; }
+        
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background: var(--term-green);
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        a { color: var(--term-green); text-decoration: none; border-bottom: 1px dashed var(--term-green); }
+        a:hover { background: var(--term-green); color: black; }
+    </style>
+</head>
+<body>
+
+<div class="terminal-window">
+    <div class="terminal-header">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+    </div>
+    <div class="terminal-body">
+        <div><span class="prompt">guest@moschese:~$</span> <span class="command">whoami</span></div>
+        <div class="output">
+            Giovanni Moschese.<br>
+            Data Engineer & Architect.<br>
+            Specialized in: Distributed Systems, AI Pipelines, LLM Infrastructure.
+        </div>
+
+        <div><span class="prompt">guest@moschese:~$</span> <span class="command">cat bio.txt</span></div>
+        <div class="output">
+            Progetto e costruisco ambienti digitali dove i dati non sono solo bit, 
+            ma motori decisionali. Il mio approccio è minimalista nel design 
+            ma brutale nell'efficienza del codice.
+        </div>
+
+        <div><span class="prompt">guest@moschese:~$</span> <span class="command">ls ./contact</span></div>
+        <div class="output">
+            <a href="mailto:tua@email.com">email</a> | <a href="https://linkedin.com/in/tuo">linkedin</a> | <a href="https://github.com/tuo">github</a>
+        </div>
+
+        <div><span class="prompt">guest@moschese:~$</span> <span class="command">cd ..</span></div>
+        <div class="output">Returning to main interface...</div>
+
+        <div><span class="prompt">guest@moschese:~$</span> <a href="../index.html">./exit_to_home.sh</a> <span class="cursor"></span></div>
+    </div>
+</div>
+
+</body>
+</html>
