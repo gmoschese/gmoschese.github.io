@@ -36,6 +36,17 @@ body {
     fill: white;
     stroke: var(--primary);
     stroke-width: 2;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+/* HOVER = SCALE + GLOW */
+.neuron.active {
+    fill: var(--accent);
+    stroke: var(--accent);
+    transform: scale(1.15);
+    transform-origin: center;
+    filter: drop-shadow(0 0 8px var(--accent));
 }
 
 .synapse {
@@ -46,6 +57,14 @@ body {
 /* DATA FLOW */
 .data-layer circle {
     filter: drop-shadow(0 0 6px currentColor);
+}
+
+/* HINT */
+.hint {
+    margin-top: 10px;
+    font-size: 0.7rem;
+    color: var(--secondary);
+    font-family: monospace;
 }
 
 /* UI */
@@ -83,27 +102,5 @@ h1 {
 
 .message {
     color: var(--secondary);
-}
-
-.main-nav {
-    margin: 2rem 0;
-}
-
-.main-nav ul {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-.main-nav a {
-    text-decoration: none;
-    color: var(--secondary);
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
-}
-
-
-.main-nav a:hover {
-    color: var(--accent);
-    transform: translateX(5px);
+    max-width: 400px;
 }
