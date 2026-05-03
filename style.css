@@ -16,72 +16,52 @@ body {
 .container { width: 90%; max-width: 900px; }
 .main-header { display: flex; gap: 5rem; align-items: center; }
 
-/* SVG E RETE */
+/* SVG - FERMO E PULITO */
 .neural-svg { overflow: visible; }
 
 .neuron { 
-    fill: var(--primary); 
-    stroke: none; 
-    transition: all 0.3s ease;
-    /* Ripristino animazione automatica */
-    animation: pulseNode 3s infinite ease-in-out;
+    fill: white; /* Torna al look originale: bianco con bordo */
+    stroke: var(--primary); 
+    stroke-width: 2.2; 
+    transition: all 0.2s ease; 
+    pointer-events: none; 
 }
 
 .synapse { 
     stroke: var(--primary); 
-    stroke-width: 1.2; 
+    stroke-width: 1.6; 
     opacity: 0.1; 
-    animation: pulseLine 3s infinite ease-in-out;
 }
 
-.hitbox { fill: transparent !important; pointer-events: all; cursor: pointer; }
-
-/* EFFETTO HOVER */
-.node-group:hover .neuron { 
-    r: 6; 
-    fill: var(--accent) !important; 
-    animation: none; /* Si ferma quando interagisci */
+/* Questa è la classe che lo script userà per illuminare i punti */
+.node-group.active .neuron { 
+    r: 7; 
+    fill: var(--accent); 
+    stroke: var(--accent); 
 }
 
-/* ANIMAZIONI ORIGINALI RIPRISTINATE */
-@keyframes pulseNode {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.1); }
-}
+.hitbox { fill: transparent !important; cursor: pointer; pointer-events: all; }
 
-@keyframes pulseLine {
-    0%, 100% { opacity: 0.1; }
-    50% { opacity: 0.25; }
-}
-
-/* Sfasamento per rendere il movimento organico */
-.node-group:nth-child(2n) .neuron { animation-delay: 0.5s; }
-.node-group:nth-child(3n) .neuron { animation-delay: 1.2s; }
-
-/* STATUS BOX E BANNER */
+/* UI ELEMENTS */
 .status-box { 
     display: inline-flex; align-items: center; 
-    background: #f0f0f0; padding: 7px 14px; border-radius: 4px; 
+    background: #eee; padding: 7px 14px; border-radius: 3px; 
     font-family: monospace; font-size: 0.75rem; margin-bottom: 1.2rem; 
 }
-
 .status-working { background: #fff4e5; color: #d47b00; }
 
 .pulse-dot { 
     width: 8px; height: 8px; border-radius: 50%; 
     margin-right: 10px; animation: blink 2s infinite; 
 }
-.pulse-dot.orange { background: var(--warning) !important; }
+.pulse-dot.orange { background: var(--warning); }
 
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
 h1 { font-size: clamp(2.8rem, 8vw, 4rem); line-height: 0.95; font-weight: 800; margin: 0; }
 .divider { width: 45px; height: 3px; background: var(--accent); margin: 1.8rem 0; }
-.message { color: var(--secondary); max-width: 400px; line-height: 1.5; }
+.message { color: var(--secondary); max-width: 400px; line-height: 1.5; min-height: 3em; }
 
-/* BANNER ENGINEERING */
-.under-construction-banner {
-    background: #fff3cd; border: 1px dashed #ffeeba;
-    border-radius: 8px; padding: 1.5rem; margin: 2rem 0;
-    text-align: center; font-family: monospace; color: #856404;
-}
+.social-bar { display: flex; gap: 1.2rem; margin-top: 2rem; }
+.social-icon { color: var(--primary); width: 20px; height: 20px; opacity: 0.8; transition: 0.2s; }
+.social-icon:hover { color: var(--accent); transform: translateY(-2px); }
