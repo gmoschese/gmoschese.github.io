@@ -8,17 +8,21 @@ window.addEventListener('load', () => {
 
         neuron.classList.add('active');
 
+        // Durata dell'accensione
         setTimeout(() => {
             neuron.classList.remove('active');
         }, 400 + Math.random() * 400);
 
-        setTimeout(fireRandomNeuron, 100 + Math.random() * 500);
+        // Intervallo per il prossimo impulso
+        setTimeout(fireRandomNeuron, 100 + Math.random() * 600);
     };
 
-    // Lanciamo 5 cicli paralleli per una rete molto attiva
+    // Attivazione di 5 flussi di dati paralleli
     fireRandomNeuron();
     setTimeout(() => fireRandomNeuron(), 150);
     setTimeout(() => fireRandomNeuron(), 300);
     setTimeout(() => fireRandomNeuron(), 450);
     setTimeout(() => fireRandomNeuron(), 600);
+
+    console.log("Neural Architecture Online.");
 });
