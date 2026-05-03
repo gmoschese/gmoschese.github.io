@@ -1,40 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const nodeGroups = Array.from(document.querySelectorAll(".node-group"));
+    const nodeGroups = document.querySelectorAll(".node-group");
     const textBox = document.getElementById("dynamic-text");
     const defaultText = "Designing systems where data flows, learns, and becomes decisions.";
-    
+
     const textMap = {
-        stack: "Data engineering stack: pipelines, cloud systems, distributed processing.",
+        stack: "Data engineering stack: pipelines and cloud architectures.",
         lab: "Experimental projects in AI and data science.",
-        ai: "Building AI systems, LLM pipelines and intelligent applications.",
-        log: "System logs: technical thoughts, updates, and incident reports.",
-        opensource: "Open source projects and collaborations.",
-        about: "Execute whoami.sh to view system architect profile."
+        ai: "Building AI systems and LLM pipelines.",
+        log: "Technical logs and incident reports.",
+        opensource: "Open source collaborations.",
+        about: "System architect profile."
     };
 
-    let autoCycle;
+    let autoTimer;
 
-    // Funzione per accendere un nodo a caso
-    function startRandomHighlight() {
-        autoCycle = setInterval(() => {
-            // Spegni tutti
+    function startRandomCycle() {
+        autoTimer = setInterval(() => {
+            // Rimuovi active da tutti
             nodeGroups.forEach(n => n.classList.remove("active"));
             
             // Scegli uno a caso
-            const randomIndex = Math.floor(Math.random() * nodeGroups.length);
-            const targetNode = nodeGroups[randomIndex];
+            const randomNode = nodeGroups[Math.floor(Math.random() * nodeGroups.length)];
+            randomNode.classList.add("active");
             
-            // Accendi
-            targetNode.classList.add("active");
-            
-            // Opzionale: cambia il testo anche durante il giro random
-            // textBox.textContent = textMap[targetNode.getAttribute("data-section")];
-        }, 2000); // Cambia ogni 2 secondi
+            // Opzionale: cambia il testo mentre gira da solo
+            // textBox.textContent = textMap[randomNode.getAttribute('data-section')];
+        }, 2000); // Ogni 2 secondi si accende un punto diverso
     }
 
     nodeGroups.forEach(group => {
         group.addEventListener("mouseenter", () => {
-            clearInterval(autoCycle); // Ferma il random quando l'utente interagisce
+            clearInterval(autoTimer); // Ferma il giro se l'utente entra col mouse
             nodeGroups.forEach(n => n.classList.remove("active"));
             
             const section = group.getAttribute("data-section");
@@ -45,10 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
         group.addEventListener("mouseleave", () => {
             group.classList.remove("active");
             textBox.textContent = defaultText;
-            startRandomHighlight(); // Fai ripartire il random
+            startRandomCycle(); // Riparti quando l'utente esce
         });
     });
 
-    // Avvia il ciclo al caricamento
-    startRandomHighlight();
+    startRandomCycle(); // Avvio immediato
 });
