@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const nodeGroups   = document.querySelectorAll(".node-group");
-    const textBox      = document.getElementById("dynamic-text");
-    const defaultText  = "Designing systems where data flows, learns, and becomes decisions.";
+    const nodeGroups  = document.querySelectorAll(".node-group");
+    const textBox     = document.getElementById("dynamic-text");
+    const defaultText = "Designing systems where data flows, learns, and becomes decisions.";
 
     const info = {
         stack:      "Modern Data Stack: Airflow, Spark, dbt and Cloud Infra.",
@@ -13,12 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
         about:      "Architecting the backbone of data-driven companies."
     };
 
-    let intervalId = null;   // unico riferimento — niente stacking
+    let intervalId = null;
     let isHovering = false;
 
     /* ── helpers ──────────────────────────────── */
 
     function setText(text) {
+        if (!textBox) return;
         textBox.classList.add("fading");
         setTimeout(() => {
             textBox.textContent = text;
@@ -32,24 +33,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function stopRandom() {
-        clearInterval(intervalId);   // clearInterval(null) è sicuro — non fa nulla
+        clearInterval(intervalId);
         intervalId = null;
     }
 
     function startRandom() {
-        stopRandom();                // pulisce sempre prima di ripartire
+        stopRandom();
         intervalId = setInterval(() => {
             if (isHovering) return;
             const random = nodeGroups[Math.floor(Math.random() * nodeGroups.length)];
             activateNode(random);
-            setText(info[random.dataset.section]);   // testo in sync con il nodo
+            setText(info[random.dataset.section]);
         }, 2000);
     }
 
-    /* ── navigazione al click ─────────────────── */
-    // I nodi hanno data-href per le pagine secondarie in ./section/
+    /* ── eventi ───────────────────────────────── */
 
     nodeGroups.forEach(group => {
+
         group.addEventListener("click", () => {
             const href = group.dataset.href;
             if (href) window.location.href = href;
