@@ -1,3 +1,12 @@
+/* RESET FONDAMENTALE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
 :root {
     --primary: #1a1a1a;
     --secondary: #666666;
@@ -7,7 +16,6 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    margin: 0;
     background-color: var(--bg);
     color: var(--primary);
     display: flex;
@@ -28,7 +36,7 @@ body {
     gap: 5rem;
 }
 
-/* Rete Neurale (Decorativa) */
+/* Rete Neurale */
 .brand-visual {
     width: 140px;
     height: 300px;
@@ -40,14 +48,12 @@ body {
 }
 
 .neuron {
-    fill: var(--bg);
+    fill: white;
     stroke: var(--primary);
     stroke-width: 2px;
-    /* Transizione fluida SOLTANTO per il colore */
-    transition: fill 0.3s ease, stroke 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-/* Stato attivo: si illumina soltanto */
 .neuron.active {
     fill: var(--accent);
     stroke: var(--accent);
@@ -60,44 +66,42 @@ body {
     opacity: 0.1;
 }
 
-/* Menu Tech-Focused (Ripristinato) */
+/* MENU FIXATO */
 .main-nav {
-    margin-top: 2.5rem;
+    margin: 2rem 0; /* Spazio sopra e sotto */
 }
 
 .main-nav ul {
-    list-style: none;
-    padding: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-    max-width: 350px;
+    gap: 1rem;
+    max-width: 300px;
 }
 
 .main-nav a {
-    text-decoration: none;
     color: var(--secondary);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    display: block; /* Importante per il clic */
 }
 
 .main-nav a:hover {
     color: var(--accent);
-    letter-spacing: 1px;
+    transform: translateX(5px);
 }
 
-/* UI Elements */
+/* ELEMENTI UI */
 .status-box {
     display: inline-flex;
     align-items: center;
     background: #eeeeee;
-    padding: 6px 14px;
+    padding: 6px 12px;
     border-radius: 4px;
     font-size: 0.75rem;
     font-family: monospace;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .pulse {
@@ -131,17 +135,18 @@ h1 {
     width: 40px;
     height: 2px;
     background: var(--accent);
-    margin: 2rem 0;
+    margin: 1.5rem 0;
 }
 
 .message {
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1rem;
+    line-height: 1.6;
     color: var(--secondary);
 }
 
+/* Mobile */
 @media (max-width: 750px) {
     .main-header { flex-direction: column; text-align: center; gap: 2rem; }
     .main-nav ul { margin: 0 auto; }
-    .divider { margin: 2rem auto; }
+    .divider { margin: 1.5rem auto; }
 }
