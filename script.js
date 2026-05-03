@@ -1,123 +1,108 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+const nodes = [
+    { x: 30, y: 50, section: "stack" },
+    { x: 90, y: 50, section: "lab" },
+    { x: 60, y: 120, section: "ai" },
+    { x: 30, y: 260, section: "opensource" },
+    { x: 90, y: 260, section: "console" }
+];
 
-:root {
-    --primary: #1a1a1a;
-    --secondary: #666;
-    --accent: #007aff;
-    --bg: #fafafa;
-}
+const paths = [
+    [0, 2, 3],
+    [1, 2, 4]
+];
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+const colors = {
+    batch: "#007aff",
+    streaming: "#2ecc71"
+};
 
-.container {
-    width: 90%;
-    max-width: 900px;
-}
+const textMap = {
+    stack: "Data engineering stack: pipelines, cloud systems, distributed processing.",
+    lab: "Experimental projects in AI, data science and system design.",
+    ai: "Building AI systems, LLM applications and intelligent pipelines.",
+    opensource: "Open source contributions and collaborative development.",
+    console: "Interactive tools, system interfaces and technical playground."
+};
 
-.main-header {
-    display: flex;
-    align-items: center;
-    gap: 4rem;
-}
+window.addEventListener("load", () => {
+    const dataLayer = document.querySelector(".data-layer");
+    const textBox = document.getElementById("dynamic-text");
+    const neurons = document.querySelectorAll(".neuron");
+    const connections = document.querySelectorAll(".synapse");
 
-/* NEURAL */
+    let activeNode = null;
 
-.neuron {
-    fill: white;
-    stroke: var(--primary);
-    stroke-width: 2;
-    transition: all 0.25s ease;
-    cursor: pointer;
-}
+    function createPacket() {
+        const path = paths[Math.floor(Math.random() * paths.length)];
 
-.neuron:hover {
-    transform: scale(1.15);
-}
+        const packet = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        packet.setAttribute("r", 3);
+        packet.setAttribute("fill", colors.batch);
 
-.neuron.active {
-    fill: var(--accent);
-    stroke: var(--accent);
-    transform: scale(1.15);
-    transform-origin: center;
-    filter: drop-shadow(0 0 8px var(--accent));
-}
+        dataLayer.appendChild(packet);
+        move(packet, path, 0);
+    }
 
-/* Connessioni */
-.synapse {
-    stroke: var(--primary);
-    opacity: 0.2;
-    transition: all 0.3s ease;
-}
+    function move(packet, path, i) {
+        if (i >= path.length - 1) {
+            packet.remove();
+            return;
+        }
 
-.synapse.active {
-    opacity: 0.8;
-    stroke: var(--accent);
-}
+        const from = nodes[path[i]];
+        const to = nodes[path[i + 1]];
 
-/* DATA FLOW */
-.data-layer circle {
-    filter: drop-shadow(0 0 6px currentColor);
-}
+        let progress = 0;
 
-/* HINT */
-.hint {
-    margin-top: 12px;
-    font-size: 0.75rem;
-    color: var(--secondary);
-    font-family: monospace;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-}
+        function animate() {
+            progress += 0.03;
 
-.brand-visual:hover .hint {
-    opacity: 1;
-}
+            const x = from.x + (to.x - from.x) * progress;
+            const y = from.y + (to.y - from.y) * progress;
 
-/* UI */
-.status-box {
-    background: #eee;
-    padding: 6px 10px;
-    border-radius: 4px;
-    font-family: monospace;
-    margin-bottom: 1rem;
-}
+            packet.setAttribute("cx", x);
+            packet.setAttribute("cy", y);
 
-.pulse {
-    width: 8px;
-    height: 8px;
-    background: #2ecc71;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 6px;
-}
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                move(packet, path, i + 1);
+            }
+        }
 
-h1 {
-    font-size: 3rem;
-}
+        animate();
+    }
 
-.role {
-    color: var(--secondary);
-}
+    function loop() {
+        createPacket();
+        setTimeout(loop, 800);
+    }
 
-.divider {
-    width: 40px;
-    height: 2px;
-    background: var(--accent);
-    margin: 1rem 0;
-}
+    loop();
 
-.message {
-    color: var(--secondary);
-    max-width: 400px;
-}
+    neurons.forEach((node) => {
+        node.addEventListener("mouseenter", () => {
+            const section = node.dataset.section;
+
+            // reset nodi
+            neurons.forEach(n => n.classList.remove("active"));
+            node.classList.add("active");
+            activeNode = node;
+
+            // testo dinamico
+            textBox.textContent = textMap[section];
+
+            // attiva connessioni
+            connections.forEach(c => c.classList.add("active"));
+
+            // burst dati
+            for (let i = 0; i < 2; i++) {
+                setTimeout(() => createPacket(), i * 150);
+            }
+        });
+
+        node.addEventListener("click", () => {
+            console.log("Navigate to:", node.dataset.section);
+        });
+    });
+});
