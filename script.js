@@ -54,8 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
         group.addEventListener("click", () => {
             const section = group.getAttribute("data-section");
             if (section) {
+                // Se è "about", va in ./section/about.html, proprio come le altre
                 window.location.href = "./section/" + section + ".html";
-            }
-        });
+    }
+});
     });
 });
