@@ -1,46 +1,28 @@
-:root {
-    --primary: #1a1a1a;
-    --accent: #0055ff;
-    --bg: #fafafa;
-}
-
-body {
-    font-family: -apple-system, sans-serif;
-    background: var(--bg);
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
+:root { --primary: #1a1a1a; --accent: #0055ff; --bg: #fafafa; }
+body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
 .container { width: 90%; max-width: 900px; }
 .main-header { display: flex; align-items: center; gap: 5rem; }
 
-.neural-svg { overflow: visible; }
 .synapse { stroke: #000; stroke-width: 1px; opacity: 0.1; }
 
-/* NODO BASE */
+/* NODO SPENTO */
 .neuron { 
     fill: #fff !important; 
     stroke: #000 !important; 
     stroke-width: 1.5px; 
-    transition: all 0.2s ease;
+    transition: all 0.3s ease; 
 }
 
-/* NODO ACCESO */
-.node-group:hover .neuron,
-.node-group.active .neuron {
-    fill: var(--accent) !important;
-    stroke: var(--accent) !important;
-    r: 6px !important;
+/* NODO ACCESO (Sia con mouse che con lo script) */
+.node-group:hover .neuron, 
+.node-group.active .neuron { 
+    fill: var(--accent) !important; 
+    stroke: var(--accent) !important; 
+    r: 6px !important; 
 }
 
 .hitbox { fill: transparent; cursor: pointer; }
-
-/* TESTI */
-h1 { font-size: 4rem; line-height: 0.95; margin: 0; font-weight: 800; }
+h1 { font-size: 4rem; line-height: 0.95; margin: 0; }
 .divider { width: 45px; height: 3px; background: var(--accent); margin: 1.5rem 0; }
-.message { color: #666; font-size: 1.1rem; }
-.status-box { background: #fff4e5; color: #d47b00; padding: 6px 12px; border-radius: 4px; font-family: monospace; font-size: 0.75rem; margin-bottom: 1rem; display: inline-flex; align-items: center; }
+.status-box { background: #fff4e5; color: #d47b00; padding: 6px 12px; border-radius: 4px; display: inline-flex; align-items: center; font-size: 0.8rem; }
 .pulse-dot { width: 8px; height: 8px; background: #f39c12; border-radius: 50%; margin-right: 8px; }
