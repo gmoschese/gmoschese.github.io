@@ -61,12 +61,15 @@ body {
     opacity: 1 !important;
 }
 
-/*.synapse { opacity: 0.1; }
-.synapse-strong { opacity: 0.3; } */
+/* Sinapsi: ora sono più leggere e "tecnologiche" */
+.synapse { 
+    stroke: var(--primary);
+    opacity: 0.1; /* Molto sottile per le linee secondarie */
+}
 
-/* Sinapsi visibili di base */
-.synapse, .synapse-strong {
-    stroke: #1a1a1a;
+.synapse-strong { 
+    stroke: var(--primary);
+    opacity: 0.3; /* Più visibile per la struttura portante */
 }
 
 /* Testi */
