@@ -126,6 +126,15 @@ h1 {
     color: var(--secondary);
 }
 
+.alias-label {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--secondary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
 footer {
     margin-top: 4rem;
     font-size: 0.75rem;
