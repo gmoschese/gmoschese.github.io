@@ -7,7 +7,7 @@
 :root {
     --primary: #1a1a1a;
     --secondary: #666;
-    --accent: #007aff;
+    --accent: #0055ff; /* Blu più profondo e "engineering" */
     --bg: #fafafa;
 }
 
@@ -23,59 +23,56 @@ body {
 .container {
     width: 90%;
     max-width: 900px;
+    padding: 20px;
 }
 
 .main-header {
     display: flex;
-    gap: 4rem;
+    gap: 5rem; /* Aumentato spazio tra rete e testo */
     align-items: center;
 }
 
-/* NODI E INTERAZIONE */
-.node-group {
-    cursor: pointer;
-}
-
-.hitbox {
-    fill: transparent;
-    pointer-events: all;
-}
+/* RETE NEURALE */
+.node-group { cursor: pointer; }
+.hitbox { fill: transparent; pointer-events: all; }
 
 .neuron {
     fill: white;
     stroke: var(--primary);
-    stroke-width: 1.8;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    stroke-width: 2; /* Più marcato */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
 }
 
+.synapse {
+    stroke: var(--primary);
+    stroke-width: 1.5; /* Bilanciamento pesi visivi */
+    opacity: 0.08;
+}
+
+/* Hover e Animazione */
 .node-group:hover .neuron {
     r: 7;
     fill: var(--accent);
     stroke: var(--accent);
-    filter: drop-shadow(0 0 8px var(--accent));
+    filter: drop-shadow(0 0 10px rgba(0, 85, 255, 0.4));
 }
 
 .neuron.pulse {
     fill: var(--accent);
     stroke: var(--accent);
-    filter: drop-shadow(0 0 5px var(--accent));
+    filter: drop-shadow(0 0 6px var(--accent));
 }
 
-.synapse {
-    stroke: var(--primary);
-    stroke-width: 1.2;
-    opacity: 0.1;
-}
-
-/* UI ELEMENTS */
+/* TESTI */
 .hint {
-    margin-top: 15px;
+    margin-top: 25px; /* Più respiro */
     font-size: 0.65rem;
     color: var(--secondary);
     font-family: monospace;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    opacity: 0.6;
     text-align: center;
 }
 
@@ -83,11 +80,12 @@ body {
     display: inline-flex;
     align-items: center;
     background: #f0f0f0;
-    padding: 6px 12px;
-    border-radius: 4px;
+    padding: 7px 14px;
+    border-radius: 3px;
     font-family: monospace;
     font-size: 0.75rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    color: #444;
 }
 
 .pulse-dot {
@@ -95,41 +93,48 @@ body {
     height: 8px;
     background: #2ecc71;
     border-radius: 50%;
-    margin-right: 8px;
-    animation: blink 2s infinite;
+    margin-right: 10px;
+    box-shadow: 0 0 8px rgba(46, 204, 113, 0.6);
+    animation: blink 2.5s infinite;
 }
 
 @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.95); }
 }
 
 h1 {
-    font-size: clamp(2.5rem, 8vw, 3.5rem);
-    line-height: 1;
-    margin-bottom: 0.5rem;
+    font-size: clamp(2.8rem, 8vw, 4rem);
+    line-height: 0.95;
+    margin-bottom: 0.6rem;
     font-weight: 800;
+    letter-spacing: -2px;
+    color: var(--primary);
 }
 
 .role {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--secondary);
+    font-weight: 400;
+    letter-spacing: -0.5px;
 }
 
 .divider {
-    width: 35px;
+    width: 45px;
     height: 3px;
     background: var(--accent);
-    margin: 1.5rem 0;
+    margin: 1.8rem 0;
 }
 
 .message {
     color: var(--secondary);
     line-height: 1.6;
-    font-size: 1.05rem;
-    max-width: 420px;
+    font-size: 1.1rem;
+    max-width: 440px;
+    font-weight: 400;
 }
 
-@media (max-width: 700px) {
-    .main-header { flex-direction: column; text-align: center; gap: 2rem; }
+@media (max-width: 768px) {
+    .main-header { flex-direction: column; text-align: center; gap: 3rem; }
+    .divider { margin: 1.8rem auto; }
 }
