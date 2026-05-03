@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const random = nodeGroups[Math.floor(Math.random() * nodeGroups.length)];
             activateNode(random);
             setText(info[random.dataset.section]);
-        }, 500);
+        }, 2000);
     }
 
     /* ── eventi ───────────────────────────────── */
@@ -70,6 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
             startRandom();
         });
     });
+
+    const navHint = document.querySelector(".nav-hint");
+    if (navHint) setTimeout(() => navHint.classList.add("hidden"), 3000);
 
     /* ── avvio ────────────────────────────────── */
 
