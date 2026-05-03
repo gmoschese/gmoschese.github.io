@@ -1,67 +1,81 @@
 :root {
     --primary: #1a1a1a;
-    --secondary: #666;
     --accent: #0055ff;
     --bg: #fafafa;
     --warning: #f39c12;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background: var(--bg);
-    display: flex; justify-content: center; align-items: center;
-    min-height: 100vh; margin: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .container { width: 90%; max-width: 900px; }
-.main-header { display: flex; gap: 5rem; align-items: center; }
 
-/* SVG - FERMO E PULITO */
-.neural-svg { overflow: visible; }
+/* LAYOUT HEADER */
+.main-header { 
+    display: flex; 
+    align-items: center; 
+    gap: 5rem; 
+}
+
+/* SVG E NODI - Blindati */
+.neural-svg { overflow: visible; flex-shrink: 0; }
 
 .neuron { 
-    fill: white; /* Torna al look originale: bianco con bordo */
+    fill: white; 
     stroke: var(--primary); 
-    stroke-width: 2.2; 
-    transition: all 0.2s ease; 
-    pointer-events: none; 
+    stroke-width: 2px; 
+    transition: all 0.2s ease;
 }
 
 .synapse { 
     stroke: var(--primary); 
-    stroke-width: 1.6; 
+    stroke-width: 1.5px; 
     opacity: 0.1; 
 }
 
-/* Questa è la classe che lo script userà per illuminare i punti */
-.node-group.active .neuron { 
-    r: 7; 
-    fill: var(--accent); 
-    stroke: var(--accent); 
+.hitbox { fill: transparent !important; cursor: pointer; }
+
+/* Effetto Hover gestito via CSS per sicurezza */
+.node-group:hover .neuron {
+    fill: var(--accent);
+    stroke: var(--accent);
+    r: 6px;
 }
 
-.hitbox { fill: transparent !important; cursor: pointer; pointer-events: all; }
-
-/* UI ELEMENTS */
-.status-box { 
-    display: inline-flex; align-items: center; 
-    background: #eee; padding: 7px 14px; border-radius: 3px; 
-    font-family: monospace; font-size: 0.75rem; margin-bottom: 1.2rem; 
+/* STATUS BOX */
+.status-box {
+    display: inline-flex;
+    align-items: center;
+    background: #fff4e5;
+    color: #d47b00;
+    padding: 7px 14px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
 }
-.status-working { background: #fff4e5; color: #d47b00; }
 
-.pulse-dot { 
-    width: 8px; height: 8px; border-radius: 50%; 
-    margin-right: 10px; animation: blink 2s infinite; 
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--warning);
+    border-radius: 50%;
+    margin-right: 10px;
+    animation: blink 2s infinite;
 }
-.pulse-dot.orange { background: var(--warning); }
 
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-h1 { font-size: clamp(2.8rem, 8vw, 4rem); line-height: 0.95; font-weight: 800; margin: 0; }
-.divider { width: 45px; height: 3px; background: var(--accent); margin: 1.8rem 0; }
-.message { color: var(--secondary); max-width: 400px; line-height: 1.5; min-height: 3em; }
-
-.social-bar { display: flex; gap: 1.2rem; margin-top: 2rem; }
-.social-icon { color: var(--primary); width: 20px; height: 20px; opacity: 0.8; transition: 0.2s; }
-.social-icon:hover { color: var(--accent); transform: translateY(-2px); }
+/* TESTI */
+h1 { font-size: 4rem; line-height: 0.95; margin: 0; font-weight: 800; }
+.role { color: var(--primary); font-weight: 500; margin-top: 10px; }
+.divider { width: 45px; height: 3px; background: var(--accent); margin: 2rem 0; }
+.message { color: #666; max-width: 400px; line-height: 1.5; font-size: 1.1rem; }
+.hint { font-family: monospace; font-size: 0.7rem; color: #999; margin-top: 10px; text-align: center; }
