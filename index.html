@@ -9,28 +9,35 @@
 </head>
 <body>
     <div class="container">
-        <header class="main-header">
+    <!-- Sostituisci solo la sezione <header> nel tuo index.html -->
+<header class="main-header">
     <div class="brand-visual">
-        <svg class="neural-svg" width="100" height="180" viewBox="0 0 100 180" xmlns="http://www.w3.org/2000/svg">
-            <line class="synapse-strong" x1="40" y1="10" x2="60" y2="10" stroke="black" stroke-width="2"/>
-            <line class="synapse" x1="40" y1="10" x2="40" y2="25" stroke="black" stroke-width="1" opacity="0.2"/>
-            <line class="synapse" x1="60" y1="10" x2="60" y2="25" stroke="black" stroke-width="1" opacity="0.2"/>
-            <line class="synapse-strong" x1="30" y1="25" x2="70" y2="25" stroke="black" stroke-width="2"/>
+        <!-- SVG allungato: viewBox aumentato a 240 per le gambe -->
+        <svg class="neural-svg" width="100" height="240" viewBox="0 0 100 240" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cappello a cilindro -->
+            <line class="synapse-strong" x1="40" y1="10" x2="60" y2="10" />
+            <line class="synapse" x1="40" y1="10" x2="40" y2="25" />
+            <line class="synapse" x1="60" y1="10" x2="60" y2="25" />
+            <line class="synapse-strong" x1="30" y1="25" x2="70" y2="25" />
             
-            <line class="synapse" x1="50" y1="25" x2="50" y2="45" stroke="black" stroke-width="1" opacity="0.2"/>
-            <line class="synapse-strong" x1="50" y1="45" x2="50" y2="70" stroke="black" stroke-width="2" opacity="0.5"/>
+            <!-- Busto -->
+            <line class="synapse" x1="50" y1="25" x2="50" y2="45" />
+            <line class="synapse-strong" x1="50" y1="45" x2="50" y2="80" />
             
-            <line class="synapse" x1="50" y1="70" x2="35" y2="160" stroke="black" stroke-width="1" opacity="0.2"/>
-            <line class="synapse-strong" x1="50" y1="70" x2="65" y2="160" stroke="black" stroke-width="2" opacity="0.5"/>
+            <!-- Gambe Estremamente Lunghe (Allungo) -->
+            <line class="synapse" x1="50" y1="80" x2="30" y2="220" />
+            <line class="synapse-strong" x1="50" y1="80" x2="70" y2="220" />
 
-            <circle class="neuron" cx="40" cy="10" r="3" fill="white" stroke="black" stroke-width="1.5"/>
-            <circle class="neuron" cx="60" cy="10" r="3" fill="white" stroke="black" stroke-width="1.5"/>
-            <circle class="neuron" cx="30" cy="25" r="3" fill="white" stroke="black" stroke-width="1.5"/>
-            <circle class="neuron" cx="70" cy="25" r="3" fill="white" stroke="black" stroke-width="1.5"/>
-            <circle class="neuron" cx="50" cy="45" r="4" fill="white" stroke="black" stroke-width="1.5"/>
-            <circle class="neuron" cx="50" cy="70" r="3" fill="white" stroke="black" stroke-width="1.5"/>
-            <circle class="neuron" cx="35" cy="160" r="3" fill="white" stroke="black" stroke-width="1.5"/>
-            <circle class="neuron" cx="65" cy="160" r="3" fill="white" stroke="black" stroke-width="1.5"/>
+            <!-- Nodi (Neuroni) -->
+            <circle class="neuron" cx="40" cy="10" r="2.5" />
+            <circle class="neuron" cx="60" cy="10" r="2.5" />
+            <circle class="neuron" cx="30" cy="25" r="2.5" />
+            <circle class="neuron" cx="70" cy="25" r="2.5" />
+            <circle class="neuron" cx="50" cy="45" r="3.5" />
+            <circle class="neuron" cx="50" cy="80" r="2.5" />
+            <!-- Piedi posizionati a y=220 -->
+            <circle class="neuron" cx="30" cy="220" r="2.5" />
+            <circle class="neuron" cx="70" cy="220" r="2.5" />
         </svg>
     </div>
 
@@ -41,7 +48,9 @@
         <div class="alias">Known as Allungo</div>
         <h1>Giovanni<br>Moschese</h1>
         <p class="role">Software Developer & Tech Enthusiast</p>
+        
         <div class="divider"></div>
+        
         <p class="message">
             Currently architecting a new digital environment.<br>
             A minimal space focused on logic and design.
