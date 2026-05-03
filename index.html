@@ -12,34 +12,44 @@
     <!-- Sostituisci solo la sezione <header> nel tuo index.html -->
 <header class="main-header">
     <div class="brand-visual">
-        <!-- SVG allungato: viewBox aumentato a 240 per le gambe -->
-        <svg class="neural-svg" width="100" height="240" viewBox="0 0 100 240" xmlns="http://www.w3.org/2000/svg">
-            <!-- Cappello a cilindro -->
-            <line class="synapse-strong" x1="40" y1="10" x2="60" y2="10" />
-            <line class="synapse" x1="40" y1="10" x2="40" y2="25" />
-            <line class="synapse" x1="60" y1="10" x2="60" y2="25" />
-            <line class="synapse-strong" x1="30" y1="25" x2="70" y2="25" />
-            
-            <!-- Busto -->
-            <line class="synapse" x1="50" y1="25" x2="50" y2="45" />
-            <line class="synapse-strong" x1="50" y1="45" x2="50" y2="80" />
-            
-            <!-- Gambe Estremamente Lunghe (Illungo) -->
-            <line class="synapse" x1="50" y1="80" x2="30" y2="220" />
-            <line class="synapse-strong" x1="50" y1="80" x2="70" y2="220" />
+    <svg class="neural-svg" width="100" height="240" viewBox="0 0 100 240" xmlns="http://www.w3.org/2000/svg">
+        <!-- Struttura superiore (Cappello e Busto) invariata -->
+        <line class="synapse-strong" x1="40" y1="10" x2="60" y2="10" />
+        <line class="synapse" x1="40" y1="10" x2="40" y2="25" />
+        <line class="synapse" x1="60" y1="10" x2="60" y2="25" />
+        <line class="synapse-strong" x1="30" y1="25" x2="70" y2="25" />
+        <line class="synapse" x1="50" y1="25" x2="50" y2="45" />
+        <line class="synapse-strong" x1="50" y1="45" x2="50" y2="80" />
+        
+        <!-- GAMBA SINISTRA (3 segmenti) -->
+        <line class="synapse" x1="50" y1="80" x2="43" y2="125" />
+        <line class="synapse" x1="43" y1="125" x2="36" y2="175" />
+        <line class="synapse" x1="36" y1="175" x2="30" y2="220" />
 
-            <!-- Nodi (Neuroni) -->
-            <circle class="neuron" cx="40" cy="10" r="2.5" />
-            <circle class="neuron" cx="60" cy="10" r="2.5" />
-            <circle class="neuron" cx="30" cy="25" r="2.5" />
-            <circle class="neuron" cx="70" cy="25" r="2.5" />
-            <circle class="neuron" cx="50" cy="45" r="3.5" />
-            <circle class="neuron" cx="50" cy="80" r="2.5" />
-            <!-- Piedi posizionati a y=220 -->
-            <circle class="neuron" cx="30" cy="220" r="2.5" />
-            <circle class="neuron" cx="70" cy="220" r="2.5" />
-        </svg>
-    </div>
+        <!-- GAMBA DESTRA (3 segmenti) -->
+        <line class="synapse-strong" x1="50" y1="80" x2="57" y2="125" />
+        <line class="synapse-strong" x1="57" y1="125" x2="64" y2="175" />
+        <line class="synapse-strong" x1="64" y1="175" x2="70" y2="220" />
+
+        <!-- NODI SUPERIORI -->
+        <circle class="neuron" cx="40" cy="10" r="2.5" />
+        <circle class="neuron" cx="60" cy="10" r="2.5" />
+        <circle class="neuron" cx="30" cy="25" r="2.5" />
+        <circle class="neuron" cx="70" cy="25" r="2.5" />
+        <circle class="neuron" cx="50" cy="45" r="3.5" />
+        <circle class="neuron" cx="50" cy="80" r="2.5" />
+
+        <!-- NUOVI NODI LUNGO LE GAMBE -->
+        <circle class="neuron" cx="43" cy="125" r="2.2" /> <!-- Sinistra 1 -->
+        <circle class="neuron" cx="36" cy="175" r="2.2" /> <!-- Sinistra 2 -->
+        <circle class="neuron" cx="57" cy="125" r="2.2" /> <!-- Destra 1 -->
+        <circle class="neuron" cx="64" cy="175" r="2.2" /> <!-- Destra 2 -->
+
+        <!-- PIEDI -->
+        <circle class="neuron" cx="30" cy="220" r="2.5" />
+        <circle class="neuron" cx="70" cy="220" r="2.5" />
+    </svg>
+</div>
 
     <div class="hero-text">
         <div class="status-box">
