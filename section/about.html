@@ -5,110 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giovanni Moschese | Terminal</title>
     <style>
-        :root {
-            --term-bg: #0d0d0d;
-            --term-green: #00ff41;
-            --term-white: #d1d1d1;
+        body { 
+            background: #0d0d0d; 
+            color: #00ff41; 
+            font-family: 'Courier New', Courier, monospace; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
         }
-
-        body {
-            background-color: var(--term-bg);
-            color: var(--term-white);
-            font-family: 'Courier New', Courier, monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+        .terminal { 
+            width: 90%; 
+            max-width: 800px; 
+            background: #000; 
+            border: 1px solid #333; 
+            border-radius: 6px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8); 
+            padding: 20px; 
         }
-
-        .terminal-window {
-            width: 100%;
-            max-width: 800px;
-            background: #1a1a1a;
-            border-radius: 6px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            overflow: hidden;
-            border: 1px solid #333;
-        }
-
-        .terminal-header {
-            background: #333;
-            padding: 10px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .red { background: #ff5f56; }
-        .yellow { background: #ffbd2e; }
-        .green { background: #27c93f; }
-
-        .terminal-body {
-            padding: 20px;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .prompt { color: var(--term-green); }
-        .command { color: #fff; margin-bottom: 15px; }
-        .output { color: var(--term-white); margin-bottom: 20px; opacity: 0.8; }
-        
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 15px;
-            background: var(--term-green);
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
-
+        .prompt { color: #00ff41; margin-right: 10px; }
+        .cmd { color: #fff; }
+        .out { color: #d1d1d1; margin: 10px 0 30px 20px; line-height: 1.4; }
+        .cursor { display: inline-block; width: 8px; height: 18px; background: #00ff41; animation: blink 1s infinite; vertical-align: middle; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        a { color: var(--term-green); text-decoration: none; border-bottom: 1px dashed var(--term-green); }
-        a:hover { background: var(--term-green); color: black; }
+        a { color: #00ff41; text-decoration: none; border-bottom: 1px dashed #00ff41; }
+        a:hover { background: #00ff41; color: #000; }
+        .social-bar { margin-top: 2rem; display: flex; gap: 20px; }
+        .social-icon svg { fill: #00ff41; transition: 0.2s; }
+        .social-icon:hover svg { fill: #fff; transform: translateY(-3px); }
     </style>
 </head>
 <body>
-
-<div class="terminal-window">
-    <div class="terminal-header">
-        <div class="dot red"></div>
-        <div class="dot yellow"></div>
-        <div class="dot green"></div>
+<div class="terminal">
+    <div><span class="prompt">guest@moschese:~$</span> <span class="cmd">whoami</span></div>
+    <div class="out">
+        Giovanni Moschese.<br>
+        Ingegnere dei sistemi & Data Architect.<br>
+        Core: Distributed Computing, AI Infrastructure, Code Minimalist.
     </div>
-    <div class="terminal-body">
-        <div><span class="prompt">guest@moschese:~$</span> <span class="command">whoami</span></div>
-        <div class="output">
-            Giovanni Moschese.<br>
-            Data Engineer & Architect.<br>
-            Specialized in: Distributed Systems, AI Pipelines, LLM Infrastructure.
-        </div>
 
-        <div><span class="prompt">guest@moschese:~$</span> <span class="command">cat bio.txt</span></div>
-        <div class="output">
-            Progetto e costruisco ambienti digitali dove i dati non sono solo bit, 
-            ma motori decisionali. Il mio approccio è minimalista nel design 
-            ma brutale nell'efficienza del codice.
-        </div>
-
-        <div><span class="prompt">guest@moschese:~$</span> <span class="command">ls ./contact</span></div>
-        <div class="output">
-            <a href="mailto:tua@email.com">email</a> | <a href="https://linkedin.com/in/tuo">linkedin</a> | <a href="https://github.com/tuo">github</a>
-        </div>
-
-        <div><span class="prompt">guest@moschese:~$</span> <span class="command">cd ..</span></div>
-        <div class="output">Returning to main interface...</div>
-
-        <div><span class="prompt">guest@moschese:~$</span> <a href="../index.html">./exit_to_home.sh</a> <span class="cursor"></span></div>
+    <div><span class="prompt">guest@moschese:~$</span> <span class="cmd">cat mission.txt</span></div>
+    <div class="out">
+        "Designing the backbone of data systems where efficiency meets intelligence."
     </div>
-</div>
-<div><span class="p">guest@moschese:~$</span><span class="cmd">ls ./contact</span></div>
-<div class="out">
-    <a href="https://github.com/tuo">github_profile</a><br>
-    <a href="https://linkedin.com/in/tuo">linkedin_profile</a><br>
-    <a href="mailto:tua@email.com">send_email</a>
+
+    <div><span class="prompt">guest@moschese:~$</span> <span class="cmd">ls ./contact</span></div>
+    <div class="social-bar out">
+        <!-- Icone Social in stile terminale -->
+        <a href="https://github.com/tuo" target="_blank" class="social-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/tuo" target="_blank" class="social-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="mailto:tua@email.com" class="social-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </a>
+    </div>
+
+    <div><span class="prompt">guest@moschese:~$</span> <span class="cmd">cd ..</span></div>
+    <div><span class="prompt">guest@moschese:~$</span> <a href="../index.html">exit.sh</a> <span class="cursor"></span></div>
 </div>
 </body>
 </html>
