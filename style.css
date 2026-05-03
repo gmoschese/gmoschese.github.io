@@ -134,6 +134,36 @@ h1 {
     color: var(--secondary);
 }
 
+/* Tooltip che appare al passaggio del mouse */
+.neural-tooltip {
+    position: fixed;
+    pointer-events: none;
+    background: var(--primary);
+    color: white;
+    padding: 4px 10px;
+    font-family: monospace;
+    font-size: 0.7rem;
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+    white-space: nowrap;
+}
+
+.neuron.interactive {
+    cursor: pointer;
+    stroke-width: 3px; /* Più evidente */
+}
+
+.neuron.interactive:hover {
+    fill: var(--accent) !important;
+    stroke: var(--accent) !important;
+    r: 8; /* Si ingrandisce al passaggio */
+}
+
+/* Nascondiamo il menu testuale classico se vuoi che la rete sia l'unico menu */
+.main-nav { display: none; }
+
 @media (max-width: 750px) {
     .main-header { flex-direction: column; text-align: center; gap: 2rem; }
     .main-nav ul { justify-content: center; }
