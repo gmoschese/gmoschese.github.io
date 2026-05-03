@@ -24,31 +24,40 @@ body {
 
 .main-header {
     display: flex;
-    flex-direction: row; /* Forza l'affiancamento */
     align-items: flex-start;
-    gap: 60px; /* Spazio generoso */
-    margin-bottom: 50px;
+    gap: 5rem;
+    margin-bottom: 2rem;
 }
 
 /* Stilizzazione Ombra */
 .brand-visual {
     width: 100px;
-    height: 180px;
-    display: block; /* Assicura che il contenitore esista */
-    /* border: 1px solid red;  <-- Decommenta questa riga se ancora non vedi nulla per fare debugging */
+    height: 240px; /* Aumentato per ospitare le gambe lunghe */
+    flex-shrink: 0;
 }
 
 .neural-svg {
-    display: block;
-    overflow: visible; /* Fondamentale se i nodi sono sui bordi */
+    width: 100%;
+    height: 100%;
+    stroke: var(--primary);
+    stroke-width: 1.2;
+    fill: none;
+    overflow: visible;
 }
 
 /* Rendi i nodi ben visibili anche senza JS */
+/* Effetto Glow per i neuroni */
 .neuron {
-    fill: #fafafa;
-    stroke: #1a1a1a;
-    stroke-width: 1.5px;
-    transition: all 0.3s ease;
+    fill: var(--bg);
+    stroke: var(--primary);
+    transition: fill 0.2s ease, stroke 0.2s ease, filter 0.2s ease;
+}
+
+/* Quando il JS applica l'accensione, aggiungiamo il bagliore blu */
+.neuron.active {
+    fill: var(--accent) !important;
+    stroke: var(--accent) !important;
+    filter: drop-shadow(0 0 8px var(--accent));
 }
 
 /*.synapse { opacity: 0.1; }
@@ -60,13 +69,14 @@ body {
 }
 
 /* Testi */
+/* Miglioramento spaziatura Alias */
 .alias {
     font-family: monospace;
     color: var(--accent);
     text-transform: uppercase;
-    letter-spacing: 4px;
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
+    letter-spacing: 5px; /* Più spazio tra le lettere per eleganza */
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
 }
 
 .status-box {
@@ -107,7 +117,7 @@ h1 {
 }
 
 .divider {
-    width: 50px;
+    width: 40px; /* Ridotto per un look più bilanciato */
     height: 2px;
     background: var(--accent);
     margin: 2.5rem 0;
