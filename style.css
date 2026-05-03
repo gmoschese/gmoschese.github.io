@@ -4,42 +4,41 @@
     --bg: #fafafa;
 }
 
-/* --- FIX ICONE SOCIAL (Evita che diventino giganti) --- */
-.social-icon {
-    display: inline-block;
-    width: 24px !important;
-    height: 24px !important;
-    color: var(--primary);
-    transition: 0.3s;
-}
-.social-icon svg {
-    width: 24px !important;
-    height: 24px !important;
-    display: block;
+body {
+    margin: 0; background: var(--bg); font-family: sans-serif;
+    display: flex; justify-content: center; align-items: center; min-height: 100vh;
 }
 
-/* --- FIX NODI E ANIMAZIONE --- */
-.node-group .neuron {
+.container { width: 90%; max-width: 900px; }
+.main-header { display: flex; align-items: center; gap: 5rem; }
+
+/* SVG E NODI - QUI IL TRUCCO */
+.neural-svg { overflow: visible; }
+
+.neuron {
     fill: var(--primary) !important;
-    stroke: none;
-    r: 3.5px !important; /* Raggio base forzato */
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    r: 3px !important; /* Raggio base forzato qui */
+    transition: all 0.3s ease;
 }
 
-/* Classe ACTIVE per animazione random e HOVER */
+/* Quando il nodo è attivo (random o mouse) */
 .node-group.active .neuron,
 .node-group:hover .neuron {
     fill: var(--accent) !important;
-    r: 7px !important; /* Il raggio aumenta qui */
-    filter: drop-shadow(0 0 4px var(--accent));
+    r: 7px !important; /* Ingrandimento forzato qui */
 }
 
-.synapse {
-    stroke: var(--primary);
-    stroke-width: 1.2;
-    opacity: 0.1;
-}
+.synapse { stroke: var(--primary); stroke-width: 1.2; opacity: 0.1; }
+.hitbox { fill: transparent; cursor: pointer; }
 
-/* Layout base */
-body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-.main-header { display: flex; gap: 4rem; align-items: center; }
+/* FIX SOCIAL ICON (Evita il gigante blu dello screenshot) */
+.social-bar { display: flex; gap: 15px; margin-top: 20px; }
+.social-icon { width: 24px; height: 24px; color: var(--primary); transition: 0.3s; }
+.social-icon svg { width: 24px; height: 24px; }
+.social-icon:hover { color: var(--accent); }
+
+/* UI */
+h1 { font-size: 4rem; margin: 0; line-height: 0.95; }
+.divider { width: 45px; height: 3px; background: var(--accent); margin: 1.5rem 0; }
+.status-box { background: #fff4e5; color: #d47b00; padding: 6px 12px; border-radius: 4px; display: inline-flex; align-items: center; font-family: monospace; }
+.pulse-dot { width: 8px; height: 8px; background: #f39c12; border-radius: 50%; margin-right: 8px; }
