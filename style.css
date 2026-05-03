@@ -28,16 +28,14 @@ body {
     gap: 5rem;
 }
 
-/* Visual della Rete */
+/* Rete Neurale */
 .brand-visual {
     width: 140px;
     height: 300px;
     flex-shrink: 0;
 }
 
-.neural-svg {
-    overflow: visible;
-}
+.neural-svg { overflow: visible; }
 
 .neuron {
     fill: var(--bg) !important;
@@ -59,7 +57,7 @@ body {
     opacity: 0.1;
 }
 
-/* Navigazione */
+/* Menu Tech-Focused */
 .main-nav {
     margin-top: 2rem;
 }
@@ -74,19 +72,18 @@ body {
 .main-nav a {
     text-decoration: none;
     color: var(--secondary);
-    font-size: 0.8rem;
-    font-family: monospace;
-    text-transform: uppercase;
-    letter-spacing: 3px;
+    font-size: 0.85rem;
+    font-family: 'Courier New', Courier, monospace; /* Font monospaziato per un look tech */
+    font-weight: bold;
     transition: all 0.3s ease;
 }
 
 .main-nav a:hover {
     color: var(--accent);
-    letter-spacing: 5px;
+    letter-spacing: 2px; /* Effetto espansione al passaggio */
 }
 
-/* Hero Text & UI */
+/* UI Elements */
 .status-box {
     display: inline-flex;
     align-items: center;
