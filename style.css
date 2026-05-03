@@ -14,86 +14,134 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden;
 }
 
-.container { width: 90%; max-width: 900px; padding: 2rem; }
-.main-header { display: flex; align-items: center; gap: 4rem; }
+.container {
+    width: 90%;
+    max-width: 900px;
+    padding: 2rem;
+}
 
-/* Rete Neurale */
-.brand-visual { position: relative; width: 140px; height: 300px; flex-shrink: 0; }
-.neural-svg { overflow: visible; }
+.main-header {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+/* Rete Neurale (Decorativa) */
+.brand-visual {
+    width: 140px;
+    height: 300px;
+    flex-shrink: 0;
+}
+
+.neural-svg {
+    overflow: visible;
+}
 
 .neuron {
     fill: var(--bg);
     stroke: var(--primary);
     stroke-width: 2px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Transizione fluida SOLTANTO per il colore */
+    transition: fill 0.3s ease, stroke 0.3s ease;
 }
 
-/* Stato attivo (impulsi casuali) */
+/* Stato attivo: si illumina soltanto */
 .neuron.active {
     fill: var(--accent);
     stroke: var(--accent);
     filter: drop-shadow(0 0 10px var(--accent));
 }
 
-/* Nodi Interattivi */
-.neuron.interactive {
-    cursor: pointer;
-    stroke-width: 3px;
+.synapse {
+    stroke: var(--primary);
+    stroke-width: 1;
+    opacity: 0.1;
 }
 
-.neuron.interactive:hover {
-    fill: var(--accent);
-    stroke: var(--accent);
-    filter: drop-shadow(0 0 15px var(--accent));
-    r: 9;
+/* Menu Tech-Focused (Ripristinato) */
+.main-nav {
+    margin-top: 2.5rem;
 }
 
-.synapse { stroke: var(--primary); stroke-width: 1; opacity: 0.1; }
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    max-width: 350px;
+}
 
-/* Tooltip */
-.neural-tooltip {
-    position: fixed;
-    pointer-events: none;
-    background: var(--primary);
-    color: #fff;
-    padding: 6px 12px;
+.main-nav a {
+    text-decoration: none;
+    color: var(--secondary);
+    font-size: 0.85rem;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 0.75rem;
     font-weight: bold;
-    border-radius: 4px;
-    opacity: 0;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 9999;
-    transform: translate(-50%, -150%);
+    transition: all 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: var(--accent);
+    letter-spacing: 1px;
 }
 
 /* UI Elements */
 .status-box {
-    display: inline-flex; align-items: center;
-    background: #f0f0f0; padding: 6px 14px;
-    border-radius: 4px; font-size: 0.7rem;
-    font-family: monospace; text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    background: #eeeeee;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-family: monospace;
     margin-bottom: 2rem;
 }
+
 .pulse {
-    height: 8px; width: 8px; background: #2ecc71;
-    border-radius: 50%; margin-right: 10px;
+    height: 8px; width: 8px;
+    background: #2ecc71;
+    border-radius: 50%;
+    margin-right: 10px;
     animation: p 2s infinite;
 }
+
 @keyframes p {
     0% { box-shadow: 0 0 0 0px rgba(46,204,113,0.4); }
     70% { box-shadow: 0 0 0 10px rgba(46,204,113,0); }
     100% { box-shadow: 0 0 0 0px rgba(46,204,113,0); }
 }
 
-h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin: 0; line-height: 1; letter-spacing: -2px; }
-.role { font-size: 1.1rem; color: var(--secondary); margin-top: 0.8rem; }
-.divider { width: 40px; height: 2px; background: var(--accent); margin: 2rem 0; }
-.message { font-size: 1.1rem; line-height: 1.7; color: var(--secondary); }
+h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -2px;
+}
+
+.role {
+    font-size: 1.1rem;
+    color: var(--secondary);
+    margin-top: 0.5rem;
+}
+
+.divider {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 2rem 0;
+}
+
+.message {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--secondary);
+}
 
 @media (max-width: 750px) {
-    .main-header { flex-direction: column; text-align: center; gap: 3rem; }
+    .main-header { flex-direction: column; text-align: center; gap: 2rem; }
+    .main-nav ul { margin: 0 auto; }
+    .divider { margin: 2rem auto; }
 }
