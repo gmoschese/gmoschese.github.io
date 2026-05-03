@@ -31,10 +31,9 @@ body {
 
 /* Stilizzazione Ombra */
 .brand-visual {
-    width: 120px; /* Leggermente più largo per la rete neurale */
-    height: 240px;
-    display: flex;
-    align-items: center;
+    width: 140px;
+    height: 300px;
+    flex-shrink: 0;
 }
 
 .neural-svg {
@@ -44,20 +43,22 @@ body {
 .neuron {
     fill: var(--bg) !important;
     stroke: var(--primary);
-    stroke-width: 1.5px;
-    transition: all 0.3s ease;
+    stroke-width: 2px; /* Nodo più marcato */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .neuron.active {
     fill: var(--accent) !important;
     stroke: var(--accent) !important;
-    filter: drop-shadow(0 0 12px var(--accent)) !important;
+    filter: drop-shadow(0 0 15px var(--accent)) drop-shadow(0 0 5px var(--accent)) !important;
+    transform: scale(1.2); /* Il nodo si ingrandisce quando pulsa */
 }
 
 .synapse {
     stroke: var(--primary);
-    stroke-width: 1;
-    opacity: 0.15;
+    stroke-width: 1.2;
+    opacity: 0.15; /* Molto sottile di base */
+    transition: opacity 0.3s ease;
 }
 
 .synapse-strong { 
