@@ -13,20 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let isHovered = false;
 
-    // Loop della rete molto più attivo
+    // Pulse casuale (Rete attiva)
     function pulseLoop() {
         if (!isHovered) {
             const allNeurons = document.querySelectorAll(".neuron");
             const randomNeuron = allNeurons[Math.floor(Math.random() * allNeurons.length)];
             
             randomNeuron.classList.add("pulse");
-            setTimeout(() => {
-                randomNeuron.classList.remove("pulse");
-            }, 500);
+            setTimeout(() => randomNeuron.classList.remove("pulse"), 500);
         }
-        
-        // Frequenza alta: un battito ogni 300-700ms
-        setTimeout(pulseLoop, 300 + Math.random() * 400);
+        setTimeout(pulseLoop, 350 + Math.random() * 400);
     }
 
     pulseLoop();
@@ -34,34 +30,24 @@ document.addEventListener("DOMContentLoaded", () => {
     nodeGroups.forEach(group => {
         group.addEventListener("mouseenter", () => {
             isHovered = true;
-            
-            // Spegne i battiti casuali per focus
             document.querySelectorAll(".neuron").forEach(n => n.classList.remove("pulse"));
             
             const section = group.getAttribute("data-section");
             if (section && textMap[section]) {
-                textBox.style.opacity = 0;
-                setTimeout(() => {
-                    textBox.textContent = textMap[section];
-                    textBox.style.opacity = 1;
-                }, 100);
+                textBox.textContent = textMap[section];
             }
         });
 
         group.addEventListener("mouseleave", () => {
             isHovered = false;
-            textBox.style.opacity = 0;
-            setTimeout(() => {
-                textBox.textContent = defaultText;
-                textBox.style.opacity = 1;
-            }, 100);
+            textBox.textContent = defaultText;
         });
 
         group.addEventListener("click", () => {
             const section = group.getAttribute("data-section");
             if (section) {
-                console.log("Navigazione a:", section);
-                // window.location.href = "sections/" + section + ".html";
+                // Navigazione verso la cartella ./section/
+                window.location.href = "./section/" + section + ".html";
             }
         });
     });
