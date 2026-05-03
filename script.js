@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const random = nodeGroups[Math.floor(Math.random() * nodeGroups.length)];
             activateNode(random);
             setText(info[random.dataset.section]);
-        }, 1000);
+        }, 500);
     }
 
     /* ── eventi ───────────────────────────────── */
