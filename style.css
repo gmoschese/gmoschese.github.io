@@ -20,7 +20,6 @@ body {
     min-height: 100vh;
 }
 
-/* layout */
 .container {
     width: 90%;
     max-width: 900px;
@@ -28,11 +27,11 @@ body {
 
 .main-header {
     display: flex;
-    align-items: center;
     gap: 3rem;
+    align-items: center;
 }
 
-/* rete */
+/* NODES */
 .neuron {
     fill: white;
     stroke: var(--primary);
@@ -41,14 +40,14 @@ body {
     cursor: pointer;
 }
 
-/* lampeggio random */
+/* RANDOM LIGHT */
 .neuron.pulse {
     fill: var(--accent);
     stroke: var(--accent);
     filter: drop-shadow(0 0 6px var(--accent));
 }
 
-/* hover */
+/* HOVER */
 .neuron.active {
     fill: var(--accent);
     stroke: var(--accent);
@@ -57,12 +56,13 @@ body {
     filter: drop-shadow(0 0 8px var(--accent));
 }
 
+/* LINES */
 .synapse {
     stroke: var(--primary);
     opacity: 0.15;
 }
 
-/* hint */
+/* UI */
 .hint {
     margin-top: 10px;
     font-size: 0.7rem;
@@ -70,7 +70,6 @@ body {
     font-family: monospace;
 }
 
-/* UI */
 .status-box {
     background: #eee;
     padding: 6px 10px;
@@ -79,7 +78,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.pulse {
+.pulse-dot {
     width: 8px;
     height: 8px;
     background: #2ecc71;
