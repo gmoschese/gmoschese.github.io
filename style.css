@@ -40,7 +40,9 @@ body {
 }
 
 /* EFFETTO HOVER - FORZA IL COLORE E IL RAGGIO */
-.node-group:hover .neuron { 
+/* Modifica questa parte nel tuo CSS */
+.node-group:hover .neuron,
+.node-group.active .neuron { 
     r: 7px !important; 
     fill: var(--accent) !important; 
 }
