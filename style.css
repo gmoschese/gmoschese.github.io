@@ -27,12 +27,10 @@ body {
 
 .main-header {
     display: flex;
-    align-items: center;
     gap: 4rem;
 }
 
 /* NEURAL */
-
 .neuron {
     fill: white;
     stroke: var(--primary);
@@ -49,15 +47,13 @@ body {
     fill: var(--accent);
     stroke: var(--accent);
     transform: scale(1.15);
-    transform-origin: center;
     filter: drop-shadow(0 0 8px var(--accent));
 }
 
-/* Connessioni */
 .synapse {
     stroke: var(--primary);
     opacity: 0.2;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 .synapse.active {
@@ -65,26 +61,18 @@ body {
     stroke: var(--accent);
 }
 
-/* DATA FLOW */
 .data-layer circle {
     filter: drop-shadow(0 0 6px currentColor);
 }
 
-/* HINT */
+/* UI */
 .hint {
-    margin-top: 12px;
-    font-size: 0.75rem;
+    margin-top: 10px;
+    font-size: 0.7rem;
     color: var(--secondary);
     font-family: monospace;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
 }
 
-.brand-visual:hover .hint {
-    opacity: 1;
-}
-
-/* UI */
 .status-box {
     background: #eee;
     padding: 6px 10px;
@@ -119,5 +107,4 @@ h1 {
 
 .message {
     color: var(--secondary);
-    max-width: 400px;
 }
