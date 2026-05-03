@@ -3,121 +3,85 @@
     --secondary: #666;
     --accent: #0055ff;
     --bg: #fafafa;
-    --warning: #f39c12; /* Arancione per i lavori in corso */
+    --warning: #f39c12;
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background: var(--bg);
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    min-height: 100vh; 
-    margin: 0;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; margin: 0;
 }
 
 .container { width: 90%; max-width: 900px; }
 .main-header { display: flex; gap: 5rem; align-items: center; }
 
-/* SVG E NODI - PULIZIA TOTALE */
-.node-group { cursor: pointer; }
+/* SVG E RETE */
+.neural-svg { overflow: visible; }
 
 .neuron { 
     fill: var(--primary); 
     stroke: none; 
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-    pointer-events: none; 
-}
-
-.hitbox { 
-    fill: transparent !important; /* Forza la trasparenza totale */
+    transition: all 0.3s ease;
+    /* Ripristino animazione automatica */
+    animation: pulseNode 3s infinite ease-in-out;
 }
 
 .synapse { 
     stroke: var(--primary); 
     stroke-width: 1.2; 
     opacity: 0.1; 
+    animation: pulseLine 3s infinite ease-in-out;
 }
 
+.hitbox { fill: transparent !important; pointer-events: all; cursor: pointer; }
+
+/* EFFETTO HOVER */
 .node-group:hover .neuron { 
     r: 6; 
-    fill: var(--accent); 
+    fill: var(--accent) !important; 
+    animation: none; /* Si ferma quando interagisci */
 }
 
-/* UI ELEMENTS & STATUS BOX */
+/* ANIMAZIONI ORIGINALI RIPRISTINATE */
+@keyframes pulseNode {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.1); }
+}
+
+@keyframes pulseLine {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.25; }
+}
+
+/* Sfasamento per rendere il movimento organico */
+.node-group:nth-child(2n) .neuron { animation-delay: 0.5s; }
+.node-group:nth-child(3n) .neuron { animation-delay: 1.2s; }
+
+/* STATUS BOX E BANNER */
 .status-box { 
-    display: inline-flex; 
-    align-items: center; 
-    background: #f0f0f0; 
-    padding: 7px 14px; 
-    border-radius: 4px; 
-    font-family: monospace; 
-    font-size: 0.75rem; 
-    margin-bottom: 1.2rem; 
-    transition: all 0.3s ease;
+    display: inline-flex; align-items: center; 
+    background: #f0f0f0; padding: 7px 14px; border-radius: 4px; 
+    font-family: monospace; font-size: 0.75rem; margin-bottom: 1.2rem; 
 }
 
-/* Variante per lavori in corso */
-.status-working {
-    background: #fff4e5; /* Sfondo arancio chiarissimo */
-    color: #d47b00;      /* Testo arancio scuro */
-}
+.status-working { background: #fff4e5; color: #d47b00; }
 
 .pulse-dot { 
-    width: 8px; 
-    height: 8px; 
-    background: #2ecc71; /* Verde base */
-    border-radius: 50%; 
-    margin-right: 10px; 
-    animation: blink 2s infinite; 
+    width: 8px; height: 8px; border-radius: 50%; 
+    margin-right: 10px; animation: blink 2s infinite; 
 }
+.pulse-dot.orange { background: var(--warning) !important; }
 
-/* Forza il colore arancione se presente la classe .orange */
-.pulse-dot.orange {
-    background: var(--warning) !important;
-}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-h1 { 
-    font-size: clamp(2.8rem, 8vw, 4rem); 
-    line-height: 0.95; 
-    margin-bottom: 0.6rem; 
-    font-weight: 800; 
-    letter-spacing: -1px;
-}
+h1 { font-size: clamp(2.8rem, 8vw, 4rem); line-height: 0.95; font-weight: 800; margin: 0; }
+.divider { width: 45px; height: 3px; background: var(--accent); margin: 1.8rem 0; }
+.message { color: var(--secondary); max-width: 400px; line-height: 1.5; }
 
-.divider { 
-    width: 45px; 
-    height: 3px; 
-    background: var(--accent); 
-    margin: 1.8rem 0; 
+/* BANNER ENGINEERING */
+.under-construction-banner {
+    background: #fff3cd; border: 1px dashed #ffeeba;
+    border-radius: 8px; padding: 1.5rem; margin: 2rem 0;
+    text-align: center; font-family: monospace; color: #856404;
 }
-
-.message {
-    color: var(--secondary);
-    max-width: 400px;
-    line-height: 1.5;
-}
-
-/* SOCIAL BAR */
-.social-bar { display: flex; gap: 1.2rem; margin-top: 2rem; }
-.social-icon { 
-    color: var(--primary); 
-    width: 20px; 
-    height: 20px; 
-    transition: 0.2s; 
-    opacity: 0.7; 
-}
-.social-icon:hover { 
-    color: var(--accent); 
-    transform: translateY(-2px); 
-    opacity: 1; 
-}
-
-@keyframes blink { 
-    0%, 100% { opacity: 1; } 
-    50% { opacity: 0.3; } 
-}
-
-/* UTILITY PAGINE SECONDARIE */
-.content-area { max-width: 600px; margin: 10vh auto; padding: 20px; }
-.back-link { display: inline-block; text-decoration: none; color: var(--accent); font-family: monospace; margin-bottom: 2rem; font-weight: bold; }
