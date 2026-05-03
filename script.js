@@ -13,16 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let isHovered = false;
 
-    // Pulse casuale (Rete attiva)
+    // Pulse casuale - frequenza "elettrica"
     function pulseLoop() {
         if (!isHovered) {
             const allNeurons = document.querySelectorAll(".neuron");
             const randomNeuron = allNeurons[Math.floor(Math.random() * allNeurons.length)];
             
             randomNeuron.classList.add("pulse");
-            setTimeout(() => randomNeuron.classList.remove("pulse"), 500);
+            setTimeout(() => randomNeuron.classList.remove("pulse"), 450);
         }
-        setTimeout(pulseLoop, 350 + Math.random() * 400);
+        setTimeout(pulseLoop, 250 + Math.random() * 500);
     }
 
     pulseLoop();
@@ -34,19 +34,26 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const section = group.getAttribute("data-section");
             if (section && textMap[section]) {
-                textBox.textContent = textMap[section];
+                textBox.style.opacity = 0.5;
+                setTimeout(() => {
+                    textBox.textContent = textMap[section];
+                    textBox.style.opacity = 1;
+                }, 100);
             }
         });
 
         group.addEventListener("mouseleave", () => {
             isHovered = false;
-            textBox.textContent = defaultText;
+            textBox.style.opacity = 0.5;
+            setTimeout(() => {
+                textBox.textContent = defaultText;
+                textBox.style.opacity = 1;
+            }, 100);
         });
 
         group.addEventListener("click", () => {
             const section = group.getAttribute("data-section");
             if (section) {
-                // Navigazione verso la cartella ./section/
                 window.location.href = "./section/" + section + ".html";
             }
         });
