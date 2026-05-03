@@ -201,6 +201,20 @@ h1 {
     opacity: 1;
 }
 
+.nav-hint {
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: #aaa;
+    text-align: center;
+    margin-top: 12px;
+    letter-spacing: 1px;
+    transition: opacity 1.5s ease;
+}
+
+.nav-hint.hidden {
+    opacity: 0;
+}
+
 /* ══════════════════════════════════════════════
    PAGINE SECONDARIE
 ══════════════════════════════════════════════ */
