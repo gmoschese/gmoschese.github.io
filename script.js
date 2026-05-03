@@ -13,11 +13,29 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     nodeGroups.forEach(group => {
+        // Al passaggio del mouse
         group.addEventListener("mouseenter", () => {
             const section = group.getAttribute("data-section");
-            textBox.textContent = textMap[section];
+            
+            // 1. Aggiorna il testo
+            textBox.style.opacity = "0";
+            setTimeout(() => {
+                textBox.textContent = textMap[section];
+                textBox.style.opacity = "1";
+            }, 50);
+
+            // 2. Accendi il nodo aggiungendo la classe active
+            group.classList.add("active");
         });
-        group.addEventListener("mouseleave", () => { textBox.textContent = defaultText; });
+
+        // Quando il mouse esce
+        group.addEventListener("mouseleave", () => {
+            textBox.textContent = defaultText;
+            // Spegni il nodo
+            group.classList.remove("active");
+        });
+
+        // Al click
         group.addEventListener("click", () => {
             window.location.href = `./section/${group.getAttribute("data-section")}.html`;
         });
