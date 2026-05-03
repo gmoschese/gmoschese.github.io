@@ -31,40 +31,33 @@ body {
 
 /* Stilizzazione Ombra */
 .brand-visual {
-    width: 100px;
-    height: 240px; /* Aumentato per ospitare le gambe lunghe */
-    flex-shrink: 0;
+    width: 120px; /* Leggermente più largo per la rete neurale */
+    height: 240px;
+    display: flex;
+    align-items: center;
 }
 
 .neural-svg {
-    width: 100%;
-    height: 100%;
-    stroke: var(--primary);
-    stroke-width: 1.2;
-    fill: none;
     overflow: visible;
 }
 
-/* Stile base dei neuroni */
 .neuron {
-    fill: var(--bg) !important; /* Forza il colore di sfondo */
+    fill: var(--bg) !important;
     stroke: var(--primary);
     stroke-width: 1.5px;
     transition: all 0.3s ease;
 }
 
-/* Stile quando sono attivi */
 .neuron.active {
     fill: var(--accent) !important;
     stroke: var(--accent) !important;
-    filter: drop-shadow(0 0 10px var(--accent)) !important;
-    opacity: 1 !important;
+    filter: drop-shadow(0 0 12px var(--accent)) !important;
 }
 
-/* Sinapsi: ora sono più leggere e "tecnologiche" */
-.synapse { 
+.synapse {
     stroke: var(--primary);
-    opacity: 0.1; /* Molto sottile per le linee secondarie */
+    stroke-width: 1;
+    opacity: 0.15;
 }
 
 .synapse-strong { 
