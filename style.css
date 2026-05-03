@@ -1,19 +1,29 @@
+/* ══════════════════════════════════════════════
+   VARIABILI & RESET
+══════════════════════════════════════════════ */
+
 :root {
     --primary: #1a1a1a;
     --accent:  #0055ff;
     --bg:      #fafafa;
 }
 
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
-    margin: 0;
     background: var(--bg);
     font-family: -apple-system, sans-serif;
+    color: var(--primary);
     min-height: 100vh;
 }
 
-/* ── HOME: centrata ───────────────────────────── */
+/* ══════════════════════════════════════════════
+   HOME — layout centrato
+══════════════════════════════════════════════ */
 
 body:has(.main-header) {
     display: flex;
@@ -31,7 +41,104 @@ body:has(.main-header) {
     gap: 5rem;
 }
 
-/* ── NODI SVG ─────────────────────────────────── */
+/* ── Titolo & testo ───────────────────────────── */
+
+h1 {
+    font-size: 4.5rem;
+    line-height: 0.9;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.role {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-top: 15px;
+}
+
+.divider {
+    width: 50px;
+    height: 4px;
+    background: var(--accent);
+    margin: 2rem 0;
+}
+
+.message {
+    color: #555;
+    max-width: 350px;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    min-height: 4.8em;
+    transition: opacity 0.25s ease;
+}
+
+.message.fading {
+    opacity: 0;
+}
+
+/* ── Status box ───────────────────────────────── */
+
+.status-box {
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: #d47b00;
+    background: #fff4e5;
+    padding: 5px 10px;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    background: #f39c12;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: blink 1.5s infinite;
+}
+
+/* ══════════════════════════════════════════════
+   SOCIAL BAR — uniforme su tutte le pagine
+══════════════════════════════════════════════ */
+
+.social-bar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    border: 1px solid #ddd;
+    padding: 10px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.social-icon svg {
+    display: block;
+    transition: transform 0.2s;
+}
+
+.social-icon:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.social-icon:hover svg {
+    transform: translateY(-2px);
+}
+
+/* ══════════════════════════════════════════════
+   NODI SVG
+══════════════════════════════════════════════ */
 
 .neuron {
     fill: var(--primary);
@@ -60,10 +167,7 @@ body:has(.main-header) {
     stroke: var(--primary);
     stroke-width: 1px;
     opacity: 0.1;
-    transition: opacity 0.4s ease;
 }
-
-/* ── LABEL SVG ────────────────────────────────── */
 
 .node-label {
     font-family: monospace;
@@ -71,125 +175,15 @@ body:has(.main-header) {
     fill: var(--accent);
     text-anchor: middle;
     opacity: 0;
-    transition: opacity 0.3s ease;
     pointer-events: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    transition: opacity 0.3s ease;
 }
 
 .node-group:hover .node-label,
 .node-group.active .node-label {
     opacity: 1;
-}
-
-/* ── TESTO HERO ───────────────────────────────── */
-
-h1 {
-    font-size: 4.5rem;
-    margin: 0;
-    line-height: 0.9;
-    font-weight: 900;
-    letter-spacing: -2px;
-}
-
-.role {
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    margin-top: 15px;
-    color: var(--primary);
-}
-
-.divider {
-    width: 50px;
-    height: 4px;
-    background: var(--accent);
-    margin: 2rem 0;
-}
-
-.message {
-    color: #555;
-    max-width: 350px;
-    line-height: 1.6;
-    font-size: 1.1rem;
-    min-height: 4.8em;
-    transition: opacity 0.25s ease;
-}
-
-.message.fading {
-    opacity: 0;
-}
-
-/* ── STATUS BOX ───────────────────────────────── */
-
-.status-box {
-    font-family: monospace;
-    font-size: 0.7rem;
-    color: #d47b00;
-    background: #fff4e5;
-    padding: 5px 10px;
-    border-radius: 3px;
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.pulse-dot {
-    width: 6px;
-    height: 6px;
-    background: #f39c12;
-    border-radius: 50%;
-    margin-right: 8px;
-    animation: blink 1.5s infinite;
-}
-
-/* ── SOCIAL BAR ───────────────────────────────── */
-
-.social-bar {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-/* Home: link testuali */
-.main-header .social-bar a.social-icon {
-    font-family: monospace;
-    font-size: 0.7rem;
-    text-decoration: none;
-    color: var(--primary);
-    border: 1px solid #ddd;
-    padding: 5px 10px;
-    transition: background 0.3s, color 0.3s, border-color 0.3s;
-    display: inline-block;
-}
-
-.main-header .social-bar a.social-icon:hover {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-}
-
-/* Sezioni: icone SVG */
-.content-area .social-bar a.social-icon {
-    display: inline-flex;
-    align-items: center;
-    color: var(--primary);
-    transition: 0.2s;
-}
-
-.content-area .social-bar a.social-icon svg {
-    transition: transform 0.2s;
-}
-
-.content-area .social-bar a.social-icon:hover svg {
-    transform: translateY(-3px);
-}
-
-/* ── ANIMAZIONI ───────────────────────────────── */
-
-@keyframes blink {
-    0%, 100% { opacity: 1;   }
-    50%       { opacity: 0.3; }
 }
 
 /* ══════════════════════════════════════════════
@@ -231,12 +225,13 @@ h1 {
 .content-area .message {
     max-width: 100%;
     min-height: unset;
-    margin: 1rem 0 0;
+    margin-top: 1rem;
 }
+
+/* ── Lista sezioni ────────────────────────────── */
 
 .section-list {
     list-style: none;
-    padding: 0;
     margin: 2rem 0;
 }
 
@@ -256,17 +251,20 @@ h1 {
     font-family: monospace;
 }
 
+/* ── Footer sezione ───────────────────────────── */
+
 .section-footer {
     margin-top: 4rem;
     border-top: 1px solid #eee;
     padding-top: 2rem;
 }
 
-/* Log page */
+/* ── Log page ─────────────────────────────────── */
+
 .log-entry {
     margin-bottom: 2rem;
-    border-bottom: 1px solid #eee;
     padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
 }
 
 .log-date {
@@ -276,7 +274,18 @@ h1 {
     margin-bottom: 0.4rem;
 }
 
-/* ── RESPONSIVE ───────────────────────────────── */
+/* ══════════════════════════════════════════════
+   ANIMAZIONI
+══════════════════════════════════════════════ */
+
+@keyframes blink {
+    0%, 100% { opacity: 1;   }
+    50%       { opacity: 0.3; }
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
 
 @media (max-width: 700px) {
     .main-header {
