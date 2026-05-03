@@ -90,12 +90,9 @@ h1 {
 }
 
 .main-nav ul {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-    max-width: 300px;
+    list-style: none;
+    padding: 0;
 }
-
 .main-nav a {
     font-family: monospace;
     font-size: 0.85rem;
