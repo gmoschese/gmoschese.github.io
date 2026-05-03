@@ -1,0 +1,134 @@
+:root {
+    --primary: #1a1a1a;
+    --secondary: #666666;
+    --accent: #007aff;
+    --bg: #fafafa;
+}
+
+body {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--bg);
+    color: var(--primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    text-align: left;
+    padding: 2rem;
+    max-width: 500px;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.brand-visual {
+    margin-bottom: 2.5rem;
+    cursor: pointer;
+    display: inline-block;
+}
+
+/* Neural Network Styling */
+.neural-svg {
+    fill: var(--bg);
+    stroke: var(--primary);
+    stroke-width: 2;
+}
+
+.synapse {
+    stroke-width: 1.5;
+    opacity: 0.1;
+    transition: all 0.3s ease;
+}
+
+.synapse-strong {
+    stroke-width: 1.5;
+    opacity: 0.3;
+    stroke: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.neuron {
+    fill: var(--bg);
+    stroke: var(--primary);
+    stroke-width: 2;
+    /* Transizione fluida per il cambio colore via JS */
+    transition: fill 0.2s ease, stroke 0.2s ease; 
+}
+
+/* Reazione delle sinapsi al passaggio del mouse */
+.brand-visual:hover .synapse-strong {
+    stroke: var(--accent);
+    opacity: 0.6;
+}
+
+/* UI Elements */
+h1 {
+    font-size: 3rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+.role {
+    font-size: 1.1rem;
+    color: var(--secondary);
+    margin-top: 0.7rem;
+    font-weight: 400;
+}
+
+.divider {
+    width: 45px;
+    height: 2px;
+    background-color: var(--accent);
+    margin: 2rem 0;
+}
+
+.status-box {
+    display: inline-flex;
+    align-items: center;
+    background: #f0f0f0;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.pulse {
+    height: 8px;
+    width: 8px;
+    background-color: #2ecc71;
+    border-radius: 50%;
+    margin-right: 10px;
+    animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+    0% { box-shadow: 0 0 0 0px rgba(46, 204, 113, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+    100% { box-shadow: 0 0 0 0px rgba(46, 204, 113, 0); }
+}
+
+.message {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--secondary);
+}
+
+footer {
+    margin-top: 4rem;
+    font-size: 0.75rem;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
