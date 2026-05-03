@@ -50,16 +50,17 @@ body {
 .neuron {
     fill: var(--bg);
     stroke: var(--primary);
-    transition: fill 0.2s ease, stroke 0.2s ease, filter 0.2s ease;
+    stroke-width: 1.5px;
+    /* Transizione più lenta in uscita (0.6s) per un effetto dissolvenza */
+    transition: fill 0.2s ease, stroke 0.2s ease, filter 0.2s ease, opacity 0.6s ease;
 }
 
-/* Quando il JS applica l'accensione, aggiungiamo il bagliore blu */
 .neuron.active {
     fill: var(--accent) !important;
     stroke: var(--accent) !important;
-    filter: drop-shadow(0 0 8px var(--accent));
+    filter: drop-shadow(0 0 10px var(--accent));
+    opacity: 1;
 }
-
 /*.synapse { opacity: 0.1; }
 .synapse-strong { opacity: 0.3; } */
 
