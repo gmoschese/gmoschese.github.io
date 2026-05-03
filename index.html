@@ -3,61 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giovanni Moschese | Portfolio</title>
+    <title>Giovanni Moschese</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header class="main-header">
-            
-            <div class="brand-visual">
-                <svg class="neural-svg" width="120" height="300" viewBox="0 0 120 300">
 
-                    <!-- Connessioni -->
-                    <g class="connections">
-                        <line class="synapse" x1="30" y1="50" x2="60" y2="120" />
-                        <line class="synapse" x1="90" y1="50" x2="60" y2="120" />
-                        <line class="synapse" x1="60" y1="120" x2="60" y2="190" />
-                        <line class="synapse" x1="60" y1="190" x2="30" y2="260" />
-                        <line class="synapse" x1="60" y1="190" x2="90" y2="260" />
-                    </g>
+<div class="container">
+    <header class="main-header">
+        
+        <div class="brand-visual">
+            <svg class="neural-svg" viewBox="0 0 120 300">
 
-                    <!-- Nodi (NAV) -->
-                    <g class="nodes">
-                        <circle class="neuron" cx="30" cy="50" r="5" data-section="stack"/>
-                        <circle class="neuron" cx="90" cy="50" r="5" data-section="lab"/>
-                        <circle class="neuron" cx="60" cy="120" r="5" data-section="ai"/>
-                        <circle class="neuron" cx="30" cy="260" r="5" data-section="opensource"/>
-                        <circle class="neuron" cx="90" cy="260" r="5" data-section="console"/>
-                    </g>
+                <g class="connections">
+                    <line class="synapse" x1="30" y1="50" x2="60" y2="120" />
+                    <line class="synapse" x1="90" y1="50" x2="60" y2="120" />
+                    <line class="synapse" x1="60" y1="120" x2="60" y2="190" />
+                    <line class="synapse" x1="60" y1="190" x2="30" y2="260" />
+                    <line class="synapse" x1="60" y1="190" x2="90" y2="260" />
+                </g>
 
-                    <!-- DATA FLOW -->
-                    <g class="data-layer"></g>
-                </svg>
+                <g class="nodes">
+                    <circle class="neuron" cx="30" cy="50" r="5" data-section="stack"/>
+                    <circle class="neuron" cx="90" cy="50" r="5" data-section="lab"/>
+                    <circle class="neuron" cx="60" cy="120" r="5" data-section="ai"/>
+                    <circle class="neuron" cx="30" cy="260" r="5" data-section="opensource"/>
+                    <circle class="neuron" cx="90" cy="260" r="5" data-section="console"/>
+                </g>
 
-                <div class="hint">
-                    Interactive system — hover nodes to explore · click to navigate
-                </div>
+                <g class="data-layer"></g>
+            </svg>
+
+            <div class="hint">
+                Interactive system — hover nodes · click to navigate
+            </div>
+        </div>
+
+        <div class="hero-text">
+            <div class="status-box">
+                <span class="pulse"></span> System: Online
             </div>
 
-            <div class="hero-text">
-                <div class="status-box">
-                    <span class="pulse"></span> System: Online
-                </div>
+            <h1>Giovanni<br>Moschese</h1>
+            <p class="role">Data Engineer · AI Systems · LLM</p>
 
-                <h1>Giovanniii<br>Moschese</h1>
-                <p class="role">Data Engineer · AI Systems · LLM</p>
+            <div class="divider"></div>
 
-                <div class="divider"></div>
+            <p class="message" id="dynamic-text">
+                Designing systems where data flows, learns, and becomes decisions.
+            </p>
+        </div>
 
-                <p class="message" id="dynamic-text">
-                    Designing systems where data flows, learns, and becomes decisions.
-                </p>
-            </div>
+    </header>
+</div>
 
-        </header>
-    </div>
-
-    <script src="script.js"></script>
+<script src="script.js" defer></script>
 </body>
 </html>
