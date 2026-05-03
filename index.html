@@ -3,81 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giovanni Moschese | Illungo</title>
+    <title>Giovanni Moschese | Software Developer</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
     <div class="container">
-    <!-- Sostituisci solo la sezione <header> nel tuo index.html -->
-<header class="main-header">
-    <div class="brand-visual">
-    <svg class="neural-svg" width="120" height="300" viewBox="0 0 120 300" xmlns="http://www.w3.org/2000/svg">
-        <g class="connections">
-            <!-- Collegamenti Layer 1 -> 2 -->
-            <line class="synapse" x1="30" y1="50" x2="20" y2="120" />
-            <line class="synapse" x1="30" y1="50" x2="60" y2="120" />
-            <line class="synapse" x1="30" y1="50" x2="100" y2="120" />
-            <line class="synapse" x1="90" y1="50" x2="20" y2="120" />
-            <line class="synapse" x1="90" y1="50" x2="60" y2="120" />
-            <line class="synapse" x1="90" y1="50" x2="100" y2="120" />
+        <header class="main-header">
+            <div class="brand-visual">
+                <!-- Rete Neurale Astratta e Complessa -->
+                <svg class="neural-svg" width="120" height="300" viewBox="0 0 120 300" xmlns="http://www.w3.org/2000/svg">
+                    <g class="connections">
+                        <!-- Layer 1 -> 2 -->
+                        <line class="synapse" x1="30" y1="50" x2="20" y2="120" />
+                        <line class="synapse" x1="30" y1="50" x2="60" y2="120" />
+                        <line class="synapse" x1="30" y1="50" x2="100" y2="120" />
+                        <line class="synapse" x1="90" y1="50" x2="20" y2="120" />
+                        <line class="synapse" x1="90" y1="50" x2="60" y2="120" />
+                        <line class="synapse" x1="90" y1="50" x2="100" y2="120" />
+                        <!-- Layer 2 -> 3 -->
+                        <line class="synapse" x1="20" y1="120" x2="20" y2="190" />
+                        <line class="synapse" x1="20" y1="120" x2="60" y2="190" />
+                        <line class="synapse" x1="60" y1="120" x2="20" y2="190" />
+                        <line class="synapse" x1="60" y1="120" x2="100" y2="190" />
+                        <line class="synapse" x1="100" y1="120" x2="60" y2="190" />
+                        <line class="synapse" x1="100" y1="120" x2="100" y2="190" />
+                        <!-- Layer 3 -> 4 -->
+                        <line class="synapse" x1="20" y1="190" x2="30" y2="260" />
+                        <line class="synapse" x1="20" y1="190" x2="90" y2="260" />
+                        <line class="synapse" x1="60" y1="190" x2="30" y2="260" />
+                        <line class="synapse" x1="60" y1="190" x2="90" y2="260" />
+                        <line class="synapse" x1="100" y1="190" x2="30" y2="260" />
+                        <line class="synapse" x1="100" y1="190" x2="90" y2="260" />
+                    </g>
+                    <g class="nodes">
+                        <circle class="neuron" cx="30" cy="50" r="4.5" />
+                        <circle class="neuron" cx="90" cy="50" r="4.5" />
+                        <circle class="neuron" cx="20" cy="120" r="4.5" />
+                        <circle class="neuron" cx="60" cy="120" r="4.5" />
+                        <circle class="neuron" cx="100" cy="120" r="4.5" />
+                        <circle class="neuron" cx="20" cy="190" r="4.5" />
+                        <circle class="neuron" cx="60" cy="190" r="4.5" />
+                        <circle class="neuron" cx="100" cy="190" r="4.5" />
+                        <circle class="neuron" cx="30" cy="260" r="4.5" />
+                        <circle class="neuron" cx="90" cy="260" r="4.5" />
+                    </g>
+                </svg>
+            </div>
 
-            <!-- Collegamenti Layer 2 -> 3 -->
-            <line class="synapse" x1="20" y1="120" x2="20" y2="190" />
-            <line class="synapse" x1="20" y1="120" x2="60" y2="190" />
-            <line class="synapse" x1="60" y1="120" x2="20" y2="190" />
-            <line class="synapse" x1="60" y1="120" x2="100" y2="190" />
-            <line class="synapse" x1="100" y1="120" x2="60" y2="190" />
-            <line class="synapse" x1="100" y1="120" x2="100" y2="190" />
+            <div class="hero-text">
+                <div class="status-box">
+                    <span class="pulse"></span> System: Online
+                </div>
+                <h1>Giovanni<br>Moschese</h1>
+                <p class="role">Software Developer & Tech Enthusiast</p>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#work">Work</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
 
-            <!-- Collegamenti Layer 3 -> 4 -->
-            <line class="synapse" x1="20" y1="190" x2="30" y2="260" />
-            <line class="synapse" x1="20" y1="190" x2="90" y2="260" />
-            <line class="synapse" x1="60" y1="190" x2="30" y2="260" />
-            <line class="synapse" x1="60" y1="190" x2="90" y2="260" />
-            <line class="synapse" x1="100" y1="190" x2="30" y2="260" />
-            <line class="synapse" x1="100" y1="190" x2="90" y2="260" />
-        </g>
-
-        <g class="nodes">
-            <!-- Input Layer -->
-            <circle class="neuron" cx="30" cy="50" r="4.5" />
-            <circle class="neuron" cx="90" cy="50" r="4.5" />
-            <!-- Hidden Layer 1 -->
-            <circle class="neuron" cx="20" cy="120" r="4.5" />
-            <circle class="neuron" cx="60" cy="120" r="4.5" />
-            <circle class="neuron" cx="100" cy="120" r="4.5" />
-            <!-- Hidden Layer 2 -->
-            <circle class="neuron" cx="20" cy="190" r="4.5" />
-            <circle class="neuron" cx="60" cy="190" r="4.5" />
-            <circle class="neuron" cx="100" cy="190" r="4.5" />
-            <!-- Output Layer -->
-            <circle class="neuron" cx="30" cy="260" r="4.5" />
-            <circle class="neuron" cx="90" cy="260" r="4.5" />
-        </g>
-    </svg>
-</div>
-
-    <div class="hero-text">
-        <div class="status-box">
-            <span class="pulse"></span> System: Online
-        </div>
-        <div class="alias">Known as Illungo</div>
-        <h1>Giovanni<br>Moschese</h1>
-        <p class="role">Software Developer & Tech Enthusiast</p>
-        
-        <div class="divider"></div>
-        
-        <p class="message">
-            Currently architecting a new digital environment.<br>
-            A minimal space focused on logic and design.
-        </p>
-    </div>
-</header>
-
-        <footer>
-            &copy; 2026 &mdash; Built with GitHub Pages
-        </footer>
+                <div class="divider"></div>
+                
+                <p class="message">
+                    Currently architecting a new digital environment.<br>
+                    A minimal space focused on logic and design.
+                </p>
+            </div>
+        </header>
     </div>
 </body>
 </html>
