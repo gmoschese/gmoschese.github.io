@@ -1,6 +1,5 @@
 window.addEventListener('load', () => {
     const neurons = document.querySelectorAll('.neuron');
-    
     if (neurons.length === 0) return;
 
     const fireRandomNeuron = () => {
@@ -11,16 +10,15 @@ window.addEventListener('load', () => {
 
         setTimeout(() => {
             neuron.classList.remove('active');
-        }, 300 + Math.random() * 400);
+        }, 400 + Math.random() * 400);
 
-        setTimeout(fireRandomNeuron, 150 + Math.random() * 600);
+        setTimeout(fireRandomNeuron, 100 + Math.random() * 500);
     };
 
-    // Avvio di 4 cicli paralleli per una rete densa e dinamica
+    // Lanciamo 5 cicli paralleli per una rete molto attiva
     fireRandomNeuron();
-    setTimeout(() => fireRandomNeuron(), 200);
-    setTimeout(() => fireRandomNeuron(), 400);
+    setTimeout(() => fireRandomNeuron(), 150);
+    setTimeout(() => fireRandomNeuron(), 300);
+    setTimeout(() => fireRandomNeuron(), 450);
     setTimeout(() => fireRandomNeuron(), 600);
-
-    console.log("Illungo System: Neural Network Online.");
 });
