@@ -1,32 +1,45 @@
 :root {
     --primary: #1a1a1a;
     --accent: #0055ff;
+    --bg: #fafafa;
 }
 
-/* Stato base: Forza il colore e la transizione */
+/* --- FIX ICONE SOCIAL (Evita che diventino giganti) --- */
+.social-icon {
+    display: inline-block;
+    width: 24px !important;
+    height: 24px !important;
+    color: var(--primary);
+    transition: 0.3s;
+}
+.social-icon svg {
+    width: 24px !important;
+    height: 24px !important;
+    display: block;
+}
+
+/* --- FIX NODI E ANIMAZIONE --- */
 .node-group .neuron {
     fill: var(--primary) !important;
-    transition: all 0.4s ease-in-out;
-    r: 3px; /* Raggio base */
+    stroke: none;
+    r: 3.5px !important; /* Raggio base forzato */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Stato Attivo/Hover: Qui forziamo l'illuminazione e l'aumento del raggio */
-.node-group:hover .neuron,
-.node-group.active .neuron {
+/* Classe ACTIVE per animazione random e HOVER */
+.node-group.active .neuron,
+.node-group:hover .neuron {
     fill: var(--accent) !important;
-    stroke: var(--accent) !important;
-    r: 7px !important; /* Qui il raggio aumenta visibilmente */
-    filter: drop-shadow(0 0 5px var(--accent)); /* Aggiunge un effetto bagliore */
+    r: 7px !important; /* Il raggio aumenta qui */
+    filter: drop-shadow(0 0 4px var(--accent));
 }
 
 .synapse {
     stroke: var(--primary);
     stroke-width: 1.2;
     opacity: 0.1;
-    transition: opacity 0.3s;
 }
 
-/* Quando un nodo è attivo, illuminiamo leggermente anche le linee collegate */
-.node-group.active ~ .connections .synapse {
-    opacity: 0.4;
-}
+/* Layout base */
+body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+.main-header { display: flex; gap: 4rem; align-items: center; }
