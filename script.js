@@ -8,16 +8,14 @@ window.addEventListener('load', () => {
 
         neuron.classList.add('active');
 
-        // Durata dell'accensione
         setTimeout(() => {
             neuron.classList.remove('active');
         }, 400 + Math.random() * 400);
 
-        // Intervallo per il prossimo impulso
-        setTimeout(fireRandomNeuron, 100 + Math.random() * 600);
+        setTimeout(fireRandomNeuron, 150 + Math.random() * 600);
     };
 
-    // Attivazione di 5 flussi di dati paralleli
+    // Attivazione di 5 flussi paralleli per un effetto dinamico
     fireRandomNeuron();
     setTimeout(() => fireRandomNeuron(), 150);
     setTimeout(() => fireRandomNeuron(), 300);
