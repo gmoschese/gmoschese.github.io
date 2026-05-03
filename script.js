@@ -1,50 +1,61 @@
-window.addEventListener("load", () => {
-    const neurons = document.querySelectorAll(".neuron");
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giovanni Moschese</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    let hovered = false;
-    let timeoutId = null;
+<div class="container">
+    <header class="main-header">
+        
+        <div class="brand-visual">
+            <svg class="neural-svg" width="100" height="260" viewBox="0 0 100 260">
 
-    function randomPulse() {
-        if (hovered) return;
+                <g class="connections">
+                    <line class="synapse" x1="25" y1="40" x2="50" y2="100" />
+                    <line class="synapse" x1="75" y1="40" x2="50" y2="100" />
+                    <line class="synapse" x1="50" y1="100" x2="50" y2="160" />
+                    <line class="synapse" x1="50" y1="160" x2="25" y2="220" />
+                    <line class="synapse" x1="50" y1="160" x2="75" y2="220" />
+                </g>
 
-        const node = neurons[Math.floor(Math.random() * neurons.length)];
+                <g class="nodes">
+                    <circle class="neuron" cx="25" cy="40" r="4" data-section="stack"/>
+                    <circle class="neuron" cx="75" cy="40" r="4" data-section="lab"/>
+                    <circle class="neuron" cx="50" cy="100" r="4" data-section="ai"/>
+                    <circle class="neuron" cx="50" cy="160" r="4"/>
+                    <circle class="neuron" cx="25" cy="220" r="4" data-section="opensource"/>
+                    <circle class="neuron" cx="75" cy="220" r="4" data-section="console"/>
+                </g>
 
-        node.classList.add("pulse");
+            </svg>
 
-        setTimeout(() => {
-            node.classList.remove("pulse");
-        }, 400);
+            <div class="hint">
+                hover nodes · click to navigate
+            </div>
+        </div>
 
-        timeoutId = setTimeout(randomPulse, 300 + Math.random() * 700);
-    }
+        <div class="hero-text">
+            <div class="status-box">
+                <span class="pulse-dot"></span> System: Online
+            </div>
 
-    randomPulse();
+            <h1>Giovanni<br>Moschese</h1>
+            <p class="role">Data Engineer · AI Systems · LLM</p>
 
-    neurons.forEach(node => {
-        node.addEventListener("mouseenter", () => {
-            hovered = true;
+            <div class="divider"></div>
 
-            if (timeoutId) clearTimeout(timeoutId);
+            <p class="message" id="dynamic-text">
+                Designing systems where data flows, learns, and becomes decisions.
+            </p>
+        </div>
 
-            neurons.forEach(n => {
-                n.classList.remove("pulse");
-                n.classList.remove("active");
-            });
+    </header>
+</div>
 
-            node.classList.add("active");
-        });
-
-        node.addEventListener("mouseleave", () => {
-            hovered = false;
-            node.classList.remove("active");
-            randomPulse();
-        });
-
-        node.addEventListener("click", () => {
-            const section = node.dataset.section;
-            if (section) {
-                window.location.href = `sections/${section}.html`;
-            }
-        });
-    });
-});
+<script src="script.js"></script>
+</body>
+</html>
