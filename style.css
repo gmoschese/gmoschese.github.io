@@ -6,6 +6,8 @@
     --primary: #1a1a1a;
     --accent:  #0055ff;
     --bg:      #fafafa;
+    --error:   #ff2244;
+    --success: #00cc66;
 }
 
 * {
@@ -91,20 +93,23 @@ h1 {
     display: inline-flex;
     align-items: center;
     margin-bottom: 1rem;
+    transition: background 0.3s, color 0.3s;
 }
 
-/* Variante WIP — grigio/giallo per le sezioni */
-/*.status-box.wip {
-    color: #666;
-    background: #f2f2f2;
-    border: 1px dashed #ccc;
+.status-box.game-active {
+    color: var(--accent);
+    background: #e8f0ff;
 }
 
-.status-box.wip .pulse-dot {
-    background: #aaa;
-    animation: none;      /* fermo = non attivo */
-    opacity: 0.6;
-}*/
+.status-box.game-error {
+    color: var(--error);
+    background: #fff0f3;
+}
+
+.status-box.game-success {
+    color: var(--success);
+    background: #f0fff7;
+}
 
 .pulse-dot {
     width: 6px;
@@ -112,11 +117,16 @@ h1 {
     background: #f39c12;
     border-radius: 50%;
     margin-right: 8px;
+    flex-shrink: 0;
     animation: blink 1.5s infinite;
 }
 
+.status-box.game-active  .pulse-dot { background: var(--accent); }
+.status-box.game-error   .pulse-dot { background: var(--error);  animation: none; }
+.status-box.game-success .pulse-dot { background: var(--success); }
+
 /* ══════════════════════════════════════════════
-   SOCIAL BAR — uniforme su tutte le pagine
+   SOCIAL BAR
 ══════════════════════════════════════════════ */
 
 .social-bar {
@@ -178,6 +188,20 @@ h1 {
     filter: drop-shadow(0 0 5px rgba(0, 85, 255, 0.5));
 }
 
+/* Stato errore nel gioco */
+.node-group.error .neuron {
+    fill: var(--error);
+    transform: scale(2);
+    filter: drop-shadow(0 0 5px rgba(255, 34, 68, 0.5));
+}
+
+/* Stato successo nel gioco */
+.node-group.success .neuron {
+    fill: var(--success);
+    transform: scale(2);
+    filter: drop-shadow(0 0 5px rgba(0, 204, 102, 0.5));
+}
+
 .synapse {
     stroke: var(--primary);
     stroke-width: 1px;
@@ -201,6 +225,15 @@ h1 {
     opacity: 1;
 }
 
+/* Nasconde le label durante il gioco */
+.game-mode .node-label {
+    opacity: 0 !important;
+}
+
+/* ══════════════════════════════════════════════
+   NAV HINT
+══════════════════════════════════════════════ */
+
 .nav-hint {
     font-family: monospace;
     font-size: 0.65rem;
@@ -213,6 +246,37 @@ h1 {
 
 .nav-hint.hidden {
     opacity: 0;
+}
+
+/* ══════════════════════════════════════════════
+   PLAY BUTTON
+══════════════════════════════════════════════ */
+
+.play-btn {
+    display: block;
+    margin: 10px auto 0;
+    font-family: monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    background: transparent;
+    border: 1px dashed var(--accent);
+    padding: 5px 14px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    width: 100%;
+}
+
+.play-btn:hover {
+    background: var(--accent);
+    color: white;
+}
+
+.play-btn.active {
+    background: var(--error);
+    color: white;
+    border-color: var(--error);
+    border-style: solid;
 }
 
 /* ══════════════════════════════════════════════
