@@ -94,7 +94,7 @@ h1 {
 }
 
 /* Variante WIP — grigio/giallo per le sezioni */
-.status-box.wip {
+/*.status-box.wip {
     color: #666;
     background: #f2f2f2;
     border: 1px dashed #ccc;
@@ -104,7 +104,7 @@ h1 {
     background: #aaa;
     animation: none;      /* fermo = non attivo */
     opacity: 0.6;
-}
+}*/
 
 .pulse-dot {
     width: 6px;
