@@ -19,46 +19,48 @@
                     <line class="synapse" x1="50" y1="160" x2="75" y2="220" />
                 </g>
                 <g class="nodes">
-                    <g class="node-group" data-section="stack"      data-href="./section/stack.html">
+                    <g class="node-group" data-section="stack" data-href="./section/stack.html" data-index="0">
                         <circle class="hitbox" cx="25" cy="40"  r="18" />
                         <circle class="neuron" cx="25" cy="40"  r="4"  />
                         <text class="node-label" x="25" y="14">Stack</text>
                     </g>
-                    <g class="node-group" data-section="lab"        data-href="./section/lab.html">
+                    <g class="node-group" data-section="lab" data-href="./section/lab.html" data-index="1">
                         <circle class="hitbox" cx="75" cy="40"  r="18" />
                         <circle class="neuron" cx="75" cy="40"  r="4"  />
                         <text class="node-label" x="75" y="14">Lab</text>
                     </g>
-                    <g class="node-group" data-section="ai"         data-href="./section/ai.html">
+                    <g class="node-group" data-section="ai" data-href="./section/ai.html" data-index="2">
                         <circle class="hitbox" cx="50" cy="100" r="18" />
                         <circle class="neuron" cx="50" cy="100" r="4"  />
                         <text class="node-label" x="50" y="74">AI</text>
                     </g>
-                    <g class="node-group" data-section="log"        data-href="./section/log.html">
+                    <g class="node-group" data-section="log" data-href="./section/log.html" data-index="3">
                         <circle class="hitbox" cx="50" cy="160" r="18" />
                         <circle class="neuron" cx="50" cy="160" r="4"  />
                         <text class="node-label" x="50" y="134">Log</text>
                     </g>
-                    <g class="node-group" data-section="opensource" data-href="./section/opensource.html">
+                    <g class="node-group" data-section="opensource" data-href="./section/opensource.html" data-index="4">
                         <circle class="hitbox" cx="25" cy="220" r="18" />
                         <circle class="neuron" cx="25" cy="220" r="4"  />
                         <text class="node-label" x="25" y="248">OSS</text>
                     </g>
-                    <g class="node-group" data-section="about"      data-href="./section/about.html">
+                    <g class="node-group" data-section="about" data-href="./section/about.html" data-index="5">
                         <circle class="hitbox" cx="75" cy="220" r="18" />
                         <circle class="neuron" cx="75" cy="220" r="4"  />
                         <text class="node-label" x="75" y="248">About</text>
                     </g>
                 </g>
             </svg>
-            <p class="nav-hint">// hover to explore</p>
+            <p class="nav-hint" id="nav-hint">// hover to explore</p>
+            <button class="play-btn" id="play-btn">// play</button>
         </div>
 
         <div class="hero-text">
-            <div class="status-box">
-                <span class="pulse-dot"></span> section: build: in progress — v0.1.0
+            <div class="status-box" id="status-box">
+                <span class="pulse-dot"></span>
+                <span id="status-text">section: build in progress — v0.1.0</span>
             </div>
-            <h1>Giovanni Moschese</h1>
+            <h1>Giovanni<br>Moschese</h1>
             <p class="role">Data Engineer • AI Systems</p>
             <div class="divider"></div>
             <p class="message" id="dynamic-text">
