@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptù | AI Centric Solutions</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #fafafa;
+        }
+
+        .aptu-page {
+            text-align: center;
+            max-width: 560px;
+            padding: 2rem;
+        }
+
+        .aptu-logo-img {
+            width: 160px;
+            height: auto;
+            margin-bottom: 2rem;
+            opacity: 0.92;
+        }
+
+        .aptu-name {
+            font-size: 3.2rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: #0a2a6e;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .aptu-sub {
+            font-family: monospace;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: #7a9ad4;
+            text-transform: uppercase;
+            margin-top: 6px;
+            margin-bottom: 2.5rem;
+        }
+
+        .aptu-divider {
+            width: 40px;
+            height: 3px;
+            background: #0a2a6e;
+            margin: 0 auto 2.5rem;
+            opacity: 0.15;
+        }
+
+        .brewing-box {
+            background: #fff;
+            border: 1px solid #e0e8f5;
+            border-radius: 6px;
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .brewing-label {
+            font-family: monospace;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: #7a9ad4;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .brewing-dot {
+            width: 6px;
+            height: 6px;
+            background: #0a2a6e;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+            opacity: 0.5;
+        }
+
+        .brewing-text {
+            font-size: 1.15rem;
+            color: #0a2a6e;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .brewing-sub {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .brewing-sub em {
+            color: #0a2a6e;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .aptu-status {
+            font-family: monospace;
+            font-size: 0.65rem;
+            color: #aaa;
+            letter-spacing: 1px;
+            margin-bottom: 2.5rem;
+        }
+
+        .aptu-status span { color: #0a2a6e; opacity: 0.5; }
+
+        .aptu-back {
+            font-family: monospace;
+            font-size: 0.7rem;
+            text-decoration: none;
+            color: #0a2a6e;
+            border-bottom: 1px dashed #0a2a6e;
+            opacity: 0.4;
+            letter-spacing: 1px;
+            transition: opacity 0.2s;
+        }
+
+        .aptu-back:hover { opacity: 1; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.5; }
+            50%       { opacity: 0.1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="aptu-page">
+
+        <img
+            src="../assets/aptu-logo.png"
+            alt="Aptù — AI Centric Solutions"
+            class="aptu-logo-img"
+        />
+
+        <h1 class="aptu-name">APTÙ</h1>
+        <p class="aptu-sub">AI Centric Solutions</p>
+
+        <div class="aptu-divider"></div>
+
+        <div class="brewing-box">
+            <div class="brewing-label">
+                <span class="brewing-dot"></span>
+                status: fermenting
+            </div>
+            <p class="brewing-text">
+                Something good is fermenting.
+            </p>
+            <p class="brewing-sub">
+                The best things need time to culture.<br>
+                We're growing <em>tools worth using</em> —<br>
+                not just shipping for the sake of it.
+            </p>
+        </div>
+
+        <p class="aptu-status">
+            <span>//</span> first release: when it's ready. not before.
+        </p>
+
+        <a href="../index.html" class="aptu-back">← return to system</a>
+
+    </div>
+</body>
+</html>
