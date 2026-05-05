@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const r = nodeGroups[Math.floor(Math.random() * nodeGroups.length)];
             activateNode(r);
             setText(info[r.dataset.section]);
-        }, 1000);
+        }, 2000);
     }
 
     if (navHint) setTimeout(() => navHint.classList.add("hidden"), 3000);
