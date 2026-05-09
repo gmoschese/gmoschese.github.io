@@ -507,6 +507,48 @@ footer p { margin-bottom: 12px; }
 .references ul { padding-left: 18px; margin-bottom: 0; }
 .references li { margin-bottom: 6px; color: var(--ink-soft); }
 
+/* Back-to-research navigation links */
+.back-nav {
+  margin: 32px 0 8px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.back-nav a {
+  color: var(--ink-mute);
+  border-bottom: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  transition: color 0.15s ease, transform 0.2s ease;
+}
+
+.back-nav a:hover {
+  color: var(--accent);
+  background: none;
+  transform: translateX(-3px);
+}
+
+.back-nav a .arrow {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.back-nav a:hover .arrow {
+  transform: translateX(-2px);
+}
+
+.back-nav-bottom {
+  margin: 24px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+
 @media (max-width: 720px) {
   body { font-size: 17px; }
   .hero { padding: 60px 0 40px; }
@@ -544,6 +586,10 @@ footer p { margin-bottom: 12px; }
   <span class="topbar-left">AML in Europe · A technical-strategic essay</span>
   <span class="topbar-right">April 2026 · ~28 min read</span>
 </div>
+
+<nav class="back-nav">
+  <a href="/research"><span class="arrow">←</span> Back</a>
+</nav>
 
 <header class="hero">
   <div class="eyebrow">Essay · Compliance and Technology</div>
@@ -1210,6 +1256,9 @@ gantt
 <footer>
   <p>Article published in April 2026. Information accurate as of publication. The subject is moving fast — for updates, follow the newsletter or the LinkedIn posts.</p>
   <p>To discuss or go deeper on any of the topics here, <a href="mailto:contact@example.com">get in touch</a>.</p>
+  <nav class="back-nav back-nav-bottom">
+    <a href="/research"><span class="arrow">←</span> Back</a>
+  </nav>
 </footer>
 
 </div>
