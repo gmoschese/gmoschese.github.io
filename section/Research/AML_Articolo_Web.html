@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AML in Europa, 2026–2028 — La finestra che si chiude</title>
+<meta name="description" content="Quadro normativo, limiti operativi, architetture difendibili davanti al regolatore. Analisi tecnico-strategica per il mercato AML europeo, aprile 2026.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: isDark ? 'dark' : 'default',
+      securityLevel: 'loose',
+      themeVariables: {
+        fontFamily: '"Inter Tight", sans-serif',
+        primaryColor: isDark ? '#1a3a52' : '#eaf1f8',
+        primaryTextColor: isDark ? '#f4f1ea' : '#0b2a4a',
+        primaryBorderColor: isDark ? '#4a8bc2' : '#1e5f8f',
+        lineColor: isDark ? '#7aa8c9' : '#1e5f8f',
+        secondaryColor: isDark ? '#2a4860' : '#f4f7fa',
+        tertiaryColor: isDark ? '#1a1a1a' : '#fff8e1',
+      }
+    });
+  });
+</script>
+
+<style>
+:root {
+  --color-bg: #fbf9f4;
+  --color-bg-card: #ffffff;
+  --color-bg-callout: #fff8e1;
+  --color-bg-code: #f4f1ea;
+  --color-text: #1a1a1a;
+  --color-text-muted: #5a5a5a;
+  --color-text-subtle: #8a8a8a;
+  --color-accent: #b8341d;
+  --color-accent-deep: #7a2410;
+  --color-navy: #0b2a4a;
+  --color-rule: #d4cfc4;
+  --color-rule-soft: #ebe6da;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter Tight', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --content-max-width: 720px;
+  --content-wide-max-width: 960px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #14110d;
+    --color-bg-card: #1c1814;
+    --color-bg-callout: #2a2418;
+    --color-bg-code: #1f1c18;
+    --color-text: #f4f1ea;
+    --color-text-muted: #b5b0a5;
+    --color-text-subtle: #8a8478;
+    --color-accent: #e85a3c;
+    --color-accent-deep: #c54124;
+    --color-navy: #88b8d8;
+    --color-rule: #2c2820;
+    --color-rule-soft: #232018;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-text);
+  background: var(--color-bg);
+  background-image:
+    radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--color-accent) 4%, transparent) 0%, transparent 35%),
+    radial-gradient(circle at 85% 90%, color-mix(in srgb, var(--color-navy) 5%, transparent) 0%, transparent 40%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: color-mix(in srgb, var(--color-bg) 80%, transparent);
+  border-bottom: 1px solid var(--color-rule-soft);
+  padding: 14px 0;
+}
+.top-nav-inner {
+  max-width: var(--content-wide-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.top-nav .signature {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+.top-nav .meta {
+  font-size: 13px;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.hero {
+  max-width: var(--content-wide-max-width);
+  margin: 0 auto;
+  padding: 80px 24px 60px;
+}
+.hero .eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: 32px;
+  display: inline-block;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-accent);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(38px, 6.5vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  margin-bottom: 28px;
+  color: var(--color-text);
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--color-accent);
+  font-weight: 500;
+}
+.hero .subtitle {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  max-width: 720px;
+  margin-bottom: 40px;
+}
+.hero .meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-rule);
+  color: var(--color-text-subtle);
+  font-size: 14px;
+}
+.hero .meta-row .dot { color: var(--color-rule); }
+
+.article {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+.article .pre-warning {
+  background: var(--color-bg-card);
+  border-left: 3px solid var(--color-accent);
+  padding: 28px 32px;
+  margin: 40px 0 60px;
+  font-size: 16px;
+  line-height: 1.65;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+.article .pre-warning .label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.article .pre-warning p { margin-bottom: 12px; color: var(--color-text-muted); }
+.article .pre-warning p:last-child { margin-bottom: 0; }
+.article .pre-warning strong { color: var(--color-text); font-weight: 600; }
+
+.toc {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-rule-soft);
+  padding: 32px 36px;
+  margin: 60px 0;
+  border-radius: 2px;
+}
+.toc h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 22px;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  padding-top: 0 !important;
+}
+.toc h2::before { display: none !important; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding-left: 0; }
+.toc ol li {
+  counter-increment: toc-counter;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--color-rule-soft);
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.toc ol li:last-child { border-bottom: none; }
+.toc ol li::before {
+  content: counter(toc-counter, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-accent);
+  font-weight: 500;
+  flex-shrink: 0;
+  width: 28px;
+}
+.toc a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.15s ease;
+  flex: 1;
+  border: none;
+}
+.toc a:hover { color: var(--color-accent); }
+
+.article h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(28px, 3.6vw, 38px);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  margin: 90px 0 28px;
+  color: var(--color-text);
+  position: relative;
+  padding-top: 28px;
+}
+.article h2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: var(--color-accent);
+}
+.article h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin: 50px 0 16px;
+  color: var(--color-text);
+}
+.article h4 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.4;
+  margin: 32px 0 12px;
+  color: var(--color-text);
+}
+
+.article p { margin: 0 0 22px; color: var(--color-text); }
+.article p strong { font-weight: 600; color: var(--color-text); }
+.article p em {
+  font-style: italic;
+  font-family: var(--font-display);
+  font-size: 1.02em;
+}
+
+.article > p:first-of-type::first-letter {
+  font-family: var(--font-display);
+  font-size: 4.5em;
+  line-height: 0.85;
+  float: left;
+  margin: 0.08em 0.12em -0.05em 0;
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.article ul, .article ol { margin: 0 0 24px 0; padding-left: 28px; }
+.article ul li, .article ol li { margin-bottom: 10px; line-height: 1.65; }
+.article ul li::marker { color: var(--color-accent); }
+
+.article blockquote {
+  background: var(--color-bg-callout);
+  border: none;
+  border-left: 3px solid var(--color-accent);
+  padding: 24px 30px;
+  margin: 32px 0;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  border-radius: 0 4px 4px 0;
+}
+.article blockquote p { margin-bottom: 12px; }
+.article blockquote p:last-child { margin-bottom: 0; }
+
+.article a {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: color 0.15s ease;
+}
+.article a:hover {
+  color: var(--color-accent-deep);
+  border-bottom-color: var(--color-accent-deep);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 32px 0;
+  border: 1px solid var(--color-rule);
+  border-radius: 2px;
+}
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+.article table th {
+  background: var(--color-bg-card);
+  text-align: left;
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--color-rule);
+}
+.article table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-rule-soft);
+  vertical-align: top;
+  color: var(--color-text);
+}
+.article table tr:last-child td { border-bottom: none; }
+.article table tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--color-bg-card) 50%, transparent);
+}
+.article table strong { color: var(--color-text); font-weight: 600; }
+
+.article code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--color-bg-code);
+  padding: 2px 6px;
+  border-radius: 2px;
+  color: var(--color-accent-deep);
+}
+
+.katex { font-size: 1.05em !important; }
+.katex-display {
+  margin: 28px 0 !important;
+  padding: 24px;
+  background: var(--color-bg-card);
+  border-left: 3px solid var(--color-navy);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.mermaid {
+  margin: 36px 0;
+  padding: 28px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-rule-soft);
+  border-radius: 4px;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.article-end {
+  text-align: center;
+  margin: 80px 0 40px;
+  color: var(--color-text-subtle);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+}
+
+.article-footer {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  border-top: 1px solid var(--color-rule-soft);
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.section-rule {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-rule), transparent);
+  margin: 100px auto;
+  max-width: 240px;
+}
+
+@media (max-width: 720px) {
+  body { font-size: 17px; }
+  .top-nav-inner { padding: 0 18px; }
+  .top-nav .meta { font-size: 11px; }
+  .hero { padding: 60px 18px 40px; }
+  .article { padding: 0 18px 60px; }
+  .article-footer { padding: 32px 18px 60px; }
+  .toc { padding: 24px 22px; }
+  .article .pre-warning { padding: 22px 22px; }
+  .article blockquote { padding: 20px 22px; }
+  .article > p:first-of-type::first-letter { font-size: 3.6em; }
+  .article h2 { margin-top: 70px; }
+}
+
+@media print {
+  .top-nav, .article-footer { display: none; }
+  body { background: white; color: black; font-size: 11pt; }
+  .hero { padding: 0; }
+  .hero h1 { font-size: 28pt; }
+  .article { max-width: none; }
+  .mermaid, .katex-display { page-break-inside: avoid; }
+  h2, h3 { page-break-after: avoid; }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <span class="signature">Illungo</span>
+    <span class="meta">Aprile 2026 · Analisi</span>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="eyebrow">Anti-Money Laundering · Europa</span>
+  <h1>AML in Europa, <em>2026—2028</em>:<br>la finestra che si chiude.</h1>
+  <p class="subtitle">Quadro normativo, limiti operativi, e architetture difendibili davanti al regolatore. Un'analisi tecnico-strategica per chi costruisce, vende o supervisiona sistemi antiriciclaggio nel triennio che decide il prossimo decennio.</p>
+  <div class="meta-row">
+    <span>~28 minuti di lettura</span>
+    <span class="dot">·</span>
+    <span>~8 min in modalità strategica</span>
+    <span class="dot">·</span>
+    <span>Aprile 2026</span>
+  </div>
+</header>
+
+<article class="article">
+
+<aside class="pre-warning">
+  <span class="label">Una nota al lettore</span>
+  <p>Questo articolo è scritto a tre velocità.</p>
+  <p>Se sei un <strong>manager di compliance, un risk officer, un dirigente</strong> che vuole capire cosa cambia nei prossimi diciotto mesi, leggi gli incipit delle sezioni e i box riassuntivi. Saranno circa 1.500 parole, otto minuti di lettura, e ne uscirai con il quadro strategico chiaro.</p>
+  <p>Se sei un <strong>professionista AML, un consulente, un fintech founder</strong> che vuole capire la materia in profondità, leggi linearmente. È quello per cui il pezzo è stato pensato. Trenta minuti, e avrai una mappa operativa di cosa fare.</p>
+  <p>Se sei un <strong>data scientist, un ML engineer, un ricercatore</strong> che vuole il dettaglio matematico e implementativo, apri anche i box tecnici. Ci sono le formule, i riferimenti bibliografici, le note implementative.</p>
+  <p>I tre livelli convivono dentro lo stesso testo. Nessuno è obbligato a leggere quello che non gli serve.</p>
+</aside>
+
+<nav class="toc">
+  <h2>Indice</h2>
+  <ol>
+    <li><a href="#perche-ne-sto-scrivendo-adesso">Perché ne sto scrivendo adesso</a></li>
+    <li><a href="#il-quadro-cosa-e-cambiato-in-europa">Il quadro: cosa è cambiato in Europa</a></li>
+    <li><a href="#il-dolore-degli-operatori">Il dolore degli operatori (perché il sistema non funziona)</a></li>
+    <li><a href="#il-problema-vero-non-e-lalgoritmo">Il problema vero non è l'algoritmo</a></li>
+    <li><a href="#i-casi-di-sanzione">I casi di sanzione, e cosa ci insegnano</a></li>
+    <li><a href="#unarchitettura-difendibile">Un'architettura difendibile: setaccio a tre livelli</a></li>
+    <li><a href="#il-caso-tmnl">Il caso TMNL: cosa è successo, cosa significa</a></li>
+    <li><a href="#cosa-fare-nei-prossimi-18-mesi">Cosa fare nei prossimi 18 mesi</a></li>
+    <li><a href="#riferimenti-e-fonti">Riferimenti e fonti</a></li>
+  </ol>
+</nav>
+
+<h2 id="perche-ne-sto-scrivendo-adesso">Perché ne sto scrivendo adesso</h2>
+<p>Il riciclaggio di denaro muove tra 800 miliardi e 2.000 miliardi di dollari l'anno a livello globale — tra il 2% e il 5% del PIL mondiale. È una stima delle Nazioni Unite (UNODC) che da oltre un decennio non si schioda. La novità degli ultimi diciotto mesi non è la dimensione del fenomeno, è il riassetto del sistema di contrasto.</p>
+<p>Tre cose, in fila, hanno cambiato il quadro:</p>
+<p>Nel 2024 l'Unione Europea ha riscritto interamente la normativa antiriciclaggio con il <strong>pacchetto AML 2024</strong> — quattro atti legislativi che sostituiscono un mosaico di cinque direttive con un Single Rulebook direttamente applicabile.</p>
+<p>Nel luglio 2025 è diventata operativa <strong>AMLA</strong> — l'autorità europea unica con sede a Francoforte — con la prospettiva di assumere la supervisione diretta delle 40 entità più grandi e rischiose dell'Unione dal 1° gennaio 2028.</p>
+<p>A partire dal <strong>10 luglio 2027</strong> l'AMLR — il Single Rulebook — sarà direttamente applicabile in tutti gli stati membri. Senza recepimento nazionale, senza sconti, senza margini di interpretazione.</p>
+<p>Tradotto: la finestra per costruire (o ricostruire) sistemi AML che reggano l'audit è aperta adesso e si chiude prima di quanto sembri. Per essere conformi a luglio 2027 i progetti vanno avviati nel 2026. Diciotto mesi sono il tempo medio di un progetto di adeguamento serio per una banca; per una fintech, dodici se va bene.</p>
+<p>E mentre la pressione regolatoria sale, la tecnologia non è ferma — ma quasi. I sistemi rule-based che dominano il mercato generano il 95-99% di falsi positivi. I progetti AI di nuova generazione, pur con investimenti in crescita, non arrivano in produzione: secondo MIT (agosto 2025), il 95% dei pilot AI nelle aziende non genera valore di business misurabile. In Italia, a fine 2025, solo il 17% delle iniziative AI bancarie aveva raggiunto implementazione operativa effettiva.</p>
+<p>Il mercato AML è in quella finestra rara — la chiamano <em>Goldilocks moment</em> — in cui la normativa spinge, la tecnologia è disponibile, e l'offerta di soluzioni mature è scarsa. Per chi sa leggere il momento, è l'ingresso ideale. Per chi non lo legge, è il triennio successivo perso.</p>
+<p>Questo è il pezzo che vorrei aver letto sei mesi fa. È il quadro completo, basato sui fatti pubblici, sulle fonti primarie, e sull'analisi tecnica delle architetture che oggi sono realmente difendibili davanti al regolatore.</p>
+<hr>
+<hr class="section-rule">
+<h2 id="il-quadro-cosa-e-cambiato-in-europa">Il quadro: cosa è cambiato in Europa</h2>
+<blockquote>
+<p><strong>In una frase.</strong> Quattro atti legislativi pubblicati nel 2024 hanno sostituito vent'anni di direttive frammentate con un Single Rulebook unico, una nuova autorità centrale, e regole applicabili direttamente in tutta l'UE dal 10 luglio 2027.</p>
+</blockquote>
+<h3 id="21-i-quattro-atti-del-pacchetto-aml-2024">I quattro atti del pacchetto AML 2024</h3>
+<p>Vanno letti insieme. Ognuno fa una cosa diversa, ma il senso politico è uno solo: chiudere l'arbitraggio supervisivo che ha permesso a banche autorizzate in giurisdizioni più permissive di operare in tutta Europa con controlli inadeguati.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Atto</th>
+<th>Cosa fa</th>
+<th>Decorrenza</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AMLR</strong> — Reg. 2024/1624</td>
+<td>Single Rulebook. Regole sostanziali uniformi e direttamente applicabili a tutti i soggetti obbligati in UE</td>
+<td>Applicabile dal 10 luglio 2027</td>
+</tr>
+<tr>
+<td><strong>AMLD6</strong> — Dir. 2024/1640</td>
+<td>Sostituisce AMLD4. Disegna il framework istituzionale nazionale, registri, FIU, accesso autorità</td>
+<td>Recepimento entro 10 luglio 2027</td>
+</tr>
+<tr>
+<td><strong>AMLAR</strong> — Reg. 2024/1620</td>
+<td>Istituisce AMLA con sede a Francoforte. Supervisione diretta su 40 entità ad alto rischio</td>
+<td>Operativa dal 1° luglio 2025. Supervisione diretta dal 1° gennaio 2028</td>
+</tr>
+<tr>
+<td><strong>TFR Recast</strong> — Reg. 2023/1113</td>
+<td>Travel Rule estesa alle crypto-asset</td>
+<td>In vigore dal 30 dicembre 2024</td>
+</tr>
+</tbody>
+</table></div>
+<p>La novità più impattante non è una singola norma. È la combinazione di tre cose: regole identiche dappertutto, un'autorità unica con potere di emanare standard tecnici vincolanti, e supervisione diretta sulle entità grandi.</p>
+<h3 id="22-amla-in-numeri">AMLA, in numeri</h3>
+<p>L'AMLA — <em>Authority for Anti-Money Laundering and Countering the Financing of Terrorism</em> — è la novità istituzionale più rilevante. Sede nel Messeturm di Francoforte, presieduta da Bruna Szego (ex Banca d'Italia, in carica da gennaio 2025). Stato attuale (aprile 2026):</p>
+<ul>
+<li><strong>Personale</strong>: circa 80 unità a fine 2025, target ~430 a regime entro fine 2027</li>
+<li><strong>Budget</strong>: €119 milioni complessivi per il quadriennio 2024-2027</li>
+<li><strong>Mandato attuale</strong>: produzione di standard tecnici (Level 2 e Level 3) e coordinamento dei supervisori nazionali</li>
+<li><strong>Trasferimento mandati</strong>: il 1° gennaio 2026 l'EBA ha completato il passaggio ad AMLA delle competenze AML/CFT</li>
+<li><strong>Audizione pubblica</strong>: il 24 marzo 2026 AMLA ha tenuto la sua prima audizione pubblica con oltre 1.600 stakeholder coinvolti sulle bozze RTS</li>
+</ul>
+<p>Il punto critico va detto a chiare lettere: AMLA dovrebbe produrre 23 fra Level 2 e Level 3 entro luglio 2026 e arrivare a regime con ~430 persone su un perimetro di vigilanza che è l'intero sistema finanziario europeo. È una sproporzione strutturale. Per gli operatori significa che i primi anni saranno dominati da soft law e linee guida — la finestra in cui prepararsi senza il pungolo immediato della sanzione.</p>
+<h3 id="23-cosa-cambia-per-i-soggetti-privati">Cosa cambia per i soggetti privati</h3>
+<p>L'AMLR uniforma e in alcune aree inasprisce gli obblighi già esistenti. La portata operativa di alcuni obblighi puntuali si conoscerà solo a valle delle Regulatory Technical Standards di AMLA, ma le linee strutturali sono chiare:</p>
+<ul>
+<li><strong>Customer Due Diligence</strong> standardizzata, con RTS dedicati emessi da AMLA</li>
+<li><strong>Soglia cash</strong> universale a €10.000 per transazioni commerciali (gli Stati membri possono abbassarla; l'Italia mantiene €5.000)</li>
+<li><strong>Identificazione obbligatoria</strong> per transazioni cash occasionali tra €3.000 e €10.000</li>
+<li><strong>Monitoraggio continuo</strong> della relazione con il cliente — non solo onboarding (concetto di "ongoing CDD")</li>
+<li><strong>Beneficial ownership</strong>: registri più dettagliati, interconnessi a livello europeo</li>
+<li><strong>CASP</strong> (Crypto Asset Service Provider) autorizzati MiCA soggetti agli stessi obblighi delle banche</li>
+<li><strong>Estensione</strong>: club calcistici professionistici, agenti calcistici, alcuni operatori del lusso</li>
+</ul>
+<p>Il concetto di "ongoing CDD" è il più importante per chi costruisce sistemi: il monitoraggio non può più essere fotografia all'apertura del conto, deve essere film. È esattamente il principio su cui Revolut è stata sanzionata nell'aprile 2025 — torno sul caso più avanti.</p>
+<h3 id="24-la-situazione-italiana">La situazione italiana</h3>
+<p>L'Italia non parte da zero. Esistono asset infrastrutturali che anticipano parte del nuovo quadro UE:</p>
+<ul>
+<li><strong>Archivio dei Rapporti Finanziari</strong> (Anagrafe dei Conti) — gestito dall'Agenzia delle Entrate dal 2011. Raccoglie da tutti gli istituti italiani: esistenza dei rapporti, saldi annuali, movimenti aggregati. È la più estesa base dati centralizzata di rapporti finanziari in Europa.</li>
+<li><strong>UIF</strong> (Unità di Informazione Finanziaria) presso Banca d'Italia — riceve oltre 130.000 SOS annue (Segnalazioni di Operazioni Sospette) con un team di analisti contenuto. Il bottleneck è strutturale.</li>
+<li><strong>Legge 91/2025</strong> — delegazione europea che conferisce al Governo la delega per recepire l'intero pacchetto AML entro il 10 luglio 2027.</li>
+<li><strong>D.Lgs. 231/2007</strong> — norma primaria nazionale, in via di aggiornamento per recepire AMLD6.</li>
+<li><strong>Banca d'Italia — provvedimenti 2025</strong>: il provvedimento del 23 luglio 2025 ha esteso le Disposizioni AML a nuovi soggetti; quello del 16 giugno 2025 ha riscritto la disciplina per gli operatori non finanziari gestori del contante. Scadenza 30 giugno 2026 per la nomina dell'Esponente Responsabile per l'AML.</li>
+</ul>
+<blockquote>
+<p><strong>In sintesi.</strong> L'Italia ha buoni asset infrastrutturali (Anagrafe dei Conti, UIF) ma è in fase di adeguamento attivo — il D.Lgs. 231/2007 va riscritto, le Disposizioni Banca d'Italia sono in evoluzione, gli operatori obbligati hanno scadenze concrete nel 2026. Per chi opera in Italia il triennio 2026-2028 è quello in cui si decide la posizione competitiva.</p>
+</blockquote>
+<hr>
+<hr class="section-rule">
+<h2 id="il-dolore-degli-operatori">Il dolore degli operatori (perché il sistema non funziona)</h2>
+<blockquote>
+<p><strong>In una frase.</strong> Il sistema AML attuale non funziona per quattro ragioni strutturali — supervisione frammentata, incentivi disallineati, latenza delle SOS, barriere alla condivisione dei dati. Capire queste quattro è la pre-condizione per progettare qualsiasi soluzione tecnologica.</p>
+</blockquote>
+<h3 id="31-frammentazione-storica-della-supervisione">Frammentazione storica della supervisione</h3>
+<p>Prima di AMLA, ogni stato membro aveva il proprio supervisore AML con risorse e rigore radicalmente diversi. Il caso paradigmatico è Revolut: licenza bancaria in Lituania (Revolut Bank UAB), operatività principale in Regno Unito e tutta Europa, supervisione AML affidata alla Banca Centrale Lituana con risorse e approccio diversi dall'FCA britannica. Quattro interventi sanzionatori tra 2022 e 2025, l'ultimo dei quali è la sanzione AML più alta mai emessa in Lituania.</p>
+<p>AMLA nasce esattamente per chiudere questa asimmetria. Va però osservato che la chiusura sarà parziale almeno fino al 2028: la supervisione diretta riguarderà 40 entità; tutte le altre resteranno in capo ai supervisori nazionali, con AMLA in ruolo di coordinamento e produzione di standard.</p>
+<h3 id="32-il-problema-degli-incentivi-la-parte-che-nessun-regolatore-nomina">Il problema degli incentivi (la parte che nessun regolatore nomina)</h3>
+<p>C'è un problema strutturale che merita di essere detto a chiare lettere: gli incentivi delle banche non sono allineati a un AML rigoroso. Tre meccanismi documentabili:</p>
+<p>Primo, ogni SOS ha un costo: tempo dei compliance officer, rischio di perdere il cliente, possibilità di contenzioso. Compilare bene una SOS significa rinunciare a ricavi.</p>
+<p>Secondo, i clienti grandi — quelli a rischio AML potenzialmente più alto — sono anche i più redditizi. L'incentivo economico spinge nella direzione opposta alla compliance.</p>
+<p>Terzo, le sanzioni sono storicamente inferiori ai profitti generati dalla non-compliance. I €3,5 milioni a Revolut sono meno dello 0,5% del fatturato annuo della holding (parametro pubblicato dalla stessa Banca di Lituania). I casi storici raccontano la stessa storia: HSBC ($1,9 miliardi nel 2012, riciclaggio fondi cartelli messicani), Danske Bank (~€2 miliardi tra varie giurisdizioni, filiale estone, 2018), Deutsche Bank (€725 milioni nel 2017 per "mirror trades" russi). Tutte sanzioni che colpiscono retroattivamente, anni dopo i fatti, quando i profitti sono già realizzati e distribuiti.</p>
+<p>AMLA è disegnata per cambiare questo calcolo, introducendo enforcement più rapido e più costoso. Una novità degli ultimi diciotto mesi è lo spostamento dell'enforcement verso responsabilità individuale dei dirigenti compliance: UK FCA in primis, ma anche autorità tedesche e del Golfo, stanno citando in giudizio CEO e mettendo in interdizione compliance officer. È la leva che potrebbe modificare gli incentivi più di qualsiasi multa corporate.</p>
+<h3 id="33-il-problema-della-sos-qualita-latenza-struttura">Il problema della SOS — qualità, latenza, struttura</h3>
+<p>Il sistema delle Segnalazioni di Operazioni Sospette è il cuore del monitoring AML, ma presenta difetti strutturali profondi:</p>
+<ul>
+<li><strong>Latenza</strong>: una SOS arriva all'UIF settimane o mesi dopo la transazione sospetta. Il denaro è già stato spostato e spesso convertito in altri asset.</li>
+<li><strong>Qualità eterogenea</strong>: ogni soggetto compila le SOS con livelli di dettaglio anagrafico e narrativo molto variabili.</li>
+<li><strong>Visione parziale</strong>: ogni banca vede solo le transazioni che passano per lei.</li>
+<li><strong>Strutturazione carente</strong>: le SOS sono documenti narrativi semi-strutturati, non dataset analizzabili computazionalmente.</li>
+<li><strong>Volume vs capacità</strong>: le FIU ricevono decine/centinaia di migliaia di SOS l'anno con team ridotti.</li>
+</ul>
+<h3 id="34-barriere-alla-condivisione-dei-dati">Barriere alla condivisione dei dati</h3>
+<p>La cooperazione inter-istituzionale — quella che consentirebbe di vedere schemi multi-banca — si scontra con barriere multiple e reali:</p>
+<ul>
+<li><strong>GDPR</strong>: i dati bancari sono dati personali protetti. Anche tecniche di pseudonimizzazione rimangono soggette a GDPR (lo pseudonimo è ancora dato personale).</li>
+<li><strong>Segreto bancario</strong>: in molti ordinamenti la condivisione di dati di cliente con terzi è un'infrazione grave.</li>
+<li><strong>Interesse competitivo</strong>: i dati comportamentali sono asset strategico delle banche.</li>
+<li><strong>Liability</strong>: chi condivide e sbaglia (falso positivo) può essere esposto a responsabilità.</li>
+<li><strong>Diritti fondamentali</strong>: la presunzione di innocenza limita strutturalmente quanto un sistema può analizzare "preventivamente".</li>
+</ul>
+<p>L'AMLR offre per la prima volta una base giuridica chiara per la condivisione di informazioni sui clienti ad alto rischio fra soggetti privati e con le autorità a livello europeo. È la novità che potrebbe sbloccare iniziative cooperative su scala continentale, ma le modalità tecniche dovranno essere precisate via RTS.</p>
+<hr>
+<hr class="section-rule">
+<h2 id="il-problema-vero-non-e-lalgoritmo">Il problema vero non è l'algoritmo</h2>
+<blockquote>
+<p><strong>In una frase.</strong> Tutti vogliono parlare di Graph Neural Networks. Quasi nessuno vuole parlare del fatto che le banche hanno ancora i dati su mainframe degli anni '90. Il vero collo di bottiglia non è il modello: è il dato.</p>
+</blockquote>
+<h3 id="41-il-sistema-a-regole-perche-e-dominante-e-perche-fallisce">Il sistema a regole — perché è dominante e perché fallisce</h3>
+<p>La stragrande maggioranza degli istituti finanziari utilizza ancora sistemi basati su regole predefinite (threshold-based rules). Il sistema monitora le transazioni rispetto a soglie predefinite dai compliance officer: "se la transazione supera X", "se ci sono più di Y transazioni in Z giorni verso lo stesso beneficiario", "se il cliente è in lista sanzioni". Ogni match genera un alert che va in coda di revisione manuale.</p>
+<p>Le conseguenze sono concrete e quantificabili:</p>
+<ul>
+<li>I sistemi a regole generano tra il 90% e il 99% di falsi positivi</li>
+<li>Ogni alert richiede da 30 minuti a diverse ore di analisi manuale</li>
+<li>Alert fatigue — i revisori, sommersi, tendono ad approvare velocemente, e la qualità dell'analisi cala con il volume</li>
+<li>Pattern sofisticati non rilevati — chi ricicla sa dove sono le soglie e le aggira sistematicamente</li>
+<li>Scalabilità impossibile — il problema cresce linearmente con il volume transazionale</li>
+</ul>
+<h3 id="42-il-problema-del-dato-pre-condizione-di-tutto">Il problema del dato — pre-condizione di tutto</h3>
+<p>Prima ancora dell'algoritmo, il problema è il dato. Tre dimensioni critiche.</p>
+<p><strong>Label scarcity e label delay.</strong> Per addestrare un modello supervisionato servono esempi certi di riciclaggio. Ma i casi confermati giudizialmente arrivano anni dopo le transazioni — il dato di training è sempre obsoleto. Le label certe sono lo 0,1-0,5% del totale (class imbalance estremo). Molti casi vengono segnalati ma mai confermati: non si sa se erano veri o falsi positivi.</p>
+<p><strong>Partial observability.</strong> Ogni istituto vede solo le transazioni che passano per lui. Uno schema di layering articolato su tre banche diverse è completamente invisibile a ciascuna delle tre singolarmente. Il grafo reale del flusso finanziario non esiste in un unico posto, neanche presso le autorità.</p>
+<p><strong>Legacy data infrastructure.</strong> La maggior parte delle banche tradizionali ha dati su mainframe e sistemi degli anni '80–'90. Non sono "AI-ready": non normalizzati, non accessibili in real-time, integrazione con sistemi ML che richiede progetti pluriennali. È il vero collo di bottiglia, più dell'algoritmo.</p>
+<blockquote>
+<p><strong>Il dato che riassume lo stato dell'arte.</strong> Secondo MIT (agosto 2025), il 95% dei pilot AI nelle aziende — banche incluse — non genera valore di business misurabile. In Italia, a fine 2025, solo il 17% delle iniziative AI bancarie aveva raggiunto implementazione operativa. La causa principale, in nove casi su dieci, non è il modello. È la qualità del dato a monte.</p>
+</blockquote>
+<h3 id="43-il-problema-della-spiegabilita-regulatory-grade-xai">Il problema della spiegabilità (regulatory-grade XAI)</h3>
+<p>In ambito AML la spiegabilità non è un nice-to-have. È un requisito legale e operativo. Il compliance officer che riceve un alert deve documentare il ragionamento in modo difendibile davanti al regolatore. Se compila una SOS si assume responsabilità personale (in alcuni ordinamenti anche penale). I modelli black-box (deep learning, reti neurali profonde) producono decisioni non interpretabili.</p>
+<p>Le tecniche di explainability per GNN (GNNExplainer, SubgraphX, PGExplainer) esistono ma sono ancora fragili e difficili da tradurre in linguaggio compliance. Dal 2026, sia FCA UK sia il framework AI Act europeo richiedono esplicitamente la dimostrazione del perché un algoritmo abbia segnalato — o non abbia segnalato — una transazione. Un modello black-box non è più solo un rischio operativo, è un rischio di non-compliance.</p>
+<h3 id="44-il-problema-avversariale">Il problema avversariale</h3>
+<p>I money launderer non sono statici. Si adattano ai sistemi di controllo con velocità che spesso supera quella degli istituti. È un problema di teoria dei giochi prima ancora che di tecnologia.</p>
+<p>Se il sistema alerta su transazioni sopra €9.999, iniziano a fare €9.800 (smurfing classico). Se un modello ML impara certi pattern grafici, chi ricicla — spesso con risorse e competenze significative — può testare il sistema iterativamente e modificare il comportamento. Il problema adversarial sulle GNN è praticamente inesplorato in produzione: è teoricamente possibile costruire grafi di transazioni che sembrano normali a un modello pur essendo schemi di riciclaggio.</p>
+<hr>
+<hr class="section-rule">
+<h2 id="i-casi-di-sanzione">I casi di sanzione, e cosa ci insegnano</h2>
+<blockquote>
+<p><strong>In una frase.</strong> Le sanzioni AML del 2024-2025 (Revolut €3,5M, N26 €9,2M, Starling £29M, Barclays £42M, Nationwide £44M) hanno un pattern ricorrente: in quasi tutti i casi non sono state colpite operazioni di riciclaggio confermate, ma l'inadeguatezza dei sistemi a rilevarle. Il bar minimo è cambiato.</p>
+</blockquote>
+<h3 id="51-revolut-il-caso-piu-documentato">Revolut — il caso più documentato</h3>
+<p>Revolut Bank UAB ha ricevuto interventi sanzionatori dalla Banca Centrale Lituana tra 2022 e 2025:</p>
+<ul>
+<li><strong>2022</strong>: €70.000, principalmente per ritardo nell'invio dei bilanci (non AML in senso stretto, ma segnale di attenzione)</li>
+<li><strong>Aprile 2025</strong>: €3,5 milioni — la più alta mai emessa in Lituania — per "irregolarità e carenze nel monitoraggio delle relazioni d'affari e delle operazioni"</li>
+</ul>
+<p>Le motivazioni dell'autorità lituana sono pubbliche e meritano attenzione tecnica:</p>
+<ul>
+<li>I sistemi non identificavano sempre adeguatamente operazioni sospette nelle relazioni in corso</li>
+<li>Carenza nel monitoraggio continuo delle relazioni cliente — non solo delle singole transazioni</li>
+<li>Gap nelle procedure interne e nei controlli, con policy non sempre standardizzate fra mercati</li>
+</ul>
+<p>Cosa Revolut aveva già implementato (e non basta):</p>
+<ul>
+<li>Automated transaction monitoring real-time con alert in-app predittivi sulle truffe ("scam alert" preventivo)</li>
+<li>Onboarding KYC end-to-end automatizzato con verifica biometrica</li>
+<li>Sanctions screening continuo</li>
+<li>Architettura cloud-native con cicli di iterazione rapidi</li>
+<li>Hiring massiccio di compliance officer post-sanzioni precedenti</li>
+</ul>
+<blockquote>
+<p><strong>La lezione strutturale.</strong> La sanzione 2025 NON riguardava casi confermati di riciclaggio: riguardava l'inadeguatezza dei sistemi a rilevarli. Per il regolatore, avere sistemi insufficienti è grave quanto il crimine stesso. La domanda dell'auditor non è più "avete avuto casi?", è "i vostri sistemi sarebbero in grado di rilevarli, se ci fossero?". Secondo AML Intelligence (settembre 2025), Revolut è candidata di primo piano per essere selezionata tra le 40 obliged entities sotto supervisione diretta AMLA dal 2028.</p>
+</blockquote>
+<h3 id="52-le-altre-sanzioni-recenti-in-tabella">Le altre sanzioni recenti, in tabella</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Istituto</th>
+<th>Sanzione</th>
+<th>Motivo specifico</th>
+<th>Anno</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Revolut Bank UAB</strong></td>
+<td>€3,5M (Lituania)</td>
+<td>Monitoring continuo inadeguato; identificazione carente di operazioni sospette</td>
+<td>Apr 2025</td>
+</tr>
+<tr>
+<td><strong>N26 Bank SE</strong></td>
+<td>€9,2M (BaFin)</td>
+<td>Ritardo sistematico nell'invio delle SAR alla FIU tedesca durante tutto il 2022. Precedente €4,25M nel 2021</td>
+<td>Mag 2024</td>
+</tr>
+<tr>
+<td><strong>Starling Bank</strong></td>
+<td>£28,9M (FCA)</td>
+<td>Sanctions screening "shockingly lax" — sistema dal 2017 controllava solo una frazione della lista. 54.000+ conti aperti per 49.183 clienti high-risk in violazione di un VREQ del 2021</td>
+<td>Set 2024</td>
+</tr>
+<tr>
+<td><strong>Barclays</strong></td>
+<td>£42M (FCA)</td>
+<td>Gestione rischio FC su due relazioni ad alto rischio (WealthTek, Stunt &amp; Co.)</td>
+<td>2025</td>
+</tr>
+<tr>
+<td><strong>Nationwide</strong></td>
+<td>£44M (FCA)</td>
+<td>Carenze in transaction monitoring e CDD (2016-2021); £27M in fraudulent Covid loans non rilevati</td>
+<td>2025</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="53-il-pattern-ricorrente">Il pattern ricorrente</h3>
+<p>Quattro tratti emergono dai casi documentati e definiscono il nuovo bar regolatorio:</p>
+<ol>
+<li><strong>Crescita commerciale rapida</strong> non bilanciata da scaling proporzionale della compliance</li>
+<li><strong>Sistemi di screening con misconfigurazioni storiche</strong> (Starling: sei anni di sanctions screening parziale prima della scoperta)</li>
+<li><strong>Procedure di reporting con latenze sistematiche</strong> (N26: ritardo SAR durante tutto il 2022)</li>
+<li><strong>Violazione di obblighi imposti</strong> dal regolatore in fase di remediation precedente (Starling 2021 VREQ)</li>
+</ol>
+<p>Il messaggio implicito del regolatore: la prima sanzione è spesso un'avvertenza. La seconda misura quanto vi siete adeguati. Sul piano globale, il 2025 si è chiuso come anno-record con oltre $5 miliardi di sanzioni AML cumulate (TD Bank ~$2,1 mld, Danske ulteriori €1,8 mld, Binance $1,2 mld). Le sanzioni in H1 2025 sono cresciute del 417% rispetto all'anno precedente.</p>
+<hr>
+<hr class="section-rule">
+<h2 id="unarchitettura-difendibile">Un'architettura difendibile: setaccio a tre livelli</h2>
+<blockquote>
+<p><strong>In una frase.</strong> L'architettura che ha più senso oggi non è "una grande GNN deep learning". È un sistema ibrido a tre livelli, dove ogni livello aggiunge un tipo di intelligenza diverso: statistica, relazionale, spiegativa.</p>
+</blockquote>
+<h3 id="61-la-metafora-che-funziona">La metafora che funziona</h3>
+<p>Pensa a come si fa una diagnosi medica seria. Prima c'è uno <strong>screening di massa</strong> che identifica i candidati anomali rispetto alla popolazione (la TAC, il prelievo di routine). Poi c'è un <strong>esame approfondito</strong> che guarda le relazioni — non più il singolo organo ma come funziona insieme al resto del corpo. Infine c'è il <strong>referto comprensibile</strong> che racconta in linguaggio leggibile cos'ha trovato l'esame e perché.</p>
+<p>Una sola di queste tre fasi non basta. Tutte e tre insieme producono qualcosa di nuovo: una diagnosi documentata, difendibile, ripetibile. È esattamente la stessa logica che serve all'AML.</p>
+<h3 id="62-la-pipeline-a-colpo-docchio">La pipeline a colpo d'occhio</h3>
+<div class="mermaid">flowchart TD
+    A[Transazioni grezze<br/>milioni/giorno] --> L1
+    
+    subgraph L1[" Livello 1 — Screening Statistico "]
+        IF[Isolation Forest]
+        IF --> S1[Score s_iso ∈ 0,1]
+    end
+    
+    S1 --> J1{Junction 1<br/>Selezione seed}
+    J1 --> SEEDS[Vettore u<br/>seed soft + blacklist]
+    
+    SEEDS --> L2
+    
+    subgraph L2[" Livello 2 — Analisi Relazionale "]
+        PR[Personalized PageRank]
+        PR --> S2[Score s_ppr per nodo]
+    end
+    
+    S1 --> J2
+    S2 --> J2{Junction 2<br/>Combinazione score}
+    J2 --> SF[Score finale]
+    
+    SF --> L3
+    
+    subgraph L3[" Livello 3 — Spiegabilità "]
+        SHAP[SHAP values]
+        SUB[Sottografi locali]
+        SHAP --> NARR[Narrative compliance-ready]
+        SUB --> NARR
+    end
+    
+    NARR --> OUT[Report SAR-ready<br/>+ Visualizzazione + Audit trail]
+    OUT --> COMP[Compliance Officer<br/>decide la SOS]</div>
+<h3 id="63-livello-1-screening-statistico-isolation-forest">Livello 1 — Screening statistico (Isolation Forest)</h3>
+<p><strong>La logica, in linguaggio piano.</strong> Immagina di dover individuare le transazioni "strane" senza conoscere in anticipo cosa sia una frode. Non hai etichette: non sai chi è colpevole. Hai solo un mucchio di transazioni e devi capire quali si comportano in modo diverso dalla massa.</p>
+<p>Isolation Forest fa esattamente questo. Costruisce molti alberi decisionali con tagli casuali sui dati. L'osservazione di base è semplice: un punto anomalo (una transazione strana) viene "isolato" in pochissimi tagli — sta lontano da tutto il resto e basta dividere lo spazio una o due volte per separarlo. Un punto normale, invece, sta nella massa; per isolarlo servono molti tagli. La lunghezza del percorso medio per isolare un punto è quindi un proxy della sua anomalia.</p>
+<p><strong>La formulazione tecnica.</strong></p>
+<p>$$s(x, n) = 2^{-E(h(x))/c(n)}$$</p>
+<p>Dove:</p>
+<ul>
+<li>$E(h(x))$ è la lunghezza media del percorso necessario a isolare la transazione $x$, calcolata su molti alberi.</li>
+<li>$c(n)$ è il fattore di normalizzazione che dipende dal numero di osservazioni $n$. Tecnicamente è la lunghezza media di una ricerca fallita in un albero binario di $n$ elementi: $c(n) \approx 2 \cdot H(n-1) - 2(n-1)/n$, con $H(k)$ numero armonico.</li>
+<li>$s(x, n)$ è lo score di anomalia compreso fra 0 e 1.</li>
+</ul>
+<p>Lettura del valore: $s \approx 1$ → forte anomalia (il punto si isola con pochissimi tagli); $s \approx 0.5$ → comportamento ambiguo; $s \approx 0$ → comportamento normale.</p>
+<blockquote>
+<p><strong>Verifica.</strong> Formula corretta. È la versione canonica del paper Liu, Ting, Zhou (2008), implementata identica in scikit-learn, MathWorks e nei textbook standard.</p>
+</blockquote>
+<p><strong>Perché funziona per AML.</strong> È unsupervised — non ha bisogno di esempi etichettati di riciclaggio. Scala bene — è lineare in $n$ e usa sottocampionamento; può girare su milioni di transazioni al giorno. È robusto — funziona anche con feature numeriche e categoriche miste, che sono il pane quotidiano dei dati transazionali.</p>
+<p><strong>I limiti onesti.</strong> Vede solo la singola transazione (o il singolo cliente). Non vede la rete. Per quella serve il Livello 2. È sensibile alla scelta delle feature: se non includi importo, frequenza, geografia, orario, controparte, lo score perde significato. La feature engineering è dove si vince o si perde. L'algoritmo originale ha una distorsione documentata (Hariri et al., 2019); le estensioni "Extended Isolation Forest" o "SCiForest" la mitigano.</p>
+<h3 id="64-livello-2-analisi-relazionale-personalized-pagerank">Livello 2 — Analisi relazionale (Personalized PageRank)</h3>
+<p><strong>La logica, in linguaggio piano.</strong> Una volta che il Livello 1 ha tirato fuori una lista di entità sospette, ci serve sapere quali altre entità sono in relazione con loro. Non perché un'entità sospetta sia automaticamente colpevole, ma perché chi ricicla raramente lavora da solo: smurfer, money mule, prestanome, conti di passaggio formano grafi. Se Tizio è anomalo e fa transazioni costanti con Caio, anche Caio merita un'occhiata.</p>
+<p>Personalized PageRank (PPR) è l'algoritmo giusto per propagare il rischio sulla rete. Nasce per Google ("quale pagina è importante in base a chi la cita?") ma in AML lo si capovolge: "quale entità è rischiosa in base a quanto è connessa con entità già rischiose?". La differenza rispetto al PageRank classico è il "Personalized": invece di teleportarsi su un nodo casuale, il random walk si teleporta sempre verso entità note ad alto rischio (blacklist, SOS pregresse, output del Livello 1). In questo modo il rischio si "diffonde" dai nodi infetti ai loro vicini.</p>
+<p><strong>La formulazione tecnica.</strong></p>
+<p>$$v = \alpha \cdot M \cdot v + (1 - \alpha) \cdot u$$</p>
+<p>Dove:</p>
+<ul>
+<li>$v$ è il vettore degli score di rischio (un valore per ogni nodo della rete).</li>
+<li>$M$ è la matrice di transizione costruita sul grafo delle transazioni. $M[i,j]$ è la probabilità che il random walker passi dal nodo $j$ al nodo $i$ (peso normalizzato della relazione).</li>
+<li>$u$ è il vettore di personalizzazione: ha valori alti sui nodi seed (entità note rischiose, output del Livello 1), zero altrove.</li>
+<li>$\alpha$ è il damping factor, tipicamente 0.85. Rappresenta la probabilità che il random walker segua un link nel grafo invece di teleportarsi al vettore $u$.</li>
+</ul>
+<blockquote>
+<p><strong>Nota sulla convenzione.</strong> In letteratura esistono due convenzioni equivalenti per $\alpha$. Qui uso la convenzione standard di NetworkX, scikit-network e GraphFrames, dove $\alpha = 0.85$ è il damping factor. Alcune formulazioni usano $\alpha$ come probabilità di teleportazione (~0.15), che è esattamente l'opposto. Vanno scelte una volta e tenute coerenti dappertutto, altrimenti il codice rischia di fare il contrario di quanto atteso.</p>
+</blockquote>
+<p><strong>Perché funziona per AML.</strong> Cattura il "contagio" relazionale: un'entità apparentemente pulita ma circondata da nodi rischiosi riceve uno score elevato. Rileva il round-tripping naturalmente: se il flusso ritorna ciclicamente al nodo di origine attraverso pochi salti, il PPR amplifica lo score di tutto il ciclo. Funziona offline: si calcola in batch sul grafo aggregato, non richiede inferenza real-time per la prima versione. È spiegabile per costruzione: lo score di un nodo si decompone esattamente nei contributi dei nodi seed che lo raggiungono.</p>
+<p><strong>I limiti onesti.</strong> Dipende dalla qualità dei seed: se i seed sono sbagliati, il PPR amplifica l'errore invece di correggerlo. Non gestisce la temporalità out-of-the-box: il PPR vede il grafo come statico. Per catturare "Tizio e Caio fanno bonifici sospetti negli ultimi 30 giorni" servono varianti temporali. È sensibile alla densità del grafo: su grafi molto densi o con super-hub (gateway di pagamento), il punteggio si "spalma" e perde discriminazione.</p>
+<h3 id="65-livello-3-spiegabilita-shap-sottografi">Livello 3 — Spiegabilità (SHAP + sottografi)</h3>
+<p><strong>La logica, in linguaggio piano.</strong> Il Livello 3 è la differenza fra un sistema che produce "score di rischio = 0.87" e un sistema che produce: <em>"questo cliente ha score 0.87 perché (a) ha effettuato 12 bonifici sotto soglia in 5 giorni, contributo +0.31; (b) la controparte X è in blacklist da febbraio, contributo +0.28; (c) il flusso ritorna al conto originario in 3 salti, contributo +0.18"</em>. Solo la seconda versione passa l'audit.</p>
+<p>Tecnicamente sono due cose diverse, gestite da due famiglie di tecniche distinte.</p>
+<p><strong>Componente A — SHAP per le feature tabellari del Livello 1.</strong> SHAP (SHapley Additive Explanations) è la tecnica standard per spiegare i modelli ML che lavorano su feature numeriche. Si basa sui valori di Shapley dalla teoria dei giochi cooperativi: "se le feature sono giocatori che cooperano per produrre lo score, qual è il contributo equo di ciascuna?".</p>
+<p>$$\phi_i = \sum_{S \subseteq N \setminus {i}} \frac{|S|! \cdot (n - |S| - 1)!}{n!} \cdot \left[ f(S \cup {i}) - f(S) \right]$$</p>
+<p>Dove $\phi_i$ è il contributo della feature $i$ allo score finale, $S$ è un sottoinsieme di feature che non include $i$, $f(S)$ è il valore del modello quando solo le feature in $S$ sono "attive". La somma pesata su tutti i possibili sottoinsiemi $S$ garantisce le proprietà assiomatiche di Shapley (efficienza, simmetria, additività, dummy player).</p>
+<blockquote>
+<p><strong>Verifica.</strong> Formula corretta. Definizione canonica di Shapley (1953), usata identica in SHAP (Lundberg &amp; Lee, 2017). In pratica si usa TreeSHAP per i modelli ad albero (esatto, polinomiale) o KernelSHAP per i modelli arbitrari (approssimato).</p>
+</blockquote>
+<p><strong>Componente B — sottografi locali per spiegare il Livello 2.</strong> SHAP non è la tecnica giusta per spiegare lo score del Personalized PageRank. Il PPR non è un modello che riceve feature in input: è un algoritmo iterativo su una struttura relazionale. Per spiegare "perché Caio ha score alto" si lavora topologicamente:</p>
+<ol>
+<li><strong>Estrazione del sottografo locale</strong>: nodo target + vicinato a 1, 2, 3 hop.</li>
+<li><strong>Identificazione dei path principali</strong>: quali catene di transazioni dal seed al target contribuiscono di più allo score.</li>
+<li><strong>Visualizzazione</strong>: il sottografo va mostrato all'analista compliance — è il "referto visivo" del caso.</li>
+<li><strong>Decomposizione del PPR</strong>: lo score di un nodo si scompone esattamente nei contributi dei walk dai seed (è una somma di serie geometriche). Tecnicamente "contribution decomposition" e dà un'attribuzione esatta, non approssimata.</li>
+</ol>
+<blockquote>
+<p><strong>In sintesi.</strong> Tre tecniche, una pipeline di spiegabilità: (1) SHAP per spiegare lo score del Livello 1 — quale feature ha pesato; (2) Path/contribution decomposition per spiegare lo score del Livello 2 — quale catena relazionale ha pesato; (3) Sottografo visualizzato per dare evidenza grafica all'analista. Vanno progettate insieme.</p>
+</blockquote>
+<h3 id="66-i-tre-punti-di-giunzione-critici">I tre punti di giunzione critici</h3>
+<p>I tre livelli funzionano se sono collegati bene. I punti di giunzione sono dove si nasconde la complessità reale.</p>
+<p><strong>Junction 1 — dal Livello 1 al Livello 2.</strong> Isolation Forest produce uno score continuo $s \in [0,1]$ per ogni entità. Per fare partire il PageRank serve un vettore $u$ che identifichi i "nodi seed". Tre scelte: soglia binaria o seed soft (raccomandato seed soft, $u_i$ proporzionale a $s_i$ normalizzato); mix con seed esterni (raccomandato sì, con pesi documentati: es. $u = 0.5 \cdot u_{IF} + 0.5 \cdot u_{blacklist}$); frequenza di aggiornamento (giornaliero o settimanale per la v1 batch).</p>
+<p><strong>Junction 2 — combinazione degli score.</strong> Alla fine di Livello 1 e Livello 2 abbiamo due score per ogni entità: $s_{iso}$ e $s_{ppr}$. Tre opzioni: combinazione lineare con pesi tarati (raccomandato per v1, $score = w_1 \cdot s_{iso} + w_2 \cdot s_{ppr}$); combinazione "a porta logica" (alert solo se entrambi superano soglia, riduce FP più aggressivamente ma rischia FN); meta-classificatore (gradient boosting sui due score più altre feature, più potente ma reintroduce un layer ML da spiegare a sua volta — da considerare in v2).</p>
+<p><strong>Junction 3 — dallo score al report SAR-ready.</strong> Tre output minimi richiesti per ogni alert: (a) narrative compliance-ready, template-based, NO LLM freeform in v1 — tracciabile e riproducibile; (b) visualizzazione del sottografo, esportabile in PDF per allegato a SOS; (c) audit trail completo — hash dei dati di input, versione del modello, timestamp, parametri.</p>
+<h3 id="67-perche-questa-architettura-e-non-una-grande-gnn">Perché questa architettura, e non una grande GNN</h3>
+<p>Tre motivi pragmatici:</p>
+<p><strong>Spiegabilità per costruzione.</strong> Le GNN non sono nativamente interpretabili e oggi non passano l'audit AMLA. Le tecniche di explainability per GNN esistono (GNNExplainer, SubgraphX, PGExplainer) ma sono ancora fragili. Costruire spiegabilità <em>dentro</em> l'architettura è strutturalmente più solido che aggiungerla <em>dopo</em>.</p>
+<p><strong>Setaccio sequenziale.</strong> Bypassare un solo livello è possibile per chi ricicla con risorse adeguate. Bypassarne tre coordinatamente è esponenzialmente più difficile. La robustezza adversariale del setaccio è superiore a quella di un singolo modello, anche complesso.</p>
+<p><strong>Co-esistenza con il sistema esistente.</strong> Si aggancia al rule-based via API, non lo sostituisce. Per le banche tradizionali con sistemi legacy maturi è la proposta vendibile in tre conversazioni invece che in tre anni. È quello che il mercato sta effettivamente comprando: i RegTech che crescono nel 2025-2026 sono add-on, non sostituzioni.</p>
+<h3 id="68-cosa-non-fare-in-v1">Cosa NON fare in v1</h3>
+<p>Definire bene cosa il sistema <em>non</em> è, in v1, è importante quanto definire cosa è.</p>
+<ul>
+<li><strong>Niente GNN deep-learning.</strong> È la fase 3 di un piano triennale. Per ora ci si ferma a graph analytics descrittiva e Personalized PageRank, che sono spiegabili per costruzione.</li>
+<li><strong>Niente integrazione real-time.</strong> La v1 è batch (giornaliero/settimanale per il PPR). Real-time è v2.</li>
+<li><strong>Niente reportistica diretta all'UIF.</strong> Il sistema produce report compliance-ready che il soggetto obbligato usa per la propria SOS. Non si interagisce direttamente con l'autorità.</li>
+<li><strong>Niente LLM freeform per le narrative SOS in v1.</strong> Template-based, tracciabile. LLM è da valutare per v2 con guardrail.</li>
+</ul>
+<hr>
+<hr class="section-rule">
+<h2 id="il-caso-tmnl">Il caso TMNL: cosa è successo, cosa significa</h2>
+<blockquote>
+<p><strong>In una frase.</strong> TMNL — il modello cooperativo olandese citato per anni come "il futuro dell'AML in Europa" — è in dismissione dal luglio 2024. Capire perché è cruciale per chi sta progettando soluzioni cooperative nel triennio 2026-2028.</p>
+</blockquote>
+<p>TMNL — <em>Transactie Monitoring Nederland</em> — era una joint venture tra cinque grandi banche olandesi: ABN AMRO, ING, Rabobank, Triodos, de Volksbank. Avviata nel 2020. Ogni banca contribuiva i propri dati transazionali in forma pseudonimizzata (hash crittografici al posto dei nomi) a una piattaforma condivisa. Il monitoring avveniva sul dataset aggregato — per la prima volta in Europa, una visione multi-banca del grafo transazionale per le PMI fino a €250M di fatturato.</p>
+<p>Era esattamente quello che la teoria dell'AML diceva di fare per superare la "partial observability".</p>
+<p>Cosa è andato storto:</p>
+<ul>
+<li>L'autorità olandese per la protezione dei dati ha definito il sistema una forma di "<em>sleepnet centrale</em>" — sorveglianza generalizzata pre-emptiva, in tensione con i diritti fondamentali dei cittadini.</li>
+<li>La proposta NL-DK-DE per estendere il modello a livello europeo è stata bocciata in sede UE.</li>
+<li>L'AMLR del 2024 fornisce un quadro giuridico nuovo (e diverso) per la condivisione di informazioni — quello su cui TMNL operava è diventato obsoleto prima di consolidarsi.</li>
+</ul>
+<p>Le cinque banche hanno preso atto. Il wind-down delle attività attuali è stato annunciato a luglio 2024. L'organizzazione (~60 dipendenti) si sta ridisegnando per operare nel nuovo quadro AMLR del 2027.</p>
+<p><strong>Le quattro lezioni che porto via.</strong></p>
+<p>Prima: anche con pseudonimizzazione, il dato bancario rimane dato personale. La privacy non si "risolve" con tecniche tecniche.</p>
+<p>Seconda: senza fondamento giuridico solido a livello europeo, qualsiasi sperimentazione nazionale rischia di essere incompatibile con il framework che arriva. Costruire piattaforme cooperative oggi senza aspettare gli RTS AMLA significa pianificare il proprio rifacimento.</p>
+<p>Terza: la tensione tra prevenzione del crimine finanziario e diritti fondamentali è reale e strutturale. Non ci sono soluzioni puramente tecniche. Sono trade-off politici.</p>
+<p>Quarta: l'AMLR apre una finestra per modelli cooperativi nuovi a partire dal 2027-2028. Ma realisticamente i primi modelli operativi non saranno disponibili prima del 2028-2029.</p>
+<blockquote>
+<p><strong>Il modello cooperativo non è morto.</strong> È stato sospeso. Quando tornerà, lo farà con regole diverse. Per chi sta valutando partnership cooperative o modelli di data-sharing AML in Europa, la sequenza è chiara: 2026-2027 studio degli RTS AMLA, partecipazione a consultazioni, posizionamento. 2027-2028 pilotaggi con quadro giuridico AMLR consolidato. 2028-2030 scaling delle iniziative che superano la fase pilota. Anticipare questa sequenza è rischioso. Aspettarla passivamente significa arrivare tardi.</p>
+</blockquote>
+<hr>
+<hr class="section-rule">
+<h2 id="cosa-fare-nei-prossimi-18-mesi">Cosa fare nei prossimi 18 mesi</h2>
+<blockquote>
+<p><strong>In una frase.</strong> Sei iniziative concrete articolate su tre orizzonti temporali. Le prime quattro vanno avviate adesso. Le altre due si pianificano nel 2026 e si eseguono nel 2027-2028.</p>
+</blockquote>
+<h3 id="81-roadmap-regolatoria-le-scadenze-chiave">Roadmap regolatoria — le scadenze chiave</h3>
+<div class="mermaid">gantt
+    title Calendario AML 2024-2029
+    dateFormat YYYY-MM
+    axisFormat %b %Y
+    
+    section Normativa
+    Travel Rule crypto    :done, 2024-12, 30d
+    AMLA operativa        :done, 2025-07, 90d
+    EBA→AMLA transfer     :done, 2026-01, 30d
+    Pubblicazione RTS     :active, 2026-04, 90d
+    FCA AI explainability :2026-09, 30d
+    AMLR applicabile      :crit, 2027-07, 90d
+    AMLA supervisione 40  :crit, 2028-01, 90d
+    BARIS interconnessi   :2029-07, 60d</div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Evento</th>
+<th>Urgenza</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dic 2024</td>
+<td>Travel Rule crypto in vigore (TFR Recast)</td>
+<td>Vigente</td>
+</tr>
+<tr>
+<td>Lug 2025</td>
+<td>AMLA operativa</td>
+<td>Vigente</td>
+</tr>
+<tr>
+<td>Gen 2026</td>
+<td>EBA → AMLA, trasferimento mandati AML</td>
+<td>Vigente</td>
+</tr>
+<tr>
+<td>Lug 2026</td>
+<td>Pubblicazione gran parte Level 2/3 AMLA</td>
+<td><strong>Alta</strong></td>
+</tr>
+<tr>
+<td>Set 2026</td>
+<td>FCA UK — guidelines su AI explainability</td>
+<td>Media (UK)</td>
+</tr>
+<tr>
+<td><strong>Lug 2027</strong></td>
+<td><strong>AMLR applicabile + recepimento AMLD6</strong></td>
+<td><strong>Massima</strong></td>
+</tr>
+<tr>
+<td>Lug-Dic 2027</td>
+<td>Selezione delle 40 entità sotto supervisione AMLA</td>
+<td>Alta (top-40)</td>
+</tr>
+<tr>
+<td><strong>Gen 2028</strong></td>
+<td><strong>AMLA supervisione diretta delle 40 entità</strong></td>
+<td><strong>Massima (top-40)</strong></td>
+</tr>
+<tr>
+<td>Lug 2029</td>
+<td>BARIS — registri europei interconnessi</td>
+<td>Media</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="82-breve-termine-0-12-mesi">Breve termine (0-12 mesi)</h3>
+<p>Sono i quick win. Tecnologia matura, dati che già esistono, ROI dimostrabile in pochi trimestri.</p>
+<ol>
+<li>
+<p><strong>Audit dei sistemi esistenti vs requisiti AMLR 2027.</strong> Identificare i gap prima che lo faccia il regolatore. Priorità assoluta su sanctions screening (lezione Starling) e SAR latency (lezione N26).</p>
+</li>
+<li>
+<p><strong>Investire in entity resolution e data quality.</strong> È la pre-condizione di qualsiasi progetto ML successivo. Senza questo, i progetti più sofisticati falliscono al primo confronto con i dati reali. Si traduce in: deduplicare entità tra sistemi diversi, standardizzare IBAN e ragioni sociali, costruire una knowledge graph interna.</p>
+</li>
+<li>
+<p><strong>Implementare alert tuning ML sul sistema a regole esistente.</strong> Modello ML supervisionato che impara quali alert storici erano falsi positivi e filtra quelli nuovi prima della revisione manuale. Riduzione documentata del 40-70% del volume alert. Tecnologia matura.</p>
+</li>
+<li>
+<p><strong>Monitorare attivamente le consultazioni AMLA.</strong> I Level 2/3 attesi entro luglio 2026 sono il vero contenuto operativo del Single Rulebook.</p>
+</li>
+<li>
+<p><strong>Mappare le competenze interne.</strong> Graph data scientist con esperienza su transazioni finanziarie: meno di 100 profili realmente qualificati in Europa. Iniziare adesso il piano di acquisizione o formazione.</p>
+</li>
+</ol>
+<h3 id="83-medio-termine-12-36-mesi">Medio termine (12-36 mesi)</h3>
+<p>Sono le iniziative che definiscono il vantaggio competitivo del 2027-2028.</p>
+<ol>
+<li>
+<p><strong>Avviare un pilot di graph analytics descrittiva.</strong> Costruire il grafo interno delle transazioni con Neo4j, TigerGraph o Amazon Neptune. Implementare community detection (Louvain, Leiden), PageRank, shortest path. Anche solo questo passo, ben fatto, supera molte capacità di player più grandi.</p>
+</li>
+<li>
+<p><strong>Valutare la registrazione come AISP per accedere ai dati PSD2.</strong> È la base per il modello consensuale bottom-up — costruire il grafo delle transazioni dal basso, attraverso il consenso degli utenti, senza dipendere dalla cooperazione inter-bancaria. Particolarmente rilevante per chi serve professionisti AML-obbligati (avvocati, commercialisti, notai, agenti immobiliari).</p>
+</li>
+<li>
+<p><strong>Pre-costruire pipeline di explainability regulatory-grade.</strong> Non si aggiunge dopo, si progetta dall'inizio. Senza spiegabilità, il modello non passa l'audit AMLA.</p>
+</li>
+</ol>
+<h3 id="84-lungo-termine-36-mesi">Lungo termine (36+ mesi)</h3>
+<ol>
+<li>
+<p><strong>Valutare adesione a iniziative cooperative tipo "TMNL ridisegnato"</strong> quando saranno disponibili nelle giurisdizioni di interesse, post-RTS AMLA.</p>
+</li>
+<li>
+<p><strong>Preparare l'architettura per GNN in produzione.</strong> Iniziare con sottografi e casi d'uso limitati. La produzione GNN end-to-end è realistica non prima del 2028-2029.</p>
+</li>
+<li>
+<p><strong>Monitorare l'evoluzione di FIDA</strong> (Financial Data Access). Se approvato, cambierà radicalmente l'accesso ai dati finanziari europei e con esso il valore di un grafo bottom-up.</p>
+</li>
+</ol>
+<h3 id="85-le-tre-cose-che-farei-subito-se-domani-aprissi-un-progetto-aml">Le tre cose che farei subito, se domani aprissi un progetto AML</h3>
+<p>Per chiudere — e per chi vuole una sintesi operativa che entri in una mail al CTO:</p>
+<p><strong>Primo</strong>, investire 3-6 mesi in entity resolution prima di toccare qualsiasi modello. Non è sexy. Non fa titoli su TechCrunch. Ma è la differenza tra un progetto che arriva in produzione e uno che muore al primo confronto col dato reale.</p>
+<p><strong>Secondo</strong>, costruire il Livello 1 (Isolation Forest + alert tuning) nei mesi 6-12. Si vede subito il valore: riduzione del volume alert, KPI migliorati per il team compliance. Genera credibilità interna che servirà nelle fasi successive.</p>
+<p><strong>Terzo</strong>, sviluppare in parallelo la pipeline di explainability — non come modulo finale ma come <em>layer trasversale</em>. Ogni componente che si costruisce deve essere accompagnato dal suo apparato di spiegazione. Senza questo, in audit AMLA dal 2028 non si passa.</p>
+<p>Il valore non sta nell'algoritmo. Sta nella combinazione di dato pulito, architettura di grafo, e capacità di tradurre l'output del modello in linguaggio compliance accettabile dal regolatore. Questa sintesi è oggi il vero collo di bottiglia: il numero di persone capaci di farla è basso, e questo crea — per chi ne dispone — un vantaggio competitivo durevole.</p>
+<p>Il mercato AML è precisamente nella finestra in cui la tecnologia è pronta, la normativa spinge, e la maggior parte degli operatori è in ritardo. Una combinazione che si presenta raramente.</p>
+<p>La finestra è aperta. Ma si chiude.</p>
+<hr>
+<hr class="section-rule">
+<h2 id="riferimenti-e-fonti">Riferimenti e fonti</h2>
+<p>Le verifiche dei fatti riportati in questo articolo si basano su fonti pubbliche primarie e secondarie consultate ad aprile 2026.</p>
+<p><strong>Atti legislativi UE</strong>
+- Regolamento (UE) 2024/1620 — AMLAR (istituzione AMLA)
+- Regolamento (UE) 2024/1624 — AMLR (Single Rulebook)
+- Direttiva (UE) 2024/1640 — AMLD6
+- Regolamento (UE) 2023/1113 — TFR Recast
+- Tutti pubblicati in Gazzetta Ufficiale UE il 19 giugno 2024.</p>
+<p><strong>Autorità e fonti regolatorie</strong>
+- AMLA — sito ufficiale (amla.europa.eu), Work Programme 2025, Council of the EU press releases
+- Bank of Lithuania — comunicato sanzione Revolut Bank UAB (8 aprile 2025)
+- FCA — Final Notice Starling Bank (27 settembre 2024); Final Notices Barclays e Nationwide (2025)
+- BaFin — proceeding statement N26 (9 maggio 2024)
+- Banca d'Italia / UIF — relazioni annuali sull'attività di prevenzione AML; provvedimenti 16 giugno e 23 luglio 2025</p>
+<p><strong>Letteratura tecnica citata</strong>
+- Liu, F. T., Ting, K. M., Zhou, Z. H. (2008). <em>Isolation Forest</em>. IEEE ICDM.
+- Hariri, S., Kind, M. C., Brunner, R. J. (2019). <em>Extended Isolation Forest</em>. IEEE TKDE.
+- Lundberg, S., Lee, S. I. (2017). <em>A Unified Approach to Interpreting Model Predictions</em>. NeurIPS.
+- Shapley, L. S. (1953). <em>A Value for n-person Games</em>. Contributions to the Theory of Games II.
+- Page, L., Brin, S., Motwani, R., Winograd, T. (1999). <em>The PageRank Citation Ranking: Bringing Order to the Web</em>. Stanford InfoLab.</p>
+<p><strong>Studi di mercato</strong>
+- MIT — <em>State of AI in Business 2025</em> (agosto 2025)
+- Banca d'Italia — Indagine sull'adozione di intelligenza artificiale nel sistema bancario italiano</p>
+<p><strong>TMNL</strong>
+- Comunicato di adattamento alle nuove norme europee, luglio 2024
+- Copertura NOS, Accountancy Vanmorgen
+- Pareri Autoriteit Persoonsgegevens (autorità olandese per la protezione dei dati)</p>
+
+<div class="article-end">— · —</div>
+
+</article>
+
+<footer class="article-footer">
+<hr />
+<p><em>Articolo pubblicato ad aprile 2026. Le informazioni sono accurate alla data di pubblicazione. La materia è in rapida evoluzione: per aggiornamenti, segui la newsletter o i post LinkedIn.</em></p>
+<p><em>Per discutere o approfondire i temi trattati, <a href="mailto:contact@example.com">scrivimi</a>.</em></p>
+</footer>
+
+</body>
+</html>
