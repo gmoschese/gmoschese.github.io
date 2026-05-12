@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AML in Europe, 2026–2028 — Technical notes</title>
+<meta name="description" content="A technical look at the European AML problem. Essential framing, documented bottlenecks, proposed architecture.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false}
+    ],
+    throwOnError: false
+  });"></script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#FAF7F2',
+      primaryTextColor: '#1A1614',
+      primaryBorderColor: '#A8542C',
+      lineColor: '#5A5046',
+      secondaryColor: '#F0EBE3',
+      tertiaryColor: '#FFFFFF',
+      fontFamily: 'Inter Tight, sans-serif',
+      fontSize: '13px'
+    }
+  });
+</script>
+
+<style>
+:root {
+  --bg: #FAF7F2;
+  --bg-shade: #F0EBE3;
+  --bg-card: #FFFFFF;
+  --ink: #1A1614;
+  --ink-soft: #4A4038;
+  --ink-mute: #7A6F62;
+  --rule: #D9D2C5;
+  --accent: #A8542C;
+  --accent-soft: #C97947;
+  --accent-bg: #F7EBDF;
+  --warn-bg: #FBEAE0;
+  --warn-rule: #C2441E;
+  --ok-bg: #ECF0E5;
+  --ok-rule: #5C7C3F;
+
+  --serif: 'Source Serif 4', 'Charter', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg); color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px; line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: radial-gradient(circle at 20% 0%, rgba(168, 84, 44, 0.025) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 100%, rgba(168, 84, 44, 0.02) 0%, transparent 50%);
+  pointer-events: none; z-index: 0;
+}
+
+.layout {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr min(720px, calc(100% - 48px)) 1fr;
+}
+.layout > * { grid-column: 2; }
+
+.topbar {
+  grid-column: 1 / -1;
+  border-bottom: 1px solid var(--rule);
+  padding: 14px 32px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--sans);
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--ink-mute); background: var(--bg);
+}
+.topbar-left { font-weight: 500; }
+
+.back-nav {
+  margin: 32px 0 8px;
+  font-family: var(--sans);
+  font-size: 13px; font-weight: 500;
+}
+.back-nav a {
+  color: var(--ink-mute); border-bottom: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 0;
+  transition: color 0.15s ease, transform 0.2s ease;
+}
+.back-nav a:hover { color: var(--accent); background: none; transform: translateX(-3px); }
+.back-nav a .arrow { font-family: var(--serif); font-size: 16px; line-height: 1; }
+
+.back-nav-bottom { margin: 24px 0 0; padding-top: 24px; border-top: 1px solid var(--rule); }
+
+.hero { padding: 90px 0 60px; }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  color: var(--accent); margin-bottom: 28px;
+  display: flex; align-items: center; gap: 16px;
+}
+.eyebrow::before, .eyebrow::after {
+  content: ''; height: 1px; flex: 0 0 32px;
+  background: var(--accent); opacity: 0.4;
+}
+.eyebrow::after { flex: 1; }
+
+h1.title {
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.05; letter-spacing: -0.02em;
+  margin: 0 0 20px; color: var(--ink);
+  font-feature-settings: "ss01", "kern";
+}
+
+p.subtitle {
+  font-family: var(--serif); font-style: italic;
+  font-size: 24px; line-height: 1.4;
+  color: var(--ink-soft); margin: 0 0 40px;
+  font-weight: 400;
+}
+
+.byline {
+  font-family: var(--sans);
+  font-size: 13px; color: var(--ink-mute);
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 16px 0;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.byline-item { display: flex; gap: 8px; }
+.byline-label {
+  text-transform: uppercase; letter-spacing: 0.1em;
+  font-size: 11px; font-weight: 600; color: var(--ink-mute);
+}
+.byline-value { font-weight: 500; color: var(--ink-soft); }
+
+.disclosure {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  padding: 28px 32px;
+  margin: 60px 0 40px;
+  font-size: 17px; line-height: 1.7;
+}
+.disclosure h3 {
+  font-family: var(--sans);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--accent); margin: 0 0 16px;
+}
+.disclosure p { margin: 0 0 14px; }
+.disclosure p:last-child { margin-bottom: 0; }
+.disclosure strong { color: var(--ink); font-weight: 600; }
+
+.toc {
+  margin: 60px 0; padding: 32px 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+.toc-label {
+  font-family: var(--sans);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  color: var(--ink-mute); margin-bottom: 20px;
+}
+.toc ol {
+  list-style: none; padding: 0; margin: 0;
+  counter-reset: toc;
+}
+.toc li {
+  counter-increment: toc;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: baseline; gap: 16px;
+  font-family: var(--sans); font-size: 16px;
+}
+.toc li:last-child { border-bottom: none; }
+.toc li::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 12px; color: var(--accent);
+  flex: 0 0 auto; font-weight: 500;
+}
+.toc a {
+  color: var(--ink); text-decoration: none;
+  font-weight: 500; flex: 1;
+  transition: color 0.15s ease;
+  border-bottom: none;
+}
+.toc a:hover { color: var(--accent); background: none; }
+
+section { margin: 64px 0; }
+
+h2.section-title {
+  font-family: var(--serif);
+  font-size: 36px; line-height: 1.2;
+  letter-spacing: -0.01em; font-weight: 600;
+  margin: 80px 0 12px;
+  scroll-margin-top: 24px;
+}
+.section-num {
+  display: block;
+  font-family: var(--sans);
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  color: var(--accent); margin-bottom: 10px;
+}
+h2.section-title::after {
+  content: ''; display: block;
+  width: 48px; height: 2px;
+  background: var(--ink); margin-top: 24px;
+}
+
+h3 {
+  font-family: var(--serif);
+  font-size: 24px; font-weight: 600;
+  letter-spacing: -0.005em; line-height: 1.3;
+  margin: 56px 0 20px; color: var(--ink);
+}
+
+h4 {
+  font-family: var(--sans);
+  font-size: 14px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--ink-mute); margin: 36px 0 14px;
+}
+
+p { margin: 0 0 22px; }
+
+a {
+  color: var(--accent); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: all 0.15s ease;
+}
+a:hover { background: var(--accent-bg); border-bottom-color: var(--accent); }
+
+/* Footnote references in text */
+sup.fn {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 1px;
+}
+sup.fn a {
+  color: var(--accent);
+  border-bottom: none;
+  padding: 0 2px;
+}
+sup.fn a:hover {
+  background: var(--accent-bg);
+  border-radius: 2px;
+}
+
+strong { font-weight: 600; color: var(--ink); }
+em { font-style: italic; }
+
+ul, ol { margin: 0 0 24px; padding-left: 28px; }
+li { margin-bottom: 10px; line-height: 1.7; }
+ul li::marker { color: var(--accent); }
+
+blockquote {
+  margin: 32px 0; padding: 24px 28px;
+  background: var(--accent-bg);
+  border-left: 3px solid var(--accent);
+  font-family: var(--serif);
+  font-size: 17px; line-height: 1.65;
+  color: var(--ink-soft); font-style: italic;
+}
+blockquote p { margin: 0 0 12px; }
+blockquote p:last-child { margin-bottom: 0; }
+blockquote strong { font-style: normal; color: var(--ink); font-weight: 600; }
+
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 32px 0;
+  font-family: var(--sans); font-size: 14px;
+  background: var(--bg-card); border: 1px solid var(--rule);
+}
+thead { background: var(--ink); color: var(--bg); }
+th {
+  padding: 12px 16px; text-align: left;
+  font-weight: 600; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+th:last-child { border-right: none; }
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  vertical-align: top; line-height: 1.5;
+}
+td:last-child { border-right: none; }
+tbody tr:nth-child(even) { background: var(--bg-shade); }
+tbody tr:last-child td { border-bottom: none; }
+td strong { color: var(--accent); font-weight: 600; }
+
+.katex-display {
+  margin: 28px 0 !important;
+  padding: 20px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  overflow-x: auto;
+}
+.katex { font-size: 1.05em !important; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--bg-shade);
+  padding: 2px 6px; border-radius: 3px;
+  color: var(--accent);
+}
+
+.mermaid {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 24px; margin: 32px 0;
+  text-align: center;
+}
+
+.box {
+  margin: 28px 0; padding: 20px 24px;
+  border-left: 3px solid;
+  font-family: var(--serif);
+  font-size: 16px; line-height: 1.65;
+}
+.box-label {
+  font-family: var(--sans);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  margin-bottom: 8px; display: block;
+}
+.box-warn { background: var(--warn-bg); border-left-color: var(--warn-rule); }
+.box-warn .box-label { color: var(--warn-rule); }
+.box-ok { background: var(--ok-bg); border-left-color: var(--ok-rule); }
+.box-ok .box-label { color: var(--ok-rule); }
+.box-caveat {
+  background: var(--bg-shade);
+  border-left-color: var(--ink-mute);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.box-caveat .box-label { color: var(--ink-mute); font-style: normal; }
+
+hr.divider {
+  border: none; height: 1px;
+  background: var(--rule); margin: 60px 0;
+  position: relative;
+}
+hr.divider::after {
+  content: '§';
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg);
+  padding: 0 16px;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ink-mute);
+  font-style: italic;
+}
+
+/* References section */
+.references-section {
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 2px solid var(--ink);
+}
+.references-section h2 {
+  font-family: var(--serif);
+  font-size: 28px; font-weight: 600;
+  margin: 0 0 24px;
+}
+.references-list {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  counter-reset: ref;
+  list-style: none;
+  padding: 0;
+}
+.references-list li {
+  counter-increment: ref;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 12px;
+  color: var(--ink-soft);
+}
+.references-list li::before {
+  content: counter(ref);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+  padding-top: 2px;
+}
+.references-list li:last-child { border-bottom: none; }
+.references-list a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  word-break: break-word;
+}
+.references-list a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  background: none;
+}
+.ref-source {
+  font-weight: 600;
+  color: var(--ink);
+  font-style: normal;
+}
+
+footer {
+  margin-top: 80px;
+  padding: 40px 0;
+  border-top: 2px solid var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink-mute);
+}
+footer p { margin-bottom: 12px; }
+
+@media (max-width: 720px) {
+  body { font-size: 17px; }
+  .hero { padding: 60px 0 40px; }
+  h1.title { font-size: 36px; }
+  p.subtitle { font-size: 19px; }
+  h2.section-title { font-size: 28px; }
+  h3 { font-size: 21px; }
+  .topbar { padding: 12px 20px; font-size: 10px; flex-wrap: wrap; gap: 8px; }
+  .layout { grid-template-columns: 1fr min(100%, calc(100% - 32px)) 1fr; }
+  .disclosure { padding: 22px 22px; }
+  .byline { flex-direction: column; gap: 10px; }
+  table { font-size: 12px; }
+  th, td { padding: 8px 10px; }
+  blockquote { padding: 18px 20px; }
+}
+
+@media print {
+  body::before { display: none; }
+  .topbar, .back-nav { display: none; }
+  body { font-size: 11pt; background: white; }
+  h1.title { font-size: 28pt; }
+  h2.section-title { font-size: 18pt; page-break-after: avoid; }
+  h3 { font-size: 14pt; page-break-after: avoid; }
+  blockquote, .box, table, .mermaid { page-break-inside: avoid; }
+  a { color: var(--ink); border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<div class="topbar">
+  <span class="topbar-left">AML in Europe · Technical notes</span>
+  <span class="topbar-right">April 2026 · ~25 min</span>
+</div>
+
+<nav class="back-nav">
+  <a href="/research"><span class="arrow">←</span> Back</a>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Technical essay · Anti-Money Laundering</div>
+  <h1 class="title">AML in Europe, 2026–2028</h1>
+  <p class="subtitle">Essential framing, documented bottlenecks, proposed architecture. Working notes from someone studying the problem from an engineer's angle.</p>
+  <div class="byline">
+    <div class="byline-item">
+      <span class="byline-label">Published</span>
+      <span class="byline-value">April 2026</span>
+    </div>
+    <div class="byline-item">
+      <span class="byline-label">Read time</span>
+      <span class="byline-value">~25 minutes</span>
+    </div>
+    <div class="byline-item">
+      <span class="byline-label">Updated</span>
+      <span class="byline-value">April 2026</span>
+    </div>
+  </div>
+</header>
+
+<aside class="disclosure">
+  <h3>A note on what this is</h3>
+  <p>What follows is not a market guide nor a strategic proposal. These are working notes from someone who has studied the European AML problem from an engineer's angle — by reading regulatory texts, technical papers, and public enforcement decisions.</p>
+  <p>I'm interested in <strong>what works and why</strong>, not in how much it should cost or when to start. The technical sections are where I stake my professional reputation: I present them in full, with formulas, computational complexity, libraries, pitfalls. The context section is kept to the minimum needed to frame the problem, with every concrete figure cited.</p>
+  <p>Where the evidence is thin, I say so. Where I'm uncertain, I show it. I'm not selling anything in these pages.</p>
+</aside>
+
+<nav class="toc">
+  <div class="toc-label">Contents</div>
+  <ol>
+    <li><a href="#sec1">The problem in three facts</a></li>
+    <li><a href="#sec2">The bottlenecks on the record</a></li>
+    <li><a href="#sec3">Why a hybrid architecture</a></li>
+    <li><a href="#sec4">Layer 1 — Isolation Forest</a></li>
+    <li><a href="#sec5">Layer 2 — Personalized PageRank</a></li>
+    <li><a href="#sec6">Layer 3 — A two-technique explainability stack</a></li>
+    <li><a href="#sec7">The three junctions</a></li>
+    <li><a href="#sec8">Limits and open questions</a></li>
+    <li><a href="#sec9">Notes and references</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============== SECTION 1 — The problem in three facts ============== -->
+<section id="sec1">
+<h2 class="section-title"><span class="section-num">Chapter One</span>The problem in three facts</h2>
+
+<p>Three facts, all verifiable from public sources, define the problem anyone building AML systems in Europe is working inside. I'll line them up before getting into the technical substance.</p>
+
+<h3>1.1 The legislation is written. The calendar is fixed.</h3>
+
+<p>In June 2024 the European Union published the AML package — four legislative acts<sup class="fn"><a href="#ref1">[1]</a></sup>: Regulation AMLR 2024/1624 (the Single Rulebook), Directive AMLD6 2024/1640, Regulation AMLAR 2024/1620 establishing AMLA, and the TFR Recast 2023/1113 extending the Travel Rule to crypto-assets. The AMLR becomes directly applicable across all Member States on <strong>10 July 2027</strong>. AMLD6 must be transposed by the same date. AMLA assumes direct supervision of a first cohort of high-risk entities on 1 January 2028<sup class="fn"><a href="#ref2">[2]</a></sup>.</p>
+
+<p>These dates are not open to interpretation. They are in the texts published in the Official Journal of the EU.</p>
+
+<h3>1.2 The current systems are massively inefficient</h3>
+
+<p>The rule-based systems that dominate the AML market produce a very high volume of false positives. The figure that circulates in the literature is 90–99% false positives, and it shows up replicated across industry studies, academic papers, and RegTech vendor communications<sup class="fn"><a href="#ref3">[3]</a></sup>. It needs to be taken with the caution due to any number that propagates without a single original study having measured it under transparent methodology. But the qualitative point is solid: anyone working in bank compliance knows alert fatigue first-hand, and FATF<sup class="fn"><a href="#ref4">[4]</a></sup> and Bank of England<sup class="fn"><a href="#ref5">[5]</a></sup> publications document the inadequacy of pure rule-based monitoring against the requirements of continuous supervision.</p>
+
+<h3>1.3 AI is underperforming (for now)</h3>
+
+<p>The MIT NANDA report <em>The GenAI Divide: State of AI in Business 2025</em>, published in July 2025, concludes that 95% of organisations that have invested in <strong>generative AI</strong> see no measurable P&amp;L impact<sup class="fn"><a href="#ref6">[6]</a></sup>. The figure is based on 52 structured interviews, 153 survey responses, and analysis of about 300 public deployments. It has been criticised for sample-size limits and certain methodological choices<sup class="fn"><a href="#ref7">[7]</a></sup>, and it should be read specifically as a statement about generative AI, not machine learning broadly. That said, the number has had significant traction, and it points to a real gap between investment and returns in enterprise AI initiatives.</p>
+
+<p>On the banking side, public data from the Swiss federal authority FINMA and other industry surveys<sup class="fn"><a href="#ref8">[8]</a></sup> shows that most AI initiatives in European banking remain in pilot phase and don't reach operational deployment. The cause, consistently, is not the model — it's the data upstream.</p>
+
+<blockquote><strong>The point in one sentence.</strong> European regulation is forcing obliged entities to adopt more sophisticated monitoring systems by 2027. Current systems produce many false positives and miss sophisticated patterns. First-generation AI replacements are struggling to reach production. The technical problem plays out in this space.</blockquote>
+
+</section>
+
+<hr class="divider">
+
+<!-- ============== SECTION 2 — The bottlenecks on the record ============== -->
+<section id="sec2">
+<h2 class="section-title"><span class="section-num">Chapter Two</span>The bottlenecks on the record</h2>
+
+<p>Before proposing an architecture, the honest move is to name what makes AML hard. Four structural obstacles are well documented in technical and regulatory literature.</p>
+
+<h3>2.1 Label scarcity and label delay</h3>
+
+<p>Supervised machine learning systems need labelled examples: transactions or patterns where it's known with certainty whether they're laundering or not. In AML these labels are structurally scarce, and they arrive late.</p>
+
+<p>A transaction flagged as suspicious (STR) is not a transaction confirmed as laundering. A case confirmed in court arrives years after the original transaction. True positive labels make up a tiny fraction of the total — academic literature on AML datasets cites ratios on the order of 0.1–0.5% of confirmed positives<sup class="fn"><a href="#ref9">[9]</a></sup>. This creates two distinct problems: training datasets that are perpetually out of date relative to current laundering patterns, and an extreme <em>class imbalance</em> that breaks most standard classification algorithms.</p>
+
+<h3>2.2 Partial observability</h3>
+
+<p>Each institution only sees the transactions that pass through its systems. A layering scheme spread across three different banks is invisible to each of them taken individually. The real graph of financial flows doesn't exist physically anywhere — not even at national FIUs, which receive fragmented STRs from obliged entities with partial visibility.</p>
+
+<p>This is why the 2024 AMLR introduces, for the first time, a European legal basis for sharing information about high-risk customers between obliged entities<sup class="fn"><a href="#ref1">[1]</a></sup>. The technical modalities will be defined through AMLA's Regulatory Technical Standards.</p>
+
+<h3>2.3 Legacy data infrastructure</h3>
+
+<p>The most underrated of the four. Most traditional institutions have transaction data on legacy systems from the 80s and 90s: mainframes, AS/400, hierarchical databases, COBOL formats. This data is not "AI-ready" — it's not normalised, customer records aren't deduplicated across systems, real-time access is limited, ETL pipelines toward modern analytical environments are multi-year projects.</p>
+
+<p>This is where the difference shows up between a pilot that works and a system in production. Most AI projects in banking crash on the encounter with real data quality, not on the models<sup class="fn"><a href="#ref6">[6]</a></sup>.</p>
+
+<h3>2.4 The regulatory explainability constraint</h3>
+
+<p>A compliance officer who files an STR takes on professional responsibility (and in some jurisdictions criminal liability) for the reasoning behind it. A black-box model producing "risk score = 0.87" without a decomposable explanation can't survive an audit. The AMLR and the expectations of national supervisors (FCA especially, but also BaFin and Banca d'Italia) converge on the requirement that every algorithmic decision be traceable and justifiable<sup class="fn"><a href="#ref10">[10]</a></sup>.</p>
+
+<p>The EU AI Act adds a second layer: AML systems fall within high-risk categories of Annex III, with specific requirements on technical documentation, log retention, human-in-the-loop, pre-deployment validation<sup class="fn"><a href="#ref11">[11]</a></sup>.</p>
+
+<h3>2.5 A note on TMNL — when data sharing fails</h3>
+
+<p>Worth flagging a recent case that illustrates the real tensions of the problem. TMNL (<em>Transactie Monitoring Nederland</em>) was a joint venture between five Dutch banks that, from 2020, shared pseudonymised transaction data for joint AML monitoring. It was cited as a model for the future of cooperative AML in Europe. The <em>wind-down</em> was announced in July 2024<sup class="fn"><a href="#ref12">[12]</a></sup>, after the Dutch data protection authority had raised objections and after the NL-DK-DE proposal to scale it to EU level was rejected at the European table.</p>
+
+<p>The technical lesson: pseudonymisation does not solve the GDPR problem. Cooperative AML platforms need a solid European legal basis, which the AMLR provides — but the technical modalities remain to be defined through RTS.</p>
+
+</section>
+
+<hr class="divider">
+
+<!-- ============== SECTION 3 — Why a hybrid architecture ============== -->
+<section id="sec3">
+<h2 class="section-title"><span class="section-num">Chapter Three</span>Why a hybrid architecture</h2>
+
+<p>Given the picture, the question becomes: what kind of system jointly satisfies the constraints of scalability, explainability, robustness, and adequacy to known laundering patterns? No single algorithm satisfies all of them.</p>
+
+<p>An approach that has gained traction in recent academic literature<sup class="fn"><a href="#ref13">[13]</a></sup> and that is consistent with regulatory expectations is the <strong>sequential sieve</strong>: three complementary algorithmic components, each solving a piece of the problem that the others cannot.</p>
+
+<h3>3.1 The sieve logic</h3>
+
+<ul>
+  <li><strong>Layer 1 — statistical screening.</strong> Reduces the volume of transactions to monitor by identifying behaviour that's anomalous relative to the population. Works on the single entity, without seeing the network.</li>
+  <li><strong>Layer 2 — relational analysis.</strong> On the suspicious entities already selected by Layer 1, propagates risk across the counterparty network. Captures relational "contagion" and multi-node patterns (round-tripping, money muling).</li>
+  <li><strong>Layer 3 — explainability.</strong> Translates the numerical scores from the previous layers into reconstructable narratives — which features weighed on the Layer 1 score, which relational chains weighed on the Layer 2 score.</li>
+</ul>
+
+<h3>3.2 The pipeline at a glance</h3>
+
+<div class="mermaid">
+flowchart TD
+    A[Raw transactions] --> L1
+
+    subgraph L1[" Layer 1 — Statistical Screening "]
+        IF[Isolation Forest]
+        IF --> S1[Score s_iso]
+    end
+
+    S1 --> J1{Junction 1<br/>Seed selection}
+    J1 --> SEEDS[Vector u<br/>seeds + blacklist]
+
+    SEEDS --> L2
+
+    subgraph L2[" Layer 2 — Relational Analysis "]
+        PR[Personalized PageRank]
+        PR --> S2[Score s_ppr]
+    end
+
+    S1 --> J2
+    S2 --> J2{Junction 2<br/>Score combination}
+    J2 --> SF[Final score]
+
+    SF --> L3
+
+    subgraph L3[" Layer 3 — Explainability "]
+        SHAP[SHAP values]
+        SUB[Local subgraphs]
+        SHAP --> NARR[Compliance narrative]
+        SUB --> NARR
+    end
+
+    NARR --> OUT[STR-ready report]
+</div>
+
+<h3>3.3 Why not a single deep GNN</h3>
+
+<p>The temptation to build a single end-to-end Graph Neural Network is real. GNNs are state of the art for many graph learning tasks<sup class="fn"><a href="#ref14">[14]</a></sup>, and the AML-specific literature is starting to build up<sup class="fn"><a href="#ref13">[13]</a></sup>. Three pragmatic objections keep GNNs out of version 1 of the system:</p>
+
+<ul>
+  <li><strong>Explainability isn't there yet.</strong> Explainability techniques for GNNs (GNNExplainer, SubgraphX, PGExplainer) exist<sup class="fn"><a href="#ref15">[15]</a></sup> but are still fragile, and translating their explanations into compliance language is hard. Building explainability <em>inside</em> the architecture is structurally more solid than bolting it on <em>afterwards</em>.</li>
+  <li><strong>Adversarial robustness.</strong> Bypassing a single model, however sophisticated, is a known problem for an attacker with resources. A three-layer sieve multiplies the conditions needed for a bypass.</li>
+  <li><strong>Co-existence with legacy systems.</strong> A module that plugs into existing transaction-monitoring systems via API, rather than replacing them, has a more realistic adoption path than a platform that wants to displace the rule-based engine.</li>
+</ul>
+
+<p>GNNs remain on the table for a version 2 of the system. For now, the algorithms in the sieve are <strong>explainable by construction</strong>, and that's a value in itself under a regulatory constraint.</p>
+
+</section>
+
+<hr class="divider">
+
+
+<!-- ============== SECTION 4 — Layer 1: Isolation Forest ============== -->
+<section id="sec4">
+<h2 class="section-title"><span class="section-num">Chapter Four</span>Layer 1 — Isolation Forest</h2>
+
+<p>Isolation Forest is an unsupervised anomaly detection algorithm proposed by Liu, Ting, and Zhou in 2008<sup class="fn"><a href="#ref16">[16]</a></sup>. The idea is disarmingly simple: instead of modelling the distribution of normal data (hard in high dimensions), it models the ease of isolating a point. Anomalous points isolate in few cuts; normal points sit in the mass and require many cuts to be isolated.</p>
+
+<h3>4.1 How it works</h3>
+
+<p>The algorithm builds an ensemble of trees (typically 100), each trained on a subsample of $\psi$ points (default 256). Each tree is built recursively: at each node, a random feature is picked and a random split value within the observed range for that feature. The point "isolates" when it lands in a leaf with a single element.</p>
+
+<p>The average isolation path length across the ensemble is the proxy for anomaly.</p>
+
+<h3>4.2 The score formula</h3>
+
+$$s(x, n) = 2^{-E(h(x))/c(n)}$$
+
+<p>Where:</p>
+<ul>
+  <li>$E(h(x))$ is the average path length needed to isolate point $x$, computed across the tree ensemble.</li>
+  <li>$c(n)$ is the normalisation factor depending on the subsample size $n = \psi$. Technically, it's the average length of an unsuccessful search in a binary search tree of $n$ elements: $c(n) \approx 2 \cdot H(n-1) - 2(n-1)/n$, where $H(k)$ is the $k$-th harmonic number.</li>
+  <li>$s(x, n)$ is the anomaly score, normalised to $[0, 1]$.</li>
+</ul>
+
+<p>Reading the value: $s \approx 1$ indicates strong anomaly (the point isolates with few cuts); $s \approx 0.5$ indicates ambiguous behaviour; $s \approx 0$ indicates normal behaviour.</p>
+
+<h3>4.3 Computational complexity</h3>
+
+<p>For an ensemble of $N$ trees with subsample size $\psi$:</p>
+<ul>
+  <li><strong>Training:</strong> $O(N \cdot \psi \log \psi)$ — essentially linear in the number of trees times $\psi \log \psi$ of the single tree<sup class="fn"><a href="#ref17">[17]</a></sup>. With $N=100$ and $\psi=256$, on datasets with millions of rows, training takes minutes rather than hours, and is easily parallelisable.</li>
+  <li><strong>Inference per point:</strong> $O(N \log \psi)$. Negligible, can run in streaming.</li>
+  <li><strong>Memory:</strong> linear in the number of trees and subsample points, independent of the original dataset. That's why it scales well to very large datasets.</li>
+</ul>
+
+<h3>4.4 Relevant variants</h3>
+
+<ul>
+  <li><strong>Extended Isolation Forest</strong> (Hariri, Kind, Brunner, 2019)<sup class="fn"><a href="#ref18">[18]</a></sup>: corrects a branching bias of the original algorithm caused by axis-parallel splits, which create artificial "bands" of anomaly. Uses random non-axis-aligned hyperplanes. More robust, slightly slower.</li>
+  <li><strong>SCiForest:</strong> variant with non-random split criteria. More precise but loses the computational simplicity advantage.</li>
+  <li><strong>Conditional Isolation Forest:</strong> recent variant for data with temporal drift, useful when "normal behaviour" changes seasonally or over time (a typical case in banking transactions).</li>
+</ul>
+
+<h3>4.5 Implementation pitfalls</h3>
+
+<ul>
+  <li><strong>The <code>contamination</code> parameter</strong> in scikit-learn sets the alert threshold but not the score. Keep them conceptually separate: the score is an anomaly estimate, the threshold is a business decision to be tuned.</li>
+  <li><strong>Feature engineering is critical.</strong> The algorithm is sensitive to feature choice. In AML, the most powerful features are aggregates over time windows (count/sum/std of transactions in the last 1/7/30/90 days), velocity ratios, distances from regulatory thresholds. Without these built upstream, the score loses meaning.</li>
+  <li><strong>High-cardinality categorical features</strong> (IBANs, transaction reason codes) produce unstable results without proper encoding. Target encoding or embeddings are options; one-hot explodes the dimensionality.</li>
+  <li><strong>The score is not a probability.</strong> Comparing scores across different datasets without retraining is methodologically incorrect.</li>
+</ul>
+
+<h3>4.6 Available libraries</h3>
+
+<table>
+<thead><tr><th>Library</th><th>Strength</th><th>Limit</th></tr></thead>
+<tbody>
+<tr><td><strong>scikit-learn</strong> (<code>IsolationForest</code>)</td><td>De-facto standard. Solid, well documented, integrated with the whole Python ecosystem.</td><td>Single-machine. Hits limits past 10M points.</td></tr>
+<tr><td><strong>PyOD</strong></td><td>Implements IForest, EIF, and 40+ other outlier detection variants. Useful for comparative benchmarks.</td><td>Maintained by an academic group, less robust on edge cases than scikit-learn.</td></tr>
+<tr><td><strong>H2O.ai</strong></td><td>Distributed implementation. Works well on very large datasets.</td><td>Heavier stack, steeper learning curve.</td></tr>
+<tr><td><strong>eif</strong></td><td>Reference implementation of Extended Isolation Forest from the paper's authors.</td><td>More limited integrations and tooling than scikit-learn.</td></tr>
+</tbody>
+</table>
+
+</section>
+
+<hr class="divider">
+
+<!-- ============== SECTION 5 — Layer 2: Personalized PageRank ============== -->
+<section id="sec5">
+<h2 class="section-title"><span class="section-num">Chapter Five</span>Layer 2 — Personalized PageRank</h2>
+
+<p>Once Layer 1 has selected suspicious entities, we need to know which other entities are connected to them. People who launder money rarely work alone: smurfers, money mules, transit accounts, nominees form graphs. An apparently clean entity strongly connected to risky ones deserves attention.</p>
+
+<h3>5.1 The algorithm</h3>
+
+<p>Personalized PageRank (PPR) is a variant of Google's PageRank<sup class="fn"><a href="#ref19">[19]</a></sup>. The key difference is the personalisation vector $u$: instead of teleporting to a random node in the graph (standard PageRank), the random walker teleports to known high-risk entities — Layer 1 output, blacklists, prior STRs, sanctions. Risk propagates from seed nodes to their neighbours.</p>
+
+<h3>5.2 The iterative formula</h3>
+
+$$v_{k+1} = \alpha \cdot M \cdot v_k + (1 - \alpha) \cdot u$$
+
+<p>Where:</p>
+<ul>
+  <li>$v$ is the vector of risk scores, one per node in the graph.</li>
+  <li>$M$ is the transition matrix built on the transaction graph. $M[i,j]$ is the probability that the random walker moves from node $j$ to node $i$, a normalised weight on the edge.</li>
+  <li>$u$ is the personalisation vector, high on seed nodes and zero elsewhere.</li>
+  <li>$\alpha$ is the <em>damping factor</em>, typically $0.85$. It's the probability that the walker follows a graph edge instead of teleporting to the vector $u$.</li>
+</ul>
+
+<div class="box box-caveat">
+  <span class="box-label">A note on the α convention</span>
+  Two equivalent but mirror-image conventions for $\alpha$ exist in the literature. The standard convention from NetworkX, scikit-network and GraphFrames uses $\alpha = 0.85$ as the damping factor. An alternative convention, common in parts of the academic literature, uses $\alpha \approx 0.15$ as the teleportation probability. The two are mathematically interchangeable (just swap $\alpha$ with $1-\alpha$), but if a development team mixes them up, the code can end up doing the opposite of what's intended. Worth fixing the convention once and documenting it in the repository.
+</div>
+
+<h3>5.3 Computational complexity</h3>
+
+<ul>
+  <li><strong>Power iteration:</strong> $O(|E| \cdot k)$ where $|E|$ is the number of edges and $k$ the number of iterations. Convergence is geometric with rate $\alpha^k$. Typically 50–100 iterations are enough for $\epsilon = 10^{-6}$. On a graph with $10^8$ edges, 100 iterations require $10^{10}$ operations: feasible in a nightly batch, not in real time.</li>
+  <li><strong>Local approach (FwdPush, Andersen-Chung-Lang):</strong> complexity $O\left(\frac{1}{\alpha \epsilon}\right)$ independent of graph size<sup class="fn"><a href="#ref20">[20]</a></sup>. Only explores the local neighbourhood of the seeds. This is the right approach when you have few seeds and want to query the graph on demand.</li>
+  <li><strong>Memory:</strong> the vector $v$ has dimension $|V|$. For a graph with $5 \times 10^7$ nodes, a float64 vector takes 400 MB. Worth considering when computing many PPRs for many different seeds.</li>
+</ul>
+
+<h3>5.4 Why PPR works for AML</h3>
+
+<ul>
+  <li><strong>It captures relational contagion.</strong> An apparently clean entity surrounded by risky nodes ends up with an elevated score — exactly what we care about.</li>
+  <li><strong>It naturally detects round-tripping.</strong> If flow cycles back to the origin node in a few hops, PPR amplifies the score across the entire cycle.</li>
+  <li><strong>It works offline.</strong> Computed in batch on the aggregated graph, no real-time inference needed for v1.</li>
+  <li><strong>It's explainable by construction.</strong> A node's score decomposes exactly into contributions from the seed nodes that reach it. It's an exact sum, not an approximation.</li>
+</ul>
+
+<h3>5.5 Honest limits</h3>
+
+<ul>
+  <li><strong>It depends on seed quality.</strong> If seeds are wrong, PPR amplifies the error rather than correcting it. Seed selection (Junction 1, see section 7) is a critical decision.</li>
+  <li><strong>It doesn't handle temporality out of the box.</strong> Classic PPR sees the graph as static. To capture "these two nodes have been doing suspicious transfers over the last 30 days", you need temporal variants with exponential edge-weight decay.</li>
+  <li><strong>It's sensitive to graph density.</strong> On dense graphs or graphs with super-hubs (payment gateways, for example), the score "spreads out" and loses discrimination. Hub filtering or non-uniform edge weighting are needed.</li>
+</ul>
+
+<h3>5.6 Available libraries</h3>
+
+<table>
+<thead><tr><th>Library</th><th>Strength</th><th>Limit</th></tr></thead>
+<tbody>
+<tr><td><strong>NetworkX</strong></td><td>Clean API, good for prototyping. <code>nx.pagerank()</code> takes a <code>personalization</code> parameter.</td><td>Pure Python, slow on graphs above 1M nodes.</td></tr>
+<tr><td><strong>igraph</strong></td><td>C backend, much faster than NetworkX. Native <code>personalized_pagerank()</code>.</td><td>Less pythonic API.</td></tr>
+<tr><td><strong>scikit-network</strong></td><td>Efficient implementation on SciPy sparse, modern API.</td><td>Smaller community than NetworkX.</td></tr>
+<tr><td><strong>GraphFrames</strong> (PySpark)</td><td>For distributed scale. PPR on graphs with billions of edges.</td><td>Spark setup overhead. Not for small datasets.</td></tr>
+<tr><td><strong>cuGraph</strong> (RAPIDS, GPU)</td><td>PPR on GPU. Orders of magnitude speedup on mid-size graphs.</td><td>Requires NVIDIA hardware and CUDA setup.</td></tr>
+</tbody>
+</table>
+
+</section>
+
+<hr class="divider">
+
+
+<!-- ============== SECTION 6 — Layer 3: Two-technique Explainability ============== -->
+<section id="sec6">
+<h2 class="section-title"><span class="section-num">Chapter Six</span>Layer 3 — A two-technique explainability stack</h2>
+
+<p>Layer 3 is the difference between a system that produces "risk score = 0.87" and one that produces: <em>"customer X has a score of 0.87 because (a) they made 12 sub-threshold transfers in 5 days, contribution +0.31; (b) counterparty Y has been on a blacklist since February, contribution +0.28; (c) the flow returns to the origin account in 3 hops, contribution +0.18"</em>. Only the second form survives an audit.</p>
+
+<p>Technically these are two distinct problems, handled by two different families of techniques. Keeping them conceptually — and implementationally — separate is one of the most important design choices.</p>
+
+<h3>6.1 Component A — SHAP for Layer 1's tabular features</h3>
+
+<p>SHAP (SHapley Additive Explanations) is the standard technique for explaining ML models that work on numerical features. It's based on Shapley values from cooperative game theory (Shapley, 1953<sup class="fn"><a href="#ref21">[21]</a></sup>), applied to ML by Lundberg and Lee in 2017<sup class="fn"><a href="#ref22">[22]</a></sup>.</p>
+
+<p>The idea: if a model's features are "players" cooperating to produce a score, what's the fair contribution of each? The Shapley value assigns to each feature its average contribution across all possible subsets of the other features.</p>
+
+$$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! \cdot (n - |S| - 1)!}{n!} \cdot \left[ f(S \cup \{i\}) - f(S) \right]$$
+
+<p>Where $\phi_i$ is the contribution of feature $i$ to the score, $S$ is a subset of the other features, and $f(S)$ is the model's prediction when only features in $S$ are "active". The weighted sum over all subsets guarantees four axiomatic properties (efficiency, symmetry, additivity, dummy player) that make the Shapley value unique among possible attribution methods.</p>
+
+<h4>The three main implementations</h4>
+
+<ul>
+  <li><strong>KernelSHAP.</strong> Model-agnostic. Approximates the Shapley value by sampling subsets. Slow but universal: usable on any model. To explain a single alert accurately, expect seconds to minutes per instance.</li>
+  <li><strong>TreeSHAP.</strong> Exact and polynomial-time for tree-based models (XGBoost, LightGBM, CatBoost, random forest, gradient boosting). Computes the true Shapley value in polynomial time by exploiting tree structure. When it can be used, it should be.</li>
+  <li><strong>DeepSHAP.</strong> Variant for neural networks, based on DeepLIFT. Approximates the Shapley value on deep models. Worth considering if neural components show up in v2.</li>
+</ul>
+
+<h4>Documented implementation pitfalls</h4>
+
+<ul>
+  <li><strong>Correlated features.</strong> SHAP on models with strongly correlated features (typical in financial data: amount, frequency, standard deviation, concentration index are all related) produces ambiguous attributions. The distinction between <em>TreeSHAP-interventional</em> and <em>TreeSHAP-observational</em> becomes important. The latter is simpler but assumes feature independence, an assumption violated in AML.</li>
+  <li><strong>Baseline choice.</strong> SHAP values are additive relative to a reference baseline. The choice (zero, mean, dataset median, conditional expectation) changes the interpretation. Document it.</li>
+  <li><strong>Default visualisations ≠ compliance-grade.</strong> The waterfall plots from the <code>shap</code> library are useful for a data scientist's debugging, but they aren't the right format for a compliance report. What a compliance officer needs is sorted tables with numerical contribution, direction (positive/negative relative to the score), and percentage of total.</li>
+</ul>
+
+<h3>6.2 Component B — Explaining Layer 2: not with SHAP</h3>
+
+<p>SHAP is not the right technique for explaining a Personalized PageRank score. PPR is not a model that takes features as input: it's an iterative algorithm on a relational structure. Applying SHAP to a PPR is methodologically forced.</p>
+
+<p>For Layer 2, the work is topological, across four complementary techniques:</p>
+
+<ul>
+  <li><strong>Path decomposition.</strong> A node's PPR score decomposes exactly as the sum of contributions from walks reaching it from the seeds. It's an algebraic decomposition, not an approximation. Paths can be sorted by contribution and the top-K shown, each with its chain of nodes and edges.</li>
+  <li><strong>Per-seed contribution analysis.</strong> For each seed in vector $u$, the PPR-from-seed can be computed separately, and you can show how much each seed contributes to the final score of a target node. It's a costly computation (as many PPRs as seeds), but parallelisable and cacheable.</li>
+  <li><strong>Local subgraph extraction.</strong> For a target node, extract the 1-2-3 hop subgraph, with edge weights and node scores. This is the "visual report" attached to the STR. Useful tools: NetworkX + matplotlib for static exports, Cytoscape.js for interactive dashboard UIs.</li>
+  <li><strong>Temporal decomposition.</strong> If the PPR variant used includes time-decay on edges, the score can be decomposed over time windows: "this node's score grew 40% over the last month due to new edges toward these seeds".</li>
+</ul>
+
+<h3>6.3 What comes out of Layer 3 — the alert dossier</h3>
+
+<p>Combining the contributions of Components A and B into a unified output is the real product of Layer 3. Every alert should produce a structured document with standardised sections. A possible layout:</p>
+
+<ul>
+  <li><strong>Executive summary.</strong> Three lines automatically extracted from the top-3 SHAP contributions and top-2 PPR paths.</li>
+  <li><strong>Layer 1 contributions.</strong> Sorted table: feature, observed value, contribution direction, percentage weight on the score.</li>
+  <li><strong>Network context.</strong> Visualisation of the 3-hop subgraph. List of seeds that contributed to the PPR score, with weights.</li>
+  <li><strong>Timeline.</strong> Recent relevant events — anomalous transactions, profile changes, prior alerts on the same subject.</li>
+  <li><strong>Audit metadata.</strong> Input data hash, model version, timestamp, threshold parameters. So that the decision can be reproduced in audit.</li>
+</ul>
+
+<div class="box box-warn">
+  <span class="box-label">A choice to make carefully</span>
+  The temptation to use an LLM to generate alert narratives in natural language is strong. In v1 of the system, it seems appropriate to avoid it: LLMs can hallucinate details not present in the data, they are non-deterministic (two executions of the same prompt produce different texts — problematic for audit), and they don't validate with objective metrics the way a classifier does. The conservative strategy is <em>template-based</em> generation: pre-written sentences with variable slots filled from the data. Traceable, deterministic, validatable. LLMs are worth considering for a v2, but with strict guardrails (constrained decoding, grammar-based output, retrieval-augmented generation with explicit citations).
+</div>
+
+</section>
+
+<hr class="divider">
+
+<!-- ============== SECTION 7 — The three junctions ============== -->
+<section id="sec7">
+<h2 class="section-title"><span class="section-num">Chapter Seven</span>The three junctions</h2>
+
+<p>The three layers work if they're connected well. The junctions are where the real design complexity hides, and where overall system quality most often gets compromised by inattention.</p>
+
+<h3>7.1 Junction 1 — from Layer 1 to Layer 2</h3>
+
+<p>Isolation Forest produces a continuous score $s \in [0, 1]$ for each entity. To initialise PPR, you need a personalisation vector $u$ that identifies the seeds. Three design choices interact:</p>
+
+<ul>
+  <li><strong>Binary threshold vs soft seed.</strong> Binary threshold: $u_i = 1$ if $s_i \geq \tau$ for some threshold $\tau$, otherwise $u_i = 0$. Simple but loses information. Soft seed: $u_i = s_i / \sum_j s_j$ (normalised). Preserves signal gradation, makes the PPR "flatter". The soft approach tends to be preferable as a default.</li>
+  <li><strong>Mixing with external seeds.</strong> A decision has to be made on whether $u$ contains only Layer 1 output or a mix with external lists: sanctions, PEPs, prior STRs, internal blacklists. An explicit mix with documented weights makes more sense than a single channel: for example $u = 0.5 \cdot u_{\text{IF}} + 0.5 \cdot u_{\text{blacklist}}$, with the weights tuned on a golden test set.</li>
+  <li><strong>Refresh frequency.</strong> PPR is batch; running it daily or weekly is reasonable. This decision shapes the upstream data architecture: Kafka streaming for Layer 1, batch for Layer 2.</li>
+</ul>
+
+<h3>7.2 Junction 2 — combining the two scores</h3>
+
+<p>At the end of Layers 1 and 2, every entity has two scores: $s_{\text{iso}}$ and $s_{\text{ppr}}$. They have to be combined to produce an alert. Three options with explicit trade-offs:</p>
+
+<ul>
+  <li><strong>Linear combination with tuned weights:</strong> $\text{score} = w_1 \cdot s_{\text{iso}} + w_2 \cdot s_{\text{ppr}}$, with $w_1 + w_2 = 1$ and weights calibrated on a golden set. Simple, explainable, recommended for the first version.</li>
+  <li><strong>Logical-gate combination:</strong> alert only if both scores exceed a threshold. Reduces false positives more aggressively but risks missing cases where one of the two signals dominates.</li>
+  <li><strong>Meta-classifier:</strong> a gradient boosting trained on $(s_{\text{iso}}, s_{\text{ppr}})$ plus other features. More powerful, but reintroduces an ML layer that itself needs an explainability pipeline. Consider for v2.</li>
+</ul>
+
+<h3>7.3 Junction 3 — from score to report</h3>
+
+<p>The system's final output isn't a numerical score. It's an <em>alert dossier</em>, with the structure described in section 6.3. It needs to be designed as a product, not as a technique. The three minimum outputs are:</p>
+
+<ul>
+  <li>Compliance-ready narrative, template-based.</li>
+  <li>Visualisation of the local subgraph, exportable to PDF.</li>
+  <li>Complete audit trail (input hash, model version, timestamp, parameters).</li>
+</ul>
+
+</section>
+
+<hr class="divider">
+
+<!-- ============== SECTION 8 — Limits and open questions ============== -->
+<section id="sec8">
+<h2 class="section-title"><span class="section-num">Chapter Eight</span>Limits and open questions</h2>
+
+<p>The architecture described above addresses part of the problem. Other parts remain open. It's honest to name them.</p>
+
+<h3>8.1 The data problem doesn't go away with an algorithm</h3>
+
+<p>All the technical analysis of the preceding sections assumes the existence of clean, deduplicated, normalised transaction data. In practice this isn't the starting point of any real project. <em>Entity resolution</em> — figuring out when two records refer to the same entity under different spellings, different systems, missing fields — is the most underrated and costly problem of an AML project. No sophisticated algorithmic architecture works around the fact that without clean data upstream, the sieve's layers turn into garbage-in/garbage-out.</p>
+
+<p>Mature tools exist (Splink from the UK Ministry of Justice, Dedupe, Zingg for Spark, Senzing as a commercial option<sup class="fn"><a href="#ref23">[23]</a></sup>), but they are projects in their own right. Underestimating them is the most common way to watch an AML pilot die before reaching production.</p>
+
+<h3>8.2 GNN explainability is still an open problem</h3>
+
+<p>The choice to stay away from GNNs in v1 of the system is pragmatic, not principled. GNNs are state of the art on many graph learning tasks, and AML-specific literature exists<sup class="fn"><a href="#ref13">[13]</a></sup>. The constraint keeping them out is the maturity of explainability techniques (GNNExplainer, SubgraphX, PGExplainer) — they exist but are fragile, and translating their explanations into compliance language is an open research area. Version 2 of the system will likely integrate a GNN for complex patterns, with a dedicated explainability infrastructure. When this becomes feasible depends on the maturation of XAI techniques for GNNs, not on the maturation of GNNs themselves.</p>
+
+<h3>8.3 How far the architecture generalises</h3>
+
+<p>Everything described here is built on known laundering patterns (smurfing, layering, round-tripping, money muling). More sophisticated typologies — trade-based money laundering, cuckoo smurfing, schemes routed through opaque jurisdictions — need graph enrichment with data many obliged entities don't have (commercial data, invoice data, beneficial owner data from foreign registers). The proposed architecture is a foundation to build on, not a complete system that handles every AML typology.</p>
+
+<h3>8.4 Where I don't yet have a settled view</h3>
+
+<p>For the sake of intellectual honesty, here are the points where my study of the problem left me without a solid answer:</p>
+
+<ul>
+  <li><strong>How well meta-classifiers (Junction 2) hold up in audit.</strong> Adding a gradient boosting on top of the two scores means having to explain that layer too. Techniques exist, but I haven't yet seen a public example of an AML system using a meta-classifier with SHAP on the meta-classifier itself that has survived inspection by a serious authority. It's territory to explore.</li>
+  <li><strong>Optimal PPR damping values for AML.</strong> The standard $\alpha = 0.85$ comes from the web search context. Some works suggest different values for anomaly detection tasks on graphs, but there isn't consensus yet. Calibration needs to be empirical.</li>
+  <li><strong>The real impact of AMLA's RTS.</strong> The technical standards AMLA produces will shape specific documentation, log, and validation requirements. Until they're published, any claim about "exactly what the regulator will want" is speculative.</li>
+</ul>
+
+<h3>8.5 The general point</h3>
+
+<p>What I've described here is an architecture consistent with the requirements one can read today in regulatory texts and technical papers. It isn't a product. It isn't a guarantee that its implementation, done in a specific context, will work. Building a real AML system requires many decisions that depend on jurisdiction, specific client, available data, budget and timing. What I'm trying to do with these notes is propose a defensible technical foundation, not a turnkey solution.</p>
+
+</section>
+
+<hr class="divider">
+
+<!-- ============== SECTION 9 — Notes and references ============== -->
+<section id="sec9" class="references-section">
+<h2>Notes and references</h2>
+
+<ol class="references-list">
+
+<li id="ref1">
+<span><span class="ref-source">Official Journal of the European Union (19 June 2024).</span> AML 2024 package: Regulation (EU) 2024/1620 (AMLAR), Regulation (EU) 2024/1624 (AMLR), Directive (EU) 2024/1640 (AMLD6). All published in OJ EU L on 19 June 2024. Available at <a href="https://eur-lex.europa.eu" target="_blank" rel="noopener">eur-lex.europa.eu</a>.</span>
+</li>
+
+<li id="ref2">
+<span><span class="ref-source">AMLA — Authority for Anti-Money Laundering.</span> Official site and Work Programme. <a href="https://www.amla.europa.eu" target="_blank" rel="noopener">amla.europa.eu</a>. AMLA became operational on 1 July 2025 with headquarters in Frankfurt. The AMLR application date and the start of direct supervision are defined in the legislative acts of reference [1].</span>
+</li>
+
+<li id="ref3">
+<span><span class="ref-source">On the 90-99% false positive figure.</span> This number recurs across RegTech literature and vendor communications. Examples: Bank for International Settlements (BIS), <em>"Anti-money laundering and combating the financing of terrorism in the use of new technologies"</em>, 2019. There is a grey area in tracing the number back to an original methodologically-transparent study, and it should be taken with care. The qualitative point is widely documented.</span>
+</li>
+
+<li id="ref4">
+<span><span class="ref-source">FATF — Financial Action Task Force.</span> <em>"Opportunities and Challenges of New Technologies for AML/CFT"</em>, 2021. FATF's official document on emerging technologies applied to AML. <a href="https://www.fatf-gafi.org" target="_blank" rel="noopener">fatf-gafi.org</a>.</span>
+</li>
+
+<li id="ref5">
+<span><span class="ref-source">Bank of England — Prudential Regulation Authority.</span> Publications and discussion papers on AML monitoring and machine learning in the UK banking system. <a href="https://www.bankofengland.co.uk" target="_blank" rel="noopener">bankofengland.co.uk</a>.</span>
+</li>
+
+<li id="ref6">
+<span><span class="ref-source">MIT NANDA — Project NANDA, MIT Media Lab.</span> <em>"The GenAI Divide: State of AI in Business 2025"</em>, July 2025. Lead author: Aditya Challapally. Based on 52 structured interviews, 153 survey responses from senior leaders, analysis of over 300 public deployments. Estimate: $30-40 billion in enterprise generative AI spend with 95% of organisations reporting no measurable P&amp;L impact. Coverage: <a href="https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/" target="_blank" rel="noopener">Fortune, August 2025</a>.</span>
+</li>
+
+<li id="ref7">
+<span><span class="ref-source">Methodological critiques of the MIT NANDA report.</span> Brian Heger, <em>"The Gen AI Divide State of AI in Business 2025 | MIT NANDA"</em>, August 2025. Raises concerns about sample size and representativeness. <a href="https://www.brianheger.com/the-gen-ai-divide-state-of-ai-in-business-2025-mit-nanda/" target="_blank" rel="noopener">brianheger.com</a>.</span>
+</li>
+
+<li id="ref8">
+<span><span class="ref-source">FINMA — Swiss Financial Market Supervisory Authority.</span> Periodic surveys on AI adoption in the banking sector. Annual supervisory publications should be consulted. For the Italian banking system, see Banca d'Italia's <em>"Survey on the adoption of artificial intelligence in the Italian banking system"</em>.</span>
+</li>
+
+<li id="ref9">
+<span><span class="ref-source">On label scarcity in AML.</span> See: Weber et al., <em>"Anti-Money Laundering in Bitcoin: Experimenting with Graph Convolutional Networks for Financial Forensics"</em>, KDD 2019; Bartoletti et al., <em>"Data Mining for Detecting Bitcoin Ponzi Schemes"</em>, IEEE CVCBT 2018. Subsequent work on the Elliptic dataset family confirms the magnitude of the imbalance.</span>
+</li>
+
+<li id="ref10">
+<span><span class="ref-source">FCA — Financial Conduct Authority (UK).</span> Publications on AI explainability in financial services, particularly DP 5/22 and subsequent consultations. <a href="https://www.fca.org.uk" target="_blank" rel="noopener">fca.org.uk</a>.</span>
+</li>
+
+<li id="ref11">
+<span><span class="ref-source">EU AI Act — Regulation (EU) 2024/1689.</span> For the classification of AML systems within Annex III (high-risk AI systems). Published in OJ EU L on 12 July 2024.</span>
+</li>
+
+<li id="ref12">
+<span><span class="ref-source">TMNL — Transactie Monitoring Nederland.</span> Communication on activity wind-down, July 2024. Dutch-language coverage: NOS, Accountancy Vanmorgen. Position of the Autoriteit Persoonsgegevens (Dutch data protection authority) on the topic. <a href="https://tmnl.nl" target="_blank" rel="noopener">tmnl.nl</a>.</span>
+</li>
+
+<li id="ref13">
+<span><span class="ref-source">Recent academic literature on graph-based AML.</span> Rasmussen et al., <em>"Inductive Graph Representation Learning for Anti-Money Laundering"</em>, 2021; Cardoso et al., <em>"Anti-Money Laundering by Graph Neural Networks"</em>, 2022; Egressy et al., <em>"Provably Powerful Graph Neural Networks for Directed Multigraphs"</em>, ICLR 2024. Numerous papers on the Elliptic dataset and synthetic AML benchmarks.</span>
+</li>
+
+<li id="ref14">
+<span><span class="ref-source">PyTorch Geometric (PyG).</span> Fey et al., <em>"Fast Graph Representation Learning with PyTorch Geometric"</em>, ICLR Workshop 2019; updated in <em>"PyG 2.0: Scalable Learning on Real World Graphs"</em>, KDD 2025. Documentation: <a href="https://pytorch-geometric.readthedocs.io" target="_blank" rel="noopener">pytorch-geometric.readthedocs.io</a>. Alternative: Deep Graph Library (DGL), <a href="https://www.dgl.ai" target="_blank" rel="noopener">dgl.ai</a>.</span>
+</li>
+
+<li id="ref15">
+<span><span class="ref-source">GNN explainability.</span> Ying et al., <em>"GNNExplainer: Generating Explanations for Graph Neural Networks"</em>, NeurIPS 2019; Yuan et al., <em>"On Explainability of Graph Neural Networks via Subgraph Explorations"</em> (SubgraphX), ICML 2021; Luo et al., <em>"Parameterized Explainer for Graph Neural Network"</em> (PGExplainer), NeurIPS 2020.</span>
+</li>
+
+<li id="ref16">
+<span><span class="ref-source">Isolation Forest — original paper.</span> Liu F.T., Ting K.M., Zhou Z.H., <em>"Isolation Forest"</em>, IEEE International Conference on Data Mining (ICDM), 2008. scikit-learn documentation: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html" target="_blank" rel="noopener">scikit-learn IsolationForest</a>.</span>
+</li>
+
+<li id="ref17">
+<span><span class="ref-source">Isolation Forest complexity.</span> O(n log n) training, O(log n) inference per tree. Confirmed in scikit-learn documentation and literature: see Brenndoerfer M., <em>"Isolation Forest: Complete Guide"</em>, 2025; official scikit-learn IsolationForest documentation.</span>
+</li>
+
+<li id="ref18">
+<span><span class="ref-source">Extended Isolation Forest.</span> Hariri S., Kind M.C., Brunner R.J., <em>"Extended Isolation Forest"</em>, IEEE Transactions on Knowledge and Data Engineering (TKDE), 2019.</span>
+</li>
+
+<li id="ref19">
+<span><span class="ref-source">Original PageRank.</span> Page L., Brin S., Motwani R., Winograd T., <em>"The PageRank Citation Ranking: Bringing Order to the Web"</em>, Stanford InfoLab Technical Report, 1999.</span>
+</li>
+
+<li id="ref20">
+<span><span class="ref-source">Local algorithms for Personalized PageRank.</span> Andersen R., Chung F., Lang K., <em>"Local Graph Partitioning using PageRank Vectors"</em>, FOCS 2006. Recent developments: Fountoulakis K., Yang R., <em>"Open Problem: Running Time Complexity of Accelerated l1-regularized PageRank"</em>, 2022. For complexity analysis see also Martínez-Rubio et al., <em>"Accelerated and Sparse Algorithms for Approximate Personalized PageRank"</em>, 2023.</span>
+</li>
+
+<li id="ref21">
+<span><span class="ref-source">Shapley value — original paper.</span> Shapley L.S., <em>"A Value for n-Person Games"</em>, in <em>Contributions to the Theory of Games II</em>, Princeton University Press, 1953.</span>
+</li>
+
+<li id="ref22">
+<span><span class="ref-source">SHAP applied to machine learning.</span> Lundberg S.M., Lee S.I., <em>"A Unified Approach to Interpreting Model Predictions"</em>, NeurIPS 2017. Reference library: <a href="https://github.com/shap/shap" target="_blank" rel="noopener">github.com/shap/shap</a>.</span>
+</li>
+
+<li id="ref23">
+<span><span class="ref-source">Entity resolution tools.</span> Splink, developed by the UK Ministry of Justice, open source: <a href="https://github.com/moj-analytical-services/splink" target="_blank" rel="noopener">github.com/moj-analytical-services/splink</a>. Dedupe (Python): <a href="https://github.com/dedupeio/dedupe" target="_blank" rel="noopener">github.com/dedupeio/dedupe</a>. Zingg (Spark, open source): <a href="https://github.com/zinggAI/zingg" target="_blank" rel="noopener">github.com/zinggAI/zingg</a>. Senzing (commercial): <a href="https://senzing.com" target="_blank" rel="noopener">senzing.com</a>.</span>
+</li>
+
+</ol>
+
+</section>
+
+</main>
+
+<footer>
+  <p>Published in April 2026. Information accurate as of publication. The subject is moving fast — for updates, follow the newsletter or LinkedIn posts.</p>
+  <p>To discuss or go deeper on any of the topics here, <a href="mailto:contact@example.com">get in touch</a>.</p>
+  <nav class="back-nav back-nav-bottom">
+    <a href="/research"><span class="arrow">←</span> Back</a>
+  </nav>
+</footer>
+
+</div>
+
+</body>
+</html>
