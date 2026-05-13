@@ -13,12 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const defaultText = "Designing systems where data flows, learns, and becomes decisions.";
 
     const info = {
-        work:     "Projects and case studies: from architecture decisions to production results.",
-        research: "Technical deep dives, documentation and applied AI research.",
-        diary:    "Technology Diary: updates, trends and thoughts from the field.",
-        aptu:     "Aptù: products and tools built to solve real problems.",
-        contact:  "Get in touch — let's build something together.",
-        about:    "Who I am, how I think, and why I care about systems."
+    work:        "Projects and case studies: from architecture decisions to production results.",
+    research:    "Technical deep dives, documentation and applied AI research.",
+    foundations: "Core concepts in data science, ML and AI — explained without the hype.",
+    aptu:        "Aptù: products and tools built to solve real problems.",
+    contact:     "Get in touch — let's build something together.",
+    about:       "Who I am, how I think, and why I care about systems."
     };
 
     let intervalId  = null;
